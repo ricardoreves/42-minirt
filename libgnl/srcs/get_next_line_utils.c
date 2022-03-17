@@ -5,89 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 21:00:55 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/17 19:50:42 by rpinto-r         ###   ########.fr       */
+/*   Created: 2022/01/09 21:19:42 by bgoncalv          #+#    #+#             */
+/*   Updated: 2022/03/17 21:46:44 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/get_next_line.h"
 
- int	gnl_strlen(char *s)
+size_t	gnl_strlen(char *s)
 {
-	int	i;
+	size_t	l;
 
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
-}
-
- char	*gnl_strdup(char *s)
-{
-	char	*str;
-	int		len;
-
-	len = gnl_strlen(s);
-	str = malloc(sizeof(char) * len + 1);
-	if (!str)
+	if (!s)
 		return (0);
-	str[len] = 0;
-	while (len--)
-		str[len] = s[len];
-	return (str);
+	l = 0;
+	while (s[l])
+		l++;
+	return (l);
 }
 
- char	*gnl_concat_buffer(char *buffer, char *buffer_read)
+int	gnl_hasline(char *s)
 {
-	int		i;
-	int		j;
-	int		len;
-	char	*str;
-
-	len = gnl_strlen(buffer) + gnl_strlen(buffer_read);
-	str = malloc(sizeof(char) * len + 1);
-	if (!str)
+	if (!s)
 		return (0);
-	i = 0;
-	j = 0;
-	while (buffer[j])
-		str[i++] = buffer[j++];
-	j = 0;
-	while (buffer_read[j])
-		str[i++] = buffer_read[j++];
-	str[i] = 0;
-	gnl_free(buffer);
-	return (str);
+	while (*s++)
+		if (*s == '\n')
+			return (1);
+	return (0);
 }
 
- void	gnl_update_buffer(char **buffer, int start)
+char	*gnl_strndup(char *s, size_t n)
 {
-	int		i;
-	int		len;
-	char	*tmp;
+	size_t	i;
+	char	*dst;
+	size_t	l;
 
-	tmp = *buffer;
-	len = gnl_strlen(tmp) - start;
-	tmp = malloc(sizeof(char) * len + 1);
-	if (!tmp)
-		gnl_free(tmp);
+	if (n < gnl_strlen(s))
+		l = n;
 	else
+		l = gnl_strlen(s);
+	dst = malloc(l + 1);
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (i < l && s[i])
 	{
-		i = 0;
-		while (i < len)
-			tmp[i++] = (*buffer)[start++];
-		tmp[i] = 0;
+		dst[i] = s[i];
+		i++;
 	}
-	gnl_free(*buffer);
-	*buffer = tmp;
+	dst[i] = 0;
+	return (dst);
 }
 
- char	*gnl_free(char *str)
+char	*gnl_strjoin(char *s1, char *s2)
 {
-	if (str)
-	{
-		free(str);
-		str = 0;
-	}
-	return (str);
+	char	*dst;
+	char	*s;
+	size_t	i;
+	size_t	l;
+
+	s = s1;
+	l = gnl_strlen(s1);
+	if (gnl_strlen(s2))
+		l += gnl_strlen(s2);
+	dst = malloc(l + 1);
+	if (!dst)
+		return (NULL);
+	i = 0;
+	if (s1)
+		while (*s1)
+			dst[i++] = *(s1++);
+	if (s2)
+		while (*s2)
+			dst[i++] = *(s2++);
+	dst[i] = 0;
+	free(s);
+	return (dst);
 }

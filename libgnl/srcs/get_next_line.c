@@ -5,76 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 17:07:21 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/17 19:48:55 by rpinto-r         ###   ########.fr       */
+/*   Created: 2022/01/09 21:19:40 by bgoncalv          #+#    #+#             */
+/*   Updated: 2022/03/17 21:47:43 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/get_next_line.h"
 
- int	gnl_has_next_line(char *s)
+static char	*gnl_get_line(char **s)
 {
-	int	i;
+	size_t	l;
+	char	*dst;
+	char	*tmp;
 
-	i = 0;
-	while (s[i])
-		if (s[i++] == '\n')
-			return (i);
-	return (0);
-}
-
- int	gnl_length_next_line(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		if (s[i++] == '\n')
-			return (i);
-	return (i);
-}
-
- char	*gnl_return_next_line(char **buffer)
-{
-	int		i;
-	int		len;
-	char	*line;
-
-	len = gnl_length_next_line(*buffer);
-	line = malloc(sizeof(char) * len + 1);
-	if (!line)
-		return (0);
-	i = -1;
-	while (++i < len)
-		line[i] = (*buffer)[i];
-	line[len] = 0;
-	gnl_update_buffer(buffer, len);
-	return (line);
+	l = 0;
+	if (!*s)
+		return (NULL);
+	while ((*s)[l] && (*s)[l] != '\n')
+		l++;
+	if ((*s)[l] == '\n')
+		l++;
+	if (!(*s)[l])
+		tmp = NULL;
+	else
+		tmp = gnl_strndup(*s + l, gnl_strlen(*s + l));
+	dst = gnl_strndup(*s, l);
+	free(*s);
+	*s = tmp;
+	return (dst);
 }
 
 char	*get_next_line(int fd)
 {
-	 char	*buffer;
-	 char	buffer_read[BUFFER_SIZE + 1];
-	int			bytes_read;
+	static char	*s_left = NULL;
+	char		buffer[BUFFER_SIZE + 1];
+	size_t		n;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (0);
-	while (1)
+	if (fd < 0 || 4095 < fd || BUFFER_SIZE < 0)
+		return (NULL);
+	if (s_left && gnl_hasline(s_left))
+		return (gnl_get_line(&s_left));
+	n = read(fd, buffer, BUFFER_SIZE);
+	buffer[n] = 0;
+	while (0 < n && n <= BUFFER_SIZE)
 	{
-		bytes_read = read(fd, buffer_read, BUFFER_SIZE);
-		if (bytes_read < 0 || (bytes_read == 0 && buffer_read[0] == 0))
-			return (0);
-		if (!buffer)
-			buffer = gnl_strdup("");
-		if ((bytes_read == 0 && buffer[0] == 0))
-			return (gnl_free(buffer));
-		if (bytes_read == 0)
+		s_left = gnl_strjoin(s_left, buffer);
+		if (!s_left || gnl_hasline(s_left))
 			break ;
-		buffer_read[bytes_read] = 0;
-		buffer = gnl_concat_buffer(buffer, buffer_read);
-		if (gnl_has_next_line(buffer))
-			break ;
+		n = read(fd, buffer, BUFFER_SIZE);
+		buffer[n] = 0;
 	}
-	return (gnl_return_next_line(&buffer));
+	return (gnl_get_line(&s_left));
 }

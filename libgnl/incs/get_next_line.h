@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 17:03:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/17 19:49:45 by rpinto-r         ###   ########.fr       */
+/*   Created: 2022/01/09 21:19:44 by bgoncalv          #+#    #+#             */
+/*   Updated: 2022/03/17 21:45:55 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,14 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
-# include <stdio.h>
-# include <fcntl.h>
-# include <unistd.h>
+# include <unistd.h> 
 # include <stdlib.h>
 
+size_t	gnl_strlen(char *s);
+int		gnl_hasline(char *s);
+char	*gnl_strndup(char *s, size_t l);
+char	*gnl_strjoin(char *s1, char *s2);
+
 char	*get_next_line(int fd);
-char	*gnl_return_next_line(char **buffer);
-int		gnl_has_next_line(char *s);
-int		gnl_length_next_line(char *s);
-int		gnl_strlen(char *s);
-char	*gnl_strdup(char *s);
-char	*gnl_free(char *str);
-char	*gnl_concat_buffer(char *buffer, char *buffer_read);
-void	gnl_update_buffer(char **buffer, int start);
 
 #endif
