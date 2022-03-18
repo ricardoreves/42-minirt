@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 15:52:19 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 18:23:46 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	print_array(char *arr[]);
 int		array_length(char *arr[]);
 
 /* convert.c */
-float str_to_float(char *str);
+float	str_to_float(char *str);
+int		color_to_int(char *color);
+int		rgb_to_int(char **rgb);
 
 #endif
