@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 21:19:42 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/29 16:56:25 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/18 14:54:08 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_linelen(char *s)
 {
 	size_t	l;
 
@@ -40,10 +40,10 @@ char	*ft_strndup(char *s, size_t n)
 	char	*dst;
 	size_t	l;
 
-	if (n < ft_strlen(s))
+	if (n < ft_linelen(s))
 		l = n;
 	else
-		l = ft_strlen(s);
+		l = ft_linelen(s);
 	dst = malloc(l + 1);
 	if (!dst)
 		return (NULL);
@@ -65,9 +65,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	l;
 
 	s = s1;
-	l = ft_strlen(s1);
-	if (ft_strlen(s2))
-		l += ft_strlen(s2);
+	l = ft_linelen(s1);
+	if (ft_linelen(s2))
+		l += ft_linelen(s2);
 	dst = malloc(l + 1);
 	if (!dst)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 21:19:40 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/29 17:23:44 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/18 14:54:31 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static char	*get_line(t_list **lst)
 	if (!(*lst)->s_left[l])
 		tmp = NULL;
 	else
-		tmp = ft_strndup((*lst)->s_left + l, ft_strlen((*lst)->s_left + l));
+		tmp = ft_strndup((*lst)->s_left + l, ft_linelen((*lst)->s_left + l));
 	dst = ft_strndup((*lst)->s_left, l);
 	free((*lst)->s_left);
 	(*lst)->s_left = tmp;
