@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 17:43:06 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 17:45:50 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef enum e_object_id
 {
-	id_ambiant,
+	id_ambient,
 	id_light,
 	id_camera,
 	id_plane,
