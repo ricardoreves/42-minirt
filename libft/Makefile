@@ -3,55 +3,59 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+         #
+#    By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/07 14:49:05 by rpinto-r          #+#    #+#              #
-#    Updated: 2022/03/17 20:15:09 by rpinto-r         ###   ########.fr        #
+#    Created: 2022/01/03 19:39:23 by bgoncalv          #+#    #+#              #
+#    Updated: 2022/01/29 15:28:25 by bgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-### VARIABLES ###
-CC              = gcc
-CFLAGS          = -Wall -Wextra -Werror
-CDEBUG          = -g3 -fsanitize=address
-RM              = rm -rf
-AR              = ar -rcs
-NORM            = norminette
-NAME            = libft.a
-SRCS_INC        = ./incs
-SRCS_DIR        = ./srcs
-SRCS_NAME       = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
-SRCS            = $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
-OBJS            = $(SRCS:.c=.o)
-BONUS_SRCS_NAME = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
-BONUS_SRCS      = $(addprefix $(SRCS_DIR)/, $(BONUS_SRCS_NAME))
-BONUS_OBJS      = $(BONUS_SRCS:.c=.o)
+NAME		= libft.a
 
-### RULES ###
-all: $(NAME)
+CC			= gcc
 
-.c.o:
-	$(CC) $(CFLAGS) -I $(SRCS_INC) -c $< -o $@
+CFLAGS		= -Wall -Wextra -Werror
 
-$(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+INCLUDES	= -I includes/
 
-bonus: ${OBJS} ${BONUS_OBJS}
-	$(AR) $(NAME) $(OBJS) ${BONUS_OBJS}
+SRCS		=	$(wildcard dlst/*) \
+				$(wildcard ftc/*) \
+				$(wildcard gnl/*) \
+				$(wildcard lst/*) \
+				$(wildcard math/*) \
+				$(wildcard printf/*) \
+				$(wildcard sort/*) \
+				$(wildcard utils/*)
+
+OBJS		= ${SRCS:.c=.o}
+
+RM			= rm -f
+
+_BLUE=\e[34m
+_PURPLE=\e[35m
+_CYAN=\e[36m
+_END=\e[0m
+
+%.o: %.c
+			@printf "Libft object : $(_BLUE)%-33.33s\r$(_END)" $@
+			@${CC} ${CFLAGS} $(INCLUDES) -c $< -o $@
+
+$(NAME):	$(OBJS)
+			@printf "\nLibft Objects	[$(_BLUE)✓$(_END)]\n"
+			@ar rc $(NAME) $(OBJS)
+			@ranlib $(NAME)
+			@printf "Libft		[$(_BLUE)✓$(_END)]\n"
+
+all:		$(NAME)
+
+re:			fclean $(NAME)
 
 clean:
-	$(RM) $(OBJS) ${BONUS_OBJS}
+			@$(RM) *.o */*.o
+			@printf "$(_PURPLE)libft object	deleted$(_END)\n"
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:		clean
+			@$(RM) $(NAME)
+			@printf "$(_PURPLE)libft		deleted$(_END)\n"
 
-re: fclean all
-
-dev: CFLAGS += $(CDEBUG)
-dev: $(OBJS) ${BONUS_OBJS}
-	$(AR) $(NAME) $(OBJS) ${BONUS_OBJS}
-
-norm:
-	$(NORM)
-
-.PHONY: all clean fclean re
+.PHONY:		all re clean fclean
