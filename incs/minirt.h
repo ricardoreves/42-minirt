@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 18:40:11 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 19:50:58 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ int		array_length(char *arr[]);
 
 /* convert.c */
 float	str_to_float(char *str);
-int		color_to_int(char *color);
-int		rgb_to_int(char **rgb);
+int		str_to_vector(char *str, t_vector *vec);
+int		str_to_color(char *str, int *color);
+int		color_to_int(char *str);
 
 /* error.c */
-void show_parsing_error(char *msg, int lineno);
+void	show_parsing_error(char *msg, int lineno);
 
 #endif
