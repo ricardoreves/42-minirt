@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 14:29:46 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 14:41:30 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,8 @@ void	ft_putpixel(t_img *img, int x, int y, int color);
 void	free_array(char *arr[]);
 void	print_array(char *arr[]);
 int		array_length(char *arr[]);
+
+/* convert.c */
+float str_to_float(char *str);
 
 #endif
