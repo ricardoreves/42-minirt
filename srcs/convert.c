@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:35:01 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 14:35:33 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 18:32:19 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,32 @@ float str_to_float(char *str)
         // printf("res: %f\n", sum);
     }
     return (sum);
+}
+
+int	color_to_int(char *color)
+{
+	int	c;
+	
+	c = ft_atoi(color);
+	if (c < 0)
+		return (0);
+	if (c > 255)
+		return (255);
+	return (c);
+}
+
+int	rgb_to_int(char **rgb)
+{
+	int	color;
+
+	if (!rgb)
+		return (0);
+    if ()
+    {
+        
+    }
+	color = color_to_int(rgb[0]);
+	color = (color << 8) + color_to_int(rgb[1]);
+	color = (color << 8) + color_to_int(rgb[2]);
+	return (color);
 }
