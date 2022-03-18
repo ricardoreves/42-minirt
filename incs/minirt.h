@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 14:41:30 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 14:46:59 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <errno.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <fcntl.h>
 # include <math.h>
 
 # include "mlx.h"
