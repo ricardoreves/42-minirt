@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 03:56:56 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:23:10 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-union u_obj
-{
-	t_ambient	*ambiant;
-	t_light		*light;
-	t_sphere	*sphere;
-	t_plane		*plane;
-	t_cylinder	*cylinder;
-};
-
-typedef struct s_object
-{
-	char		id[3];
-	union u_obj	*obj;
-}	t_objects;
-
 typedef struct s_rt
 {
 	char		*path;
@@ -61,7 +46,7 @@ typedef struct s_rt
 	void		*mlx_win;
 	t_img		img;
 	t_camera	camera;
-	t_list		*objects;
+	t_object	*objects;
 }	t_rt;
 
 /* main.c */
