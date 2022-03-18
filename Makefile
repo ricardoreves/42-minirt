@@ -6,7 +6,7 @@
 #    By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:19:59 by rpinto-r          #+#    #+#              #
-#    Updated: 2022/03/18 14:37:20 by rpinto-r         ###   ########.fr        #
+#    Updated: 2022/03/18 14:37:57 by rpinto-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NORM             = norminette
 NAME             = minirt
 SRCS_INC         = ./incs
 SRCS_DIR         = ./srcs
-SRCS_NAME        = main.c window.c image.c keyboard.c parsing.c 
+SRCS_NAME        = main.c window.c image.c keyboard.c parsing.c array_utils.c
 SRCS             = $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 OBJS             = $(SRCS:.c=.o)
 SCENE		     = ./scenes/mandatory.rt
