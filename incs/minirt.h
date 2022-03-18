@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 14:46:59 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 15:52:19 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ typedef struct s_rt
 	void		*mlx_win;
 	t_img		img;
 	t_camera	camera;
-	t_object	*objects;
+	t_object	*objs;
+	size_t		num_objs;
 }	t_rt;
 
 /* main.c */
