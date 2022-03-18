@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 15:52:40 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:30:19 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,17 @@ typedef enum e_object_id
 
 typedef union u_object
 {
-	t_ambient	*ambiant;
-	t_light		*light;
-	t_sphere	*sphere;
-	t_plane		*plane;
-	t_cylinder	*cylinder;
+	t_ambient	ambient;
+	t_light		light;
+	t_sphere	sphere;
+	t_plane		plane;
+	t_cylinder	cylinder;
 }	t_object_union;
 
 typedef struct s_object
 {
 	t_object_id		id;
-	t_object_union	*object;
+	t_object_union	object;
 	struct s_object	*next;
 }	t_object;
 
