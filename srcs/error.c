@@ -6,11 +6,11 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 18:32:38 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 18:37:12 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 18:54:22 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minirt.h"
 
 void show_parsing_error(char *msg, int lineno)
 {
