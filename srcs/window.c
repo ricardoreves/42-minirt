@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 19:55:20 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:25:46 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	rt_clear(t_rt *rt)
 		mlx_destroy_image(rt->mlx, rt->img.img);
 	if (rt->mlx)
 		ft_memdel(&rt->mlx);
+	rt_free(rt);
 }
 
 int	close_window(t_rt *rt)
@@ -40,4 +41,14 @@ int	close_window(t_rt *rt)
 	rt_clear(rt);
 	exit(EXIT_SUCCESS);
 	return (0);
+}
+
+void rt_free(t_rt *rt)
+{
+	if (rt)
+	{	
+		if (rt->objs)
+			free_objects(&rt->objs);
+		free(rt);
+	}
 }
