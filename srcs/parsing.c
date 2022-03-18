@@ -6,16 +6,8 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/17 16:35:26 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 03:19:43 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-/* 
-is_valid_color
-is_valid_
-
-parse_camera
-parse_ambient_lightning
-
- */
+#include "minirt.h"
