@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 17:31:21 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 17:43:06 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 typedef enum e_object_id
 {
-	AMBIENT_ID,
-	LIGHT_ID,
-	CAMERA_ID,
-	PLANE_ID,
-	CYLINDER_ID,
-	SPHERE_ID
+	id_ambiant,
+	id_light,
+	id_camera,
+	id_plane,
+	id_cylinder,
+	id_sphere
 }	t_object_id;
 
 typedef struct s_vector
