@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:35:01 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 19:50:36 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:17:36 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ float str_to_float(char *str)
     return (sum);
 }
 
-int color_to_int(char *str)
+int str_to_int_color(char *str)
 {
     int c;
 
@@ -56,40 +56,3 @@ int color_to_int(char *str)
     return (c);
 }
 
-int	str_to_vector(char *str, t_vector *vect)
-{
-	char **tmp;
-
-	tmp = ft_split(str, ',');
-	if (array_length(tmp) != 3)
-	{
-		ft_putendl_fd("too few vector values", 2);
-	}
-	else
-	{
-		vect->x = str_to_float(tmp[0]);
-		vect->y = str_to_float(tmp[1]);
-		vect->z = str_to_float(tmp[2]);
-	}
-	free_array(tmp);
-    return (0);
-}
-
-int	str_to_color(char *str, int *color)
-{
-	char **tmp;
-
-	tmp = ft_split(str, ',');
-	if (array_length(tmp) != 3)
-	{
-		ft_putendl_fd("too few color values", 2);
-	}
-	else
-	{
-        *color = color_to_int(tmp[0]);
-        *color = (*color << 8) + color_to_int(tmp[1]);
-        *color = (*color << 8) + color_to_int(tmp[2]);
-	}
-	free_array(tmp);
-    return (0);
-}
