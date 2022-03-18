@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 19:50:58 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:26:30 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	hook_init(t_rt *rt);
 void	rt_init(t_rt *rt, char *path);
 void	rt_clear(t_rt *rt);
 int		close_window(t_rt *rt);
+void	rt_free(t_rt *rt);
 
 /* image.c*/
 void	clear_img(t_img *img);
@@ -73,11 +74,9 @@ int		array_length(char *arr[]);
 
 /* convert.c */
 float	str_to_float(char *str);
-int		str_to_vector(char *str, t_vector *vec);
-int		str_to_color(char *str, int *color);
-int		color_to_int(char *str);
+int		str_to_int_color(char *str);
 
 /* error.c */
-void	show_parsing_error(char *msg, int lineno);
+int show_parsing_error(char **arr, char *msg, int num);
 
 #endif
