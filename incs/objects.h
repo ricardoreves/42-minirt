@@ -6,19 +6,12 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 02:46:59 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:28:24 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
-
-# define AMBIANT_ID 'A'
-# define LIGHT_ID 'L'
-# define CAMERA_ID 'C'
-# define PLANE_ID 'pl'
-# define CYLINDER_ID 'cy'
-# define SPHERE_ID 'sp'
 
 typedef struct s_vector
 {
@@ -69,5 +62,30 @@ typedef struct s_sphere
 	float		diameter;
 	int			color;
 }	t_sphere;
+
+typedef enum e_object_id
+{
+	AMBIANT_ID,
+	LIGHT_ID,
+	CAMERA_ID,
+	PLANE_ID,
+	CYLINDER_ID,
+	SPHERE_ID
+}	t_object_id;
+
+union u_object
+{
+	t_ambient	*ambiant;
+	t_light		*light;
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
+};
+
+typedef struct s_object
+{
+	t_object_id		id;
+	union u_object	*object;
+}	t_object;
 
 #endif
