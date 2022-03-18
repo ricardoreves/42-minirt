@@ -6,15 +6,17 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/17 20:32:50 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 03:56:56 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "libft.h"
-# include "../libgnl/incs/get_next_line.h"
+# define WIN_WIDTH 1500
+# define WIN_HEIGHT 1200
+# define ON_KEYDOWN 2
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -23,74 +25,58 @@
 # include <sys/stat.h>
 # include <math.h>
 
-typedef struct s_vector
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_vector;
+# include "mlx.h"
+# include "libft.h"
+# include "objects.h"
+# include "parsing.h"
 
-typedef struct s_color
+typedef struct s_img
 {
-	size_t	r;
-	size_t	g;
-	size_t	b;
-}	t_color;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
-typedef struct s_ambient
+union u_obj
 {
-	char	id;
-	float	lighting;
-	t_color	color;
-}	t_ambient;
+	t_ambient	*ambiant;
+	t_light		*light;
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
+};
 
-typedef struct s_light
+typedef struct s_object
 {
-	char		id;
-	t_vector	coords;
-	float		brightness;
-	t_color		color;
-}	t_light;
-
-typedef struct s_camera
-{
-	char		id;
-	t_vector	coords;
-	t_vector	orient;
-	size_t		fov;
-}	t_camera;
-
-typedef struct s_plane
-{
-	char		id;
-	t_vector	coords;
-	t_vector	orient;
-	t_color		color;
-}	t_plane;
-
-typedef struct s_cylinder
-{
-	char		id;
-	t_vector	coords;
-	t_vector	orient;
-	float		diameter;
-	float		height;
-	t_color		color;
-}	t_cylinder;
-
-typedef struct s_sphere
-{
-	char		id;
-	t_vector	coords;
-	float		diameter;
-	t_color		color;
-}	t_sphere;
+	char		id[3];
+	union u_obj	*obj;
+}	t_objects;
 
 typedef struct s_rt
 {
-	t_ambient	ambient;
-	t_light		light;
+	char		*path;
+	void		*mlx;
+	void		*mlx_win;
+	t_img		img;
 	t_camera	camera;
+	t_list		*objects;
 }	t_rt;
+
+/* main.c */
+int		msg_quit(char *s);
+int		handle_keydown(int key, t_rt *rt);
+int		handle_no_event(t_rt *rt);
+void	hook_init(t_rt *rt);
+
+/* window.c */
+void	rt_init(t_rt *rt, char *path);
+void	rt_clear(t_rt *rt);
+int		close_window(t_rt *rt);
+
+/* image.c*/
+void	clear_img(t_img *img);
+void	ft_putpixel(t_img *img, int x, int y, int color);
 
 #endif
