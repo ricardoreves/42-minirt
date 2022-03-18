@@ -6,7 +6,7 @@
 #    By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:19:59 by rpinto-r          #+#    #+#              #
-#    Updated: 2022/03/18 03:44:52 by rpinto-r         ###   ########.fr        #
+#    Updated: 2022/03/18 13:10:52 by rpinto-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ norm:
 
 dev: CFLAGS += $(CDEBUG)
 dev: $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) dev
+	$(MAKE) -C $(LIBFT_DIR)
 	$(MAKE) -C $(LIBMLX_DIR)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) -L $(LIBFT_DIR) -L $(LIBMLX_DIR) -o $(NAME)
 
