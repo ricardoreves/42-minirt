@@ -6,12 +6,22 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 17:28:15 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 17:31:21 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
+
+typedef enum e_object_id
+{
+	AMBIENT_ID,
+	LIGHT_ID,
+	CAMERA_ID,
+	PLANE_ID,
+	CYLINDER_ID,
+	SPHERE_ID
+}	t_object_id;
 
 typedef struct s_vector
 {
@@ -68,16 +78,6 @@ typedef struct s_sphere
 	float		diameter;
 	int			color;
 }	t_sphere;
-
-typedef enum e_object_id
-{
-	AMBIANT_ID,
-	LIGHT_ID,
-	CAMERA_ID,
-	PLANE_ID,
-	CYLINDER_ID,
-	SPHERE_ID
-}	t_object_id;
 
 typedef union u_object
 {
