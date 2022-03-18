@@ -6,7 +6,7 @@
 #    By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:19:59 by rpinto-r          #+#    #+#              #
-#    Updated: 2022/03/18 13:10:52 by rpinto-r         ###   ########.fr        #
+#    Updated: 2022/03/18 14:14:53 by rpinto-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS_NAME        = main.c window.c image.c keyboard.c parsing.c
 SRCS             = $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 OBJS             = $(SRCS:.c=.o)
 SCENE		     = ./scenes/mandatory.rt
-
+DEV_SRCS         = $(patsubst %/main.c, %/dev.c, $(SRCS)) 
+DEV_OBJS         = $(DEV_SRCS:.c=.o)
 
 ### LIBRARIES ###
 LIBFT_FLAGS      = -lft
@@ -69,10 +70,12 @@ norm:
 	$(NORM) $(SRCS_INC) $(SRCS_DIR) $(LIBFT_DIR) | grep Error
 
 dev: CFLAGS += $(CDEBUG)
-dev: $(OBJS)
+dev: $(DEV_OBJS)
+	echo $(DEV_SRCS)
+	echo $(DEV_OBJS)
 	$(MAKE) -C $(LIBFT_DIR)
 	$(MAKE) -C $(LIBMLX_DIR)
-	$(CC) $(OBJS) $(CFLAGS) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) -L $(LIBFT_DIR) -L $(LIBMLX_DIR) -o $(NAME)
+	$(CC) $(DEV_OBJS) $(CFLAGS) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) -L $(LIBFT_DIR) -L $(LIBMLX_DIR) -o $(NAME)
 
 valgrind:
 	valgrind --leak-check=full ./$(NAME)
