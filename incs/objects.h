@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 13:28:24 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:38:33 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_object
 {
 	t_object_id		id;
 	union u_object	*object;
+	struct s_object	*next;
 }	t_object;
 
 #endif
