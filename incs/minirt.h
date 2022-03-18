@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/19 00:26:30 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:52:40 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,15 @@ float	str_to_float(char *str);
 int		str_to_int_color(char *str);
 
 /* error.c */
-int show_parsing_error(char **arr, char *msg, int num);
+int 	show_parsing_error(char **arr, char *msg, int num);
+
+/* object_utils.c */
+void 	push_object(t_object *obj, t_object **objs);
+t_object *create_object(t_rt *rt);
+void 	free_objects(t_object **objs);
+
+/* file.c */
+int 	read_file(t_rt *rt, int fd);
+int 	open_file(t_rt *rt, char *path);
 
 #endif
