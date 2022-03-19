@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/19 01:03:18 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/19 01:44:25 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,16 @@ int is_ulong(char *str);
 
 /* parsing.c */
 char *sanitize_line(char *line);
+int parse_line(t_rt *rt, char *line, int num);
 int parse_vector(char *str, t_vector *vect);
 int parse_color(char *str, int *color);
 int parse_float(char *str, float *num);
 int parse_ulong(char *str, size_t *num);
 int parse_ambient(t_rt *rt, char *line, int num);
 int parse_camera(t_rt *rt, char *line, int num);
-int parse_line(t_rt *rt, char *line, int num);
+int parse_light(t_rt *rt, char *line, int num);
+int parse_plane(t_rt *rt, char *line, int num);
+int parse_sphere(t_rt *rt, char *line, int num);
+int parse_cylinder(t_rt *rt, char *line, int num);
 
 #endif
