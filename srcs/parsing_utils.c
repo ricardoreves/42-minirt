@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/19 01:40:14 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/19 01:51:20 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int parse_cylinder(t_rt *rt, char *line, int num)
 	t_cylinder cylinder;
 
 	args = ft_split(line, ' ');
-	print_array(args);
 	if (array_length(args) != 6)
 		return (show_parsing_error(args, ERR_TOO_FEW_OBJ_ARG, num));
 	ft_bzero(&cylinder, sizeof(t_cylinder));
