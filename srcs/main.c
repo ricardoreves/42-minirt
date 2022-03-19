@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:31:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 03:53:56 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/19 01:54:55 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,17 @@ void	hook_init(t_rt *rt)
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-	t_rt	rt;
+	t_rt *rt;
 
+	rt = ft_calloc(sizeof(t_rt), 1);
 	if (argc != 2)
-		return (msg_quit("Arg error : please enter an unique path as arg!"));
-	rt_init(&rt, argv[1]);
-	mlx_put_image_to_window(rt.mlx, rt.mlx_win, rt.img.img, 0, 0);
-	mlx_loop(rt.mlx);
+		ft_putendl_fd("Error: please provide a scene file.", 2);
+	else if (open_file(rt, argv[1]))
+	{
+		rt_init(rt, argv[1]);
+		mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->img.img, 0, 0);
+		mlx_loop(rt->mlx);
+	}
+	rt_free(rt);
 	return (0);
 }
