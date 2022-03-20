@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/20 15:32:34 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 15:40:25 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	rt_init(t_rt *rt, char *path)
 	rt->img.img = mlx_new_image(rt->mlx, WIN_WIDTH, WIN_HEIGHT);
 	rt->img.addr = mlx_get_data_addr(rt->img.img, &rt->img.bits_per_pixel,
 		&rt->img.line_length, &rt->img.endian);
-	hook_init(rt);
 	if (!rt->img.img)
 		rt_clear(rt);
 	mlx_loop_hook(rt->mlx, handle_no_event, rt);
