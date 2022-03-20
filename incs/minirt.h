@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 04:58:36 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 06:05:20 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 
 # define WIN_WIDTH 1500
 # define WIN_HEIGHT 1200
-# define ON_KEYDOWN 2
+# ifdef __APPLE__
+#  define KEY_EXIT 53
+# elif defined __unix__
+#  define KEY_EXIT 65307
+# endif
 
 # include <stdio.h>
 # include <stdlib.h>
