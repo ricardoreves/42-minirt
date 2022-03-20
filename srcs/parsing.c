@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 04:23:06 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 16:02:09 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ int parse_line(t_rt *rt, char *line, int num)
 			return (parse_cylinder(rt, line, num));
 	}
 	else
-		return (show_parsing_error(0, ERR_CONTAIN_FORBIDDEN_CHAR, num));
+		return (show_error(ERR_FORBIDDEN_CHAR));
 	return (0);
 }

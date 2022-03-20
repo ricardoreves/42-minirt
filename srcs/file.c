@@ -6,13 +6,13 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:36:59 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 06:31:28 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 15:55:48 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	 check_file_extension(char *path)
+int	 is_rt_file(char *path)
 {
 	int len;
 
@@ -49,15 +49,15 @@ int open_file(t_rt *rt, char *path)
 {
 	int fd;
 
-	if (!check_file_extension(path))
-	{
-		ft_putendl_fd("Error: invalid file extension", 2);
-		return (0);
-	}
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("Error");
+		return (0);
+	}
+	if (!is_rt_file(path))
+	{
+		show_parsing_error(0, ERR_IS_NOT_RT_FILE, 0);
 		return (0);
 	}
 	if (read_file(rt, fd))
