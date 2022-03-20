@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/19 01:49:03 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 04:23:06 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ int parse_camera(t_rt *rt, char *line, int num)
 	return (0);
 }
 
+int has_line_valid_charset(char *line)
+{
+	int i;
+
+	i = -1;
+	while (line && line[++i])
+		if (ft_strchr(SCENE_CHARSET, line[i]) == 0)
+			return (0);
+	return (1);
+}
+
 char *sanitize_line(char *line)
 {
 	int i;
@@ -50,18 +61,23 @@ char *sanitize_line(char *line)
 
 int parse_line(t_rt *rt, char *line, int num)
 {
-	//printf("[line:%d]%s\n", num, line);
-	if (ft_strncmp(line, "A", 1) == 0)
-		return (parse_ambient(rt, line, num));
-	if (ft_strncmp(line, "C", 1) == 0)
-		return (parse_camera(rt, line, num));
-	if (ft_strncmp(line, "L", 1) == 0)
-		return (parse_light(rt, line, num));
-	if (ft_strncmp(line, "sp", 2) == 0)
-		return (parse_sphere(rt, line, num));
-	if (ft_strncmp(line, "pl", 2) == 0)
-		return (parse_plane(rt, line, num));
-	if (ft_strncmp(line, "cy", 2) == 0)
-		return (parse_cylinder(rt, line, num));
+	// printf("[line:%d]%s\n", num, line);
+	if (has_line_valid_charset(line))
+	{
+		if (ft_strncmp(line, "A", 1) == 0)
+			return (parse_ambient(rt, line, num));
+		if (ft_strncmp(line, "C", 1) == 0)
+			return (parse_camera(rt, line, num));
+		if (ft_strncmp(line, "L", 1) == 0)
+			return (parse_light(rt, line, num));
+		if (ft_strncmp(line, "sp", 2) == 0)
+			return (parse_sphere(rt, line, num));
+		if (ft_strncmp(line, "pl", 2) == 0)
+			return (parse_plane(rt, line, num));
+		if (ft_strncmp(line, "cy", 2) == 0)
+			return (parse_cylinder(rt, line, num));
+	}
+	else
+		return (show_parsing_error(0, ERR_CONTAIN_FORBIDDEN_CHAR, num));
 	return (0);
 }
