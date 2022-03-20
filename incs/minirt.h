@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/19 01:44:25 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 04:58:36 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_rt
 	size_t		num_objs;
 }	t_rt;
 
-/* main.c */
+/* hook.c */
 int		msg_quit(char *s);
 int		handle_keydown(int key, t_rt *rt);
 int		handle_no_event(t_rt *rt);
@@ -105,5 +105,8 @@ int parse_light(t_rt *rt, char *line, int num);
 int parse_plane(t_rt *rt, char *line, int num);
 int parse_sphere(t_rt *rt, char *line, int num);
 int parse_cylinder(t_rt *rt, char *line, int num);
+
+/* debug.c */
+void rt_dump(t_rt *rt);
 
 #endif
