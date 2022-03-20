@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 15:33:53 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 16:01:36 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # elif defined __unix__
 #  define ESCAPE_KEY 65307
 # endif
+# define USAGE_MESSAGE "Usage: ./minirt scenes/mandatory.c"
+# define SCENE_CHARSET "ACLsplcy0123456789-,. \n"
+# define ERR_IS_NOT_RT_FILE "Error: isn't a [.rt] file."
+# define ERR_FORBIDDEN_CHAR "contain forbidden character"
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -32,7 +37,6 @@
 # include "mlx.h"
 # include "libft.h"
 # include "objects.h"
-# include "parsing.h"
 
 enum {
 	ON_KEYDOWN = 2,
