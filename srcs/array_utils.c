@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:28:55 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/18 14:28:57 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 22:30:12 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void print_array(char *arr[])
 
     i = 0;
     while (arr && arr[i])
-        printf("%s\n", arr[i++]);
+        ft_putendl_fd(arr[i++], 1);
 }
 
 int array_length(char *arr[])
