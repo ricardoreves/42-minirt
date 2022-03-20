@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 06:05:20 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 15:33:53 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 # define WIN_WIDTH 1500
 # define WIN_HEIGHT 1200
 # ifdef __APPLE__
-#  define KEY_EXIT 53
+#  define ESCAPE_KEY 53
 # elif defined __unix__
-#  define KEY_EXIT 65307
+#  define ESCAPE_KEY 65307
 # endif
-
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -34,6 +33,16 @@
 # include "libft.h"
 # include "objects.h"
 # include "parsing.h"
+
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
 
 typedef struct s_img
 {
@@ -55,11 +64,11 @@ typedef struct s_rt
 	size_t		num_objs;
 }	t_rt;
 
-/* hook.c */
+/* test.c */
+void	init_test(t_rt *rt);
+
+/* main.c */
 int		msg_quit(char *s);
-int		handle_keydown(int key, t_rt *rt);
-int		handle_no_event(t_rt *rt);
-void	hook_init(t_rt *rt);
 
 /* window.c */
 void	rt_init(t_rt *rt, char *path);
@@ -69,8 +78,8 @@ void	rt_free(t_rt *rt);
 
 /* image.c*/
 void	clear_img(t_img *img);
-void	ft_putpixel(t_img *img, int x, int y, int color);
-
+void	putpixel(t_img *img, int x, int y, int color);
+void	render_img(t_rt *rt);
 /* array_utils.c */
 void	free_array(char *arr[]);
 void	print_array(char *arr[]);
