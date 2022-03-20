@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 16:05:24 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 16:06:26 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void 	free_objects(t_object **objs);
 /* file.c */
 int 	read_file(t_rt *rt, int fd);
 int 	open_file(t_rt *rt, char *path);
+int	 	is_rt_file(char *path);
 
 /* number.c */
 int is_float(char *str);
