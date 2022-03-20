@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   number.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/18 18:32:38 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/19 00:19:05 by rpinto-r         ###   ########.fr       */
+/*   Created: 2022/03/19 00:55:28 by rpinto-r          #+#    #+#             */
+/*   Updated: 2022/03/19 00:55:30 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int show_parsing_error(char **arr, char *msg, int num)
+int is_float(char *str)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(msg, 2);
-	if (num)
+	int i;
+
+	i = 0;
+	while (str[i] && str[i])
 	{
-		ft_putstr_fd(" [line:", 2);
-		ft_putnbr_fd(num, 2);
-		ft_putstr_fd("]", 2);
+		if (ft_isdigit(str[i]) != 1 && str[i] != '-' && str[i] != '.')
+			return (0);
+		i++;
 	}
-	ft_putendl_fd("", 2);
-	free_array(arr);
+	return (1);
+}
+
+int is_ulong(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i])
+	{
+		if (ft_isdigit(str[i]) != 1)
+			return (0);
+		i++;
+	}
 	return (1);
 }

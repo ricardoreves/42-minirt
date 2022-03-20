@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 17:45:50 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 02:53:06 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
+
+# define ERR_TOO_FEW_OBJ_ARG "too few object arguments"
+# define ERR_TOO_FEW_COORS_VAL "too few coordinates values"
+# define ERR_TOO_FEW_ORIENT_VAL "too few orientation values"
+# define ERR_TOO_FEW_COLOR_VAL "too few color values"
+# define ERR_NOT_A_ULONG "value is not a unsigned long"
+# define ERR_NOT_A_FLOAT "value is not a float"
 
 typedef enum e_object_id
 {
