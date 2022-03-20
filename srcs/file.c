@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:36:59 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 15:55:48 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 16:13:13 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,9 @@ int open_file(t_rt *rt, char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("Error");
-		return (0);
-	}
+		return (!show_error(ERR_FILE_NOT_FOUND));
 	if (!is_rt_file(path))
-	{
-		show_parsing_error(0, ERR_IS_NOT_RT_FILE, 0);
-		return (0);
-	}
+		return (!show_error(ERR_IS_NOT_RT_FILE));
 	if (read_file(rt, fd))
 		return (0);
 	return (1);
