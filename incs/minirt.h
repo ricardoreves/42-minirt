@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 16:01:36 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/20 16:05:24 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int		str_to_int_color(char *str);
 
 /* error.c */
 int 	show_parsing_error(char **arr, char *msg, int num);
+int 	show_error(char *msg);
 
 /* object_utils.c */
 void 	push_object(t_object *obj, t_object **objs);
