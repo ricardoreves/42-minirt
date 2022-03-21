@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 16:02:09 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/21 02:11:00 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ int parse_camera(t_rt *rt, char *line, int num)
 	char **args;
 	t_camera camera;
 
+	if (rt->camera.id)
+		return (show_parsing_error(args, ERR_TOO_MANY_CAMERAS, num));
 	args = ft_split(line, ' ');
 	if (array_length(args) != 4)
-		return (show_parsing_error(args, ERR_TOO_FEW_OBJ_ARG, num));
+		return (show_parsing_error(args, ERR_INVALID_NB_PARAMS, num));
 	ft_bzero(&camera, sizeof(t_camera));
 	camera.id = id_camera;
 	if (parse_vector(args[1], &camera.coords))
-		return (show_parsing_error(args, ERR_TOO_FEW_COORS_VAL, num));
+		return (show_parsing_error(args, ERR_INVALID_NB_COORDS, num));
 	if (parse_vector(args[2], &camera.orient))
-		return (show_parsing_error(args, ERR_TOO_FEW_ORIENT_VAL, num));
+		return (show_parsing_error(args, ERR_INVALID_NB_ORIENT, num));
 	if (parse_ulong(args[3], &camera.fov))
 		return (show_parsing_error(args, ERR_NOT_A_ULONG, num));
 	rt->camera = camera;

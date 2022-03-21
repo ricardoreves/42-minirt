@@ -6,17 +6,23 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/21 01:39:31 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/21 02:08:44 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define ERR_TOO_FEW_OBJ_ARG "too few object arguments"
-# define ERR_TOO_FEW_COORS_VAL "too few coordinates values"
-# define ERR_TOO_FEW_ORIENT_VAL "too few orientation values"
-# define ERR_TOO_FEW_COLOR_VAL "too few color values"
+# define ERR_TOO_MANY_LIGTHS "too many light params"
+# define ERR_TOO_MANY_CAMERAS "too many camera params"
+# define ERR_TOO_MANY_AMBIENTS "too many ambient params"
+# define ERR_MISSING_LIGHT_PARAMS "missing light params"
+# define ERR_MISSING_CAMERA_PARAMS "missing camera params"
+# define ERR_MISSING_AMBIENT_PARAMS "missing ambient params"
+# define ERR_INVALID_NB_PARAMS "invalid number of params"
+# define ERR_INVALID_NB_COORDS "invalid number of coordinates values"
+# define ERR_INVALID_NB_ORIENT "invalid number of orientation values"
+# define ERR_INVALID_NB_COLORS "invalid number of color values"
 # define ERR_NOT_A_ULONG "value is not a unsigned long"
 # define ERR_NOT_A_FLOAT "value is not a float"
 
