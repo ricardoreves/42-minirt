@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/21 02:19:23 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/21 02:26:03 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int parse_light(t_rt *rt, char *line, int num)
 	t_light light;
 
 	if (rt->light.id)
-		return (show_parsing_error(args, ERR_TOO_MANY_AMBIENTS, num));
+		return (show_parsing_error(args, ERR_TOO_MANY_LIGTHS, num));
 	args = ft_split(line, ' ');
 	if (array_length(args) != 4)
 		return (show_parsing_error(args, ERR_INVALID_NB_PARAMS, num));
