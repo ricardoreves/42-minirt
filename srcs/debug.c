@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object_debug.c                                     :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 00:34:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 01:30:16 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/21 02:43:22 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,23 @@ void rt_dump(t_rt *rt)
 {
 	t_object *tmp;
 
+	if (rt->ambient.id == id_ambient)
+	{
+		printf("object: ambient\n");
+		printf("id    : %d\n", rt->ambient.id);
+		printf("color : %d\n", rt->ambient.color);
+		printf("ligth : %f\n", rt->ambient.lighting);
+	}
+	if (rt->light.id == id_light)
+	{
+		printf("object: light\n");
+		printf("id    : %d\n", rt->light.id);
+		printf("cx    : %f\n", rt->light.coords.x);
+		printf("cy    : %f\n", rt->light.coords.y);
+		printf("cz    : %f\n", rt->light.coords.z);
+		printf("color : %d\n", rt->light.color);
+		printf("bright: %f\n", rt->light.brightness);
+	}
 	if (rt->camera.id)
 	{
 		printf("object: camera\n");
@@ -31,23 +48,6 @@ void rt_dump(t_rt *rt)
 	tmp = rt->objs;
 	while (tmp)
 	{
-		if (tmp->id == id_ambient)
-		{
-			printf("object: ambient\n");
-			printf("id    : %d\n", tmp->id);
-			printf("color : %d\n", tmp->object.ambient.color);
-			printf("ligth : %f\n", tmp->object.ambient.lighting);
-		}
-		if (tmp->id == id_light)
-		{
-			printf("object: light\n");
-			printf("id    : %d\n", tmp->id);
-			printf("cx    : %f\n", tmp->object.light.coords.x);
-			printf("cy    : %f\n", tmp->object.light.coords.y);
-			printf("cz    : %f\n", tmp->object.light.coords.z);
-			printf("color : %d\n", tmp->object.light.color);
-			printf("bright: %f\n", tmp->object.light.brightness);
-		}
 		if (tmp->id == id_plane)
 		{
 			printf("object: plane\n");
