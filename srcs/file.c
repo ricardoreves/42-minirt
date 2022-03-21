@@ -6,11 +6,22 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:36:59 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 16:13:13 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/21 02:38:19 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int is_invalid_file(t_rt *rt)
+{
+	if (!rt->ambient.id)
+		return (show_error(ERR_MISSING_AMBIENT_PARAMS));
+	if (!rt->camera.id)
+		return (show_error(ERR_MISSING_CAMERA_PARAMS));
+	if (!rt->light.id)
+		return (show_error(ERR_MISSING_LIGHT_PARAMS));
+	return (0);
+}
 
 int	 is_rt_file(char *path)
 {
@@ -41,6 +52,8 @@ int read_file(t_rt *rt, int fd)
 			ret = 1;
 		free(line);
 	}
+	if (is_invalid_file(rt))
+		ret = 1;
 	close(fd);
 	return (ret);
 }
