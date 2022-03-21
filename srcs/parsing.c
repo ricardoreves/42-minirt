@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/21 02:11:00 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/21 02:39:20 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int parse_camera(t_rt *rt, char *line, int num)
 	char **args;
 	t_camera camera;
 
+	args = ft_split(line, ' ');
 	if (rt->camera.id)
 		return (show_parsing_error(args, ERR_TOO_MANY_CAMERAS, num));
-	args = ft_split(line, ' ');
 	if (array_length(args) != 4)
 		return (show_parsing_error(args, ERR_INVALID_NB_PARAMS, num));
 	ft_bzero(&camera, sizeof(t_camera));
