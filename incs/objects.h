@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 23:16:53 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/21 01:38:47 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ typedef struct s_sphere
 
 typedef union u_object
 {
-	t_ambient	ambient;
-	t_light		light;
 	t_sphere	sphere;
 	t_plane		plane;
 	t_cylinder	cylinder;
