@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/21 02:26:03 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/21 02:45:54 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 int parse_ambient(t_rt *rt, char *line, int num)
 {
 	char **args;
-	t_object *obj;
 	t_ambient ambient;
 
+	args = ft_split(line, ' ');
 	if (rt->ambient.id)
 		return (show_parsing_error(args, ERR_TOO_MANY_AMBIENTS, num));
-	args = ft_split(line, ' ');
 	if (array_length(args) != 3)
 		return (show_parsing_error(args, ERR_INVALID_NB_PARAMS, num));
 	ft_bzero(&ambient, sizeof(t_ambient));
@@ -29,7 +28,7 @@ int parse_ambient(t_rt *rt, char *line, int num)
 		return (show_parsing_error(args, ERR_NOT_A_FLOAT, num));
 	if (parse_color(args[2], &ambient.color))
 		return (show_parsing_error(args, ERR_INVALID_NB_COLORS, num));
-	rt->ambient.id = id_ambient;
+	rt->ambient = ambient;
 	free_array(args);
 	return (0);
 }
@@ -37,12 +36,11 @@ int parse_ambient(t_rt *rt, char *line, int num)
 int parse_light(t_rt *rt, char *line, int num)
 {
 	char **args;
-	t_object *obj;
 	t_light light;
 
+	args = ft_split(line, ' ');
 	if (rt->light.id)
 		return (show_parsing_error(args, ERR_TOO_MANY_LIGTHS, num));
-	args = ft_split(line, ' ');
 	if (array_length(args) != 4)
 		return (show_parsing_error(args, ERR_INVALID_NB_PARAMS, num));
 	ft_bzero(&light, sizeof(t_light));
@@ -53,8 +51,7 @@ int parse_light(t_rt *rt, char *line, int num)
 		return (show_parsing_error(args, ERR_NOT_A_FLOAT, num));
 	if (parse_color(args[3], &light.color))
 		return (show_parsing_error(args, ERR_INVALID_NB_COLORS, num));
-	obj = create_object(rt);
-	rt->light.id = id_light;
+	rt->light = light;
 	free_array(args);
 	return (0);
 }
