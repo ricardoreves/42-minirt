@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 16:15:34 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/23 00:32:15 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,15 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		addr_incr;
 }	t_img;
 
 typedef struct s_rt
 {
 	char		*path;
+	int			width;
+	int			height;
+	float		aspectRatio;
 	void		*mlx;
 	void		*mlx_win;
 	t_img		img;
@@ -84,7 +88,16 @@ void	rt_free(t_rt *rt);
 /* image.c*/
 void	clear_img(t_img *img);
 void	putpixel(t_img *img, int x, int y, int color);
-void	render_img(t_rt *rt);
+void	gen_img(t_rt *rt);
+
+/* ray.c */
+int		raytrace(float x, float y, t_rt *rt);
+
+/* vector.c */
+void	vectcpy(t_vector *dst, t_vector *src);
+void	vectres(t_vector *dst, t_vector *a, t_vector *b);
+t_vector	*normalize(t_vector *v);
+
 /* array_utils.c */
 void	free_array(char *arr[]);
 void	print_array(char *arr[]);

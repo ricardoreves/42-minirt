@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 18:31:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/21 00:00:59 by bgoncalv         ###   ########.fr       */
+/*   Created: 2022/03/20 18:48:55 by bgoncalv          #+#    #+#             */
+/*   Updated: 2022/03/23 00:50:49 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	msg_quit(char *s)
+int	raytrace(float x, float y, t_rt *rt)
 {
-	ft_putendl_fd(s, 1);
-	return (EXIT_FAILURE);
-}
+	int		color;
 
-int	main(int argc, char **argv)
-{
-	t_rt *rt;
+	vect_init(&r.origin, x, y, 1); // careful need to be transform with matrix to world
 
-	rt = ft_calloc(sizeof(t_rt), 1);
-	if (argc != 2)
-		show_error(USAGE_MESSAGE);
-	else if (open_file(rt, argv[1]))
-	{
-		rt_init(rt, argv[1]);
-		init_test(rt);
-		gen_img(rt);
-		mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->img.img, 0, 0);
-		mlx_loop(rt->mlx);
-	}
-	rt_free(rt);
-	return (0);
+	color = (int) (x + y);
+	return (color);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/20 15:40:25 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/23 00:25:32 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,23 @@ static int	exit_win(t_rt *rt)
 void	rt_init(t_rt *rt, char *path)
 {
 	rt->mlx = mlx_init();
+	rt->width = WIN_WIDTH;
+	rt->height = WIN_HEIGHT;
+	if (WIN_HEIGHT < WIN_WIDTH)
+		rt->aspectRatio = WIN_WIDTH / WIN_HEIGHT;
+	else
+		rt->aspectRatio = WIN_HEIGHT / WIN_WIDTH;
 	rt->mlx_win = mlx_new_window(rt->mlx, WIN_WIDTH, WIN_HEIGHT, "minirt");
 	rt->path = path;
 	rt->img.img = mlx_new_image(rt->mlx, WIN_WIDTH, WIN_HEIGHT);
 	rt->img.addr = mlx_get_data_addr(rt->img.img, &rt->img.bits_per_pixel,
 		&rt->img.line_length, &rt->img.endian);
 	if (!rt->img.img)
+	{
 		rt_clear(rt);
+		return ;
+	}
+	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	mlx_loop_hook(rt->mlx, handle_no_event, rt);
 	mlx_hook(rt->mlx_win, ON_KEYDOWN, 0, handle_keydown, rt);
 	mlx_hook(rt->mlx_win, ON_DESTROY, 0, exit_win, rt);

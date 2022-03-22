@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 02:31:21 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/20 03:06:08 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/20 03:13:41 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,26 @@ static void add_sphere(t_object_union *obj, float x, float y, float z, float dim
 	obj->sphere.color = color;
 }
 
+static void add_plane(t_object_union *obj, float x, float y, float z,
+							float x2, float y2, float z2, int color)
+{
+	obj->plane.coords.x = x;
+	obj->plane.coords.y = y;
+	obj->plane.coords.z = z;
+	obj->plane.orient.x = x2;
+	obj->plane.orient.y = y2;
+	obj->plane.orient.z = z2;
+	obj->plane.color = color;
+}
+
 void	init_test(t_rt *rt)
 {	t_object	*new_obj;
 
 	init_cam(rt);
 	new_obj = create_object(rt);
 	new_obj->id = id_sphere;
-	add_sphere(&new_obj->object, 0, 0, 20, 20 , 0xFF00FD);
+	add_sphere(&new_obj->object, 0, 0, 20, 20 , 0xFF0000);
+	new_obj = create_object(rt);
+	new_obj->id = id_plane;
+	add_plane(&new_obj->object, 0, 0, 0 , 0, 0, 1.0, 0xFF00FD);
 }

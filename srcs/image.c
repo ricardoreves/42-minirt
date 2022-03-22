@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/20 02:54:58 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/23 00:28:23 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,28 @@ void	putpixel(t_img *img, int x, int y, int color)
 	}
 }
 
-int	raytrace(int x, int y, t_rt *rt)
+void	gen_img(t_rt *rt)
 {
-	int	color;
+	int			x;
+	int			y;
+	char		*pix;
+	float		xdir;
+	float		ydir;
 
-	(void) rt;
-	
-	color = x + y;
-	return (color);
-}
-
-void	render_img(t_rt *rt)
-{
-	int		x;
-	int		y;
-	int		color;
-	char	*dst;
-
-	x = 0;
 	y = 0;
+	pix = rt->img.addr;
+	rt->camera.scale = tan(rt->camera.fov / 2 * M_PI /180);
+	rt->aspectRatio = (float) rt->width / rt->height;     //careful when resizing if height > width
+	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			color = raytrace(x, y, rt);
-			dst = rt->img.addr
-			+ (y * rt->img.line_length + x * (rt->img.bits_per_pixel / 8));
-			*(unsigned int *)dst = color;
+			xdir = (2 * ((x + 0.5) / (float) rt->width) - 1) * rt->camera.scale * rt->aspectRatio;
+			ydir = (1 - 2 * (y + 0.5) / (float) rt->height) * rt->camera.scale;
+			*(unsigned int *)pix = raytrace(xdir, ydir, rt);
+			pix += rt->img.addr_incr;
 			x++;
 		}
 		y++;
