@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/23 00:28:23 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:58:05 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ void	gen_img(t_rt *rt)
 	int			x;
 	int			y;
 	char		*pix;
-	float		xdir;
-	float		ydir;
+	t_ray		ray;
+	t_camera	*cam;
 
 	y = 0;
+	cam = &rt->camera;
 	pix = rt->img.addr;
+	vect_init(&ray.or, cam->coords.x, cam->coords.y, cam->coords.z);
 	rt->camera.scale = tan(rt->camera.fov / 2 * M_PI /180);
 	rt->aspectRatio = (float) rt->width / rt->height;     //careful when resizing if height > width
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
@@ -47,12 +49,18 @@ void	gen_img(t_rt *rt)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			xdir = (2 * ((x + 0.5) / (float) rt->width) - 1) * rt->camera.scale * rt->aspectRatio;
-			ydir = (1 - 2 * (y + 0.5) / (float) rt->height) * rt->camera.scale;
-			*(unsigned int *)pix = raytrace(xdir, ydir, rt);
+			ray.dir.x = (2 * (((float) x + 0.5) / (float) rt->width) - 1) * rt->camera.scale * rt->aspectRatio;
+			ray.dir.y = (1 - 2 * ((float) y + 0.5) / (float) rt->height) * rt->camera.scale;
+			*(unsigned int *)pix = raytrace(&ray, rt);
 			pix += rt->img.addr_incr;
 			x++;
 		}
 		y++;
 	}
 }
+
+			// printf("%f   %f    %f\n", ray.or.x, ray.or.y, ray.or.z);
+			// if ((x == 300 || x == 749 || x == 1200) && (y == 100 || y == 599 || y == 1100))
+			// {
+			// printf("%f   %f   %f\n", ray.dir.x, ray.dir.y, ray.dir.z);
+			// }

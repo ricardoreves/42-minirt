@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 02:31:21 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/20 03:13:41 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:31:45 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void init_cam(t_rt *rt)
 	cam->coords.z = 20;
 	cam->orient.x = 0;
 	cam->orient.y = 0;
-	cam->orient.z = 0;
+	cam->orient.z = 1;
 	cam->fov = 70;
 }
 
@@ -53,8 +53,8 @@ void	init_test(t_rt *rt)
 	init_cam(rt);
 	new_obj = create_object(rt);
 	new_obj->id = id_sphere;
-	add_sphere(&new_obj->object, 0, 0, 20, 20 , 0xFF0000);
+	add_sphere(&new_obj->object, -50, 10, 500, 2 , 0xFF5600);
 	new_obj = create_object(rt);
 	new_obj->id = id_plane;
-	add_plane(&new_obj->object, 0, 0, 0 , 0, 0, 1.0, 0xFF00FD);
+	add_plane(&new_obj->object, 0, 0, 0 , 0, 0, 1.0, 0xFF0000);
 }

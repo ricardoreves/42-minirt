@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:31:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/21 00:00:59 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:31:59 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	else if (open_file(rt, argv[1]))
 	{
 		rt_init(rt, argv[1]);
-		init_test(rt);
+		// init_test(rt);
 		gen_img(rt);
 		mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->img.img, 0, 0);
 		mlx_loop(rt->mlx);

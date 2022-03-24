@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/23 00:32:15 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/24 21:10:02 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # include "libft.h"
 # include "objects.h"
 
+typedef enum e_bool {FALSE, TRUE}	t_bool;
+typedef t_vector					t_vect;
+typedef t_object					t_obj;
 enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -69,6 +72,8 @@ typedef struct s_rt
 	void		*mlx_win;
 	t_img		img;
 	t_camera	camera;
+	t_ambient	ambient;
+	t_light		light;
 	t_object	*objs;
 	size_t		num_objs;
 }	t_rt;
@@ -91,12 +96,15 @@ void	putpixel(t_img *img, int x, int y, int color);
 void	gen_img(t_rt *rt);
 
 /* ray.c */
-int		raytrace(float x, float y, t_rt *rt);
+int	raytrace(t_ray *ray, t_rt *rt);
 
 /* vector.c */
-void	vectcpy(t_vector *dst, t_vector *src);
+void	vect_init(t_vector *v, float x, float y, float z);
 void	vectres(t_vector *dst, t_vector *a, t_vector *b);
-t_vector	*normalize(t_vector *v);
+t_vect	*normalize(t_vector *v);
+float	distance(t_vect *a, t_vect *b);
+float	dot_prod(t_vector *v1, t_vector *v2);
+t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 
 /* array_utils.c */
 void	free_array(char *arr[]);
@@ -108,18 +116,19 @@ float	str_to_float(char *str);
 int		str_to_int_color(char *str);
 
 /* error.c */
-int 	show_parsing_error(char **arr, char *msg, int num);
+int 	show_parsing_error(char **params, char *msg, int num);
 int 	show_error(char *msg);
 
 /* object_utils.c */
 void 	push_object(t_object *obj, t_object **objs);
-t_object *create_object(t_rt *rt);
+t_obj	*create_object(t_rt *rt);
 void 	free_objects(t_object **objs);
 
 /* file.c */
 int 	read_file(t_rt *rt, int fd);
 int 	open_file(t_rt *rt, char *path);
 int	 	is_rt_file(char *path);
+int		is_invalid_file(t_rt *rt);
 
 /* number.c */
 int is_float(char *str);
