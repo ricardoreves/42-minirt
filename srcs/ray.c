@@ -37,7 +37,11 @@ t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_vect *pHit, t_vect *nHit)
 		t[0] = t[1];
 	ray_mul(pHit, ray, t[0]);
 	vectres(nHit, &sp->coords, pHit);
-	// printf("yeah\n");
+	printf("%f   %f   %f   len : %f\n", ray->dir.x, ray->dir.y, ray->dir.z, vectlen(&ray->dir));
+	printf("t:%f tca:%f thc:%f \n", t[0], tca, thc);
+	printf("d2:%f   lx:%f ly:%f lz:%f llen:%f  l.l:%f\n", d2, l.x, l.y, l.z, vectlen(&l), dot_prod(&l, &l));
+	printf("yeah\n");
+	printf("(%f, %f, %f)   diam: %f r: %f \n", sp->coords.x,sp->coords.y,sp->coords.z, sp->diameter, sp->r2);
 	return (TRUE);
 }
 

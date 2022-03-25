@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/24 22:55:33 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/25 01:12:05 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	vectres(t_vector *dst, t_vector *a, t_vector *b)
 
 float	vectlen(t_vector *v)
 {
-	return (sqrt(v->x * v->x + v->y * v->y + v->y * v->y));
+	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));
 }
 
 float	dot_prod(t_vector *v1, t_vector *v2)
