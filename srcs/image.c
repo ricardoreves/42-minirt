@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/25 01:16:42 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/03/26 00:29:46 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	gen_img(t_rt *rt)
 	cam = &rt->camera;
 	pix = rt->img.addr;
 	vect_init(&ray.or, cam->coords.x, cam->coords.y, cam->coords.z);
-	rt->camera.scale = tan(rt->camera.fov / 2 * M_PI /180);
+	rt->camera.scale = tan(rt->camera.fov / 2 * M_PI / 180);
 	rt->aspectRatio = (float) rt->width / rt->height;     //careful when resizing if height > width
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	while (y < WIN_HEIGHT)
@@ -49,7 +49,7 @@ void	gen_img(t_rt *rt)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			ray.dir.x = (2.0 * (((float) x + 0.5) / (float) rt->width) - 1.0) * rt->camera.scale * rt->aspectRatio;
+			ray.dir.x = (2.0 * ((float) x + 0.5) / (float) rt->width - 1.0) * rt->camera.scale * rt->aspectRatio;
 			ray.dir.y = (1.0 - 2.0 * ((float) y + 0.5) / (float) rt->height) * rt->camera.scale;
 			*(unsigned int *)pix = raytrace(&ray, rt);
 			pix += rt->img.addr_incr;
