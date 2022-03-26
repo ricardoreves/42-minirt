@@ -171,12 +171,12 @@ int	color_obj(t_obj *obj)
 
 int	raytrace(t_ray *ray, t_rt *rt)
 {
-	int			color;
+	//int			color;
 	t_vect		pHit;
 	t_vect		nHit;
 	t_object	*closest_obj;
 
-	color = (int) (ray->dir.x + ray->dir.y);
+	//color = (int) (ray->dir.x + ray->dir.y);
 	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y, ray->or.z + 1); // careful need to be transform with matrix to world
 	vectres(&ray->dir, &ray->or, &ray->dir);
 	normalize(&ray->dir);
