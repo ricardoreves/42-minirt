@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/25 01:12:05 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/01 01:03:30 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ void	vect_init(t_vector *v, float x, float y, float z)
 	v->x = x;
 	v->y = y;
 	v->z = z;
+}
+
+void	vect_cpy(t_vector *dst, t_vector *src)
+{
+	dst->x = src->x;
+	dst->y = src->y;
+	dst->z = src->z;
 }
 
 void	vectres(t_vector *dst, t_vector *a, t_vector *b)

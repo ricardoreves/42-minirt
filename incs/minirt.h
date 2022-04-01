@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/25 00:34:37 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/01 01:03:40 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ float	distance(t_vect *a, t_vect *b);
 float	dot_prod(t_vector *v1, t_vector *v2);
 t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 float	vectlen(t_vector *v);
+void	vect_cpy(t_vector *dst, t_vector *src);
 
 /* array_utils.c */
 void	free_array(char *arr[]);
