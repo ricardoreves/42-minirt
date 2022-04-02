@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/01 01:03:30 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/02 01:59:56 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,12 @@ float	distance(t_vect *a, t_vect *b)
 	y = pow(y, 2);
 	z = pow(z, 2);
 	return (sqrt(x + y + z));
+}
+
+t_vector	*vect_inv(t_vect *v)
+{
+	v->x = -v->x;
+	v->y = -v->y;
+	v->z = -v->z;
+	return (v);
 }

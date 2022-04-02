@@ -37,6 +37,7 @@ t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_vect *pHit, t_vect *nHit)
 		t[0] = t[1];
 	ray_mul(pHit, ray, t[0]);
 	vectres(nHit, &sp->coords, pHit);
+	normalize(nHit);
 	return (TRUE);
 }
 
@@ -111,6 +112,7 @@ t_bool	plane_inter(t_ray *r, t_plane *pl, t_vect *pHit, t_vect *nHit)
 		return (FALSE);
 	ray_mul(pHit, r, t);
 	vect_cpy(nHit, &pl->orient);
+	normalize(nHit);
 	return (TRUE);
 }
 
@@ -159,30 +161,15 @@ t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit)
 	return (closest_obj);
 }
 
-int	color_obj(t_obj *obj)
+t_color	*color_obj(t_obj *obj)
 {
 	if (obj && obj->id == id_sphere)
-		return (obj->object.sphere.color);
+		return (&obj->object.sphere.color);
 	if (obj && obj->id == id_plane)
-		return (obj->object.plane.color);
+		return (&obj->object.plane.color);
 	if (obj && obj->id == id_cylinder)
-		return (obj->object.cylinder.color);
+		return (&obj->object.cylinder.color);
 	return (0);
-}
-
-int	raytrace(t_ray *ray, t_rt *rt)
-{
-	t_vect		pHit;
-	t_vect		nHit;
-	t_object	*closest_obj;
-
-	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y, ray->or.z + 1); // careful need to be transform with matrix to world
-	vectres(&ray->dir, &ray->or, &ray->dir);
-	normalize(&ray->dir);
-	closest_obj = get_closest_obj(ray, rt->objs, &pHit, &nHit);
-	if (!closest_obj)
-		return (0);
-	return ((int)(color_obj(closest_obj)));
 }
 
 // int	raytrace(t_ray *ray, t_rt *rt)
@@ -190,8 +177,6 @@ int	raytrace(t_ray *ray, t_rt *rt)
 // 	t_vect		pHit;
 // 	t_vect		nHit;
 // 	t_object	*closest_obj;
-// 	t_ray		shadow_ray;
-// 	t_bool		in_shadow;
 
 // 	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y, ray->or.z + 1); // careful need to be transform with matrix to world
 // 	vectres(&ray->dir, &ray->or, &ray->dir);
@@ -199,13 +184,31 @@ int	raytrace(t_ray *ray, t_rt *rt)
 // 	closest_obj = get_closest_obj(ray, rt->objs, &pHit, &nHit);
 // 	if (!closest_obj)
 // 		return (0);
-// 	shadow_ray.or = pHit;
-// 	vectres(&shadow_ray.dir, &pHit, &rt->light.coords);
-// 	normalize(&shadow_ray.dir);
-// 	in_shadow = FALSE;
-// 	if (get_closest_obj(&shadow_ray, rt->objs, &pHit, &nHit))
-// 		in_shadow = TRUE;
-// 	if (in_shadow)
-// 		return (color_obj(closest_obj) + (0x88 << 24));
-// 	return ((int)(color_obj(closest_obj) * rt->light.brightness));
+// 	return (color2rgb(color_obj(closest_obj)));
 // }
+
+int	raytrace(t_ray *ray, t_rt *rt)
+{
+	t_vect		pHit;
+	t_vect		nHit;
+	t_object	*closest_obj;
+	t_ray		shadow_ray;
+	t_bool		in_shadow;
+
+	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y, ray->or.z + 1); // careful need to be transform with matrix to world
+	vectres(&ray->dir, &ray->or, &ray->dir);
+	normalize(&ray->dir);
+	closest_obj = get_closest_obj(ray, rt->objs, &pHit, &nHit);
+	if (!closest_obj)
+		return (0);
+	shadow_ray.or = pHit;
+	vectres(&shadow_ray.dir, &pHit, &rt->light.coords);
+	normalize(&shadow_ray.dir);
+	in_shadow = FALSE;
+	if (get_closest_obj(&shadow_ray, rt->objs, &pHit, &nHit))
+		in_shadow = TRUE;
+	if (in_shadow)
+		return (color_mul(color_obj(closest_obj), 0.2));
+	return (color_mul(color_obj(closest_obj),
+			rt->light.brightness * dot_prod(&shadow_ray.dir, &nHit)));
+}

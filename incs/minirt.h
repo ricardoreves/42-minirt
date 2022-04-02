@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/01 01:03:40 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/02 03:01:08 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,15 @@ float	dot_prod(t_vector *v1, t_vector *v2);
 t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 float	vectlen(t_vector *v);
 void	vect_cpy(t_vector *dst, t_vector *src);
+t_vect	*vect_inv(t_vect *v);
+
+/* color.c */
+// int		clamp_color(int c1, int c2);
+// int		avg_color(int c1, int c2);
+int		clamp_color(t_color *c1, t_color *c2);
+int		avg_color(t_color *c1, t_color *c2);
+int		color2rgb(t_color *c);
+int		color_mul(t_color *c, float p);
 
 /* array_utils.c */
 void	free_array(char *arr[]);
@@ -118,39 +127,40 @@ float	str_to_float(char *str);
 int		str_to_int_color(char *str);
 
 /* error.c */
-int 	show_parsing_error(char **params, char *msg, int num);
-int 	show_error(char *msg);
+int		show_parsing_error(char **params, char *msg, int num);
+int		show_error(char *msg);
 
 /* object_utils.c */
-void 	push_object(t_object *obj, t_object **objs);
+void	push_object(t_object *obj, t_object **objs);
 t_obj	*create_object(t_rt *rt);
-void 	free_objects(t_object **objs);
+void	free_objects(t_object **objs);
 
 /* file.c */
-int 	read_file(t_rt *rt, int fd);
-int 	open_file(t_rt *rt, char *path);
-int	 	is_rt_file(char *path);
+int		read_file(t_rt *rt, int fd);
+int		open_file(t_rt *rt, char *path);
+int		is_rt_file(char *path);
 int		is_invalid_file(t_rt *rt);
 
 /* number.c */
-int is_float(char *str);
-int is_ulong(char *str);
+int		is_float(char *str);
+int		is_ulong(char *str);
 
 /* parsing.c */
-char *sanitize_line(char *line);
-int parse_line(t_rt *rt, char *line, int num);
-int parse_vector(char *str, t_vector *vect);
-int parse_color(char *str, int *color);
-int parse_float(char *str, float *num);
-int parse_ulong(char *str, size_t *num);
-int parse_ambient(t_rt *rt, char *line, int num);
-int parse_camera(t_rt *rt, char *line, int num);
-int parse_light(t_rt *rt, char *line, int num);
-int parse_plane(t_rt *rt, char *line, int num);
-int parse_sphere(t_rt *rt, char *line, int num);
-int parse_cylinder(t_rt *rt, char *line, int num);
+char	*sanitize_line(char *line);
+int		parse_line(t_rt *rt, char *line, int num);
+int		parse_vector(char *str, t_vector *vect);
+// int		parse_color(char *str, int *color);
+int		parse_color(char *str, t_color *color);
+int		parse_float(char *str, float *num);
+int		parse_ulong(char *str, size_t *num);
+int		parse_ambient(t_rt *rt, char *line, int num);
+int		parse_camera(t_rt *rt, char *line, int num);
+int		parse_light(t_rt *rt, char *line, int num);
+int		parse_plane(t_rt *rt, char *line, int num);
+int		parse_sphere(t_rt *rt, char *line, int num);
+int		parse_cylinder(t_rt *rt, char *line, int num);
 
 /* debug.c */
-void rt_dump(t_rt *rt);
+void	rt_dump(t_rt *rt);
 
 #endif

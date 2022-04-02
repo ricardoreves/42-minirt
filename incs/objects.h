@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/24 21:10:20 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/02 02:44:15 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ typedef struct s_vector
 	float	z;
 }	t_vector;
 
+typedef struct s_color
+{
+	float	r;
+	float	g;
+	float	b;
+}	t_color;
+
 typedef	struct s_ray
 {
 	t_vector	or;
@@ -53,8 +60,10 @@ typedef	struct s_ray
 typedef struct s_ambient
 {
 	t_object_id	id;
-	float	lighting;
-	int		color;
+	float		lighting;
+	// int		color;
+	t_color		color;
+
 }	t_ambient;
 
 typedef struct s_light
@@ -62,7 +71,8 @@ typedef struct s_light
 	t_object_id	id;
 	t_vector	coords;
 	float		brightness;
-	int			color;
+	// int			color;
+	t_color		color;
 }	t_light;
 
 typedef struct s_camera
@@ -79,7 +89,9 @@ typedef struct s_plane
 	t_object_id	id;
 	t_vector	coords;
 	t_vector	orient;
-	int			color;
+	// int			color;
+	t_color		color;
+
 }	t_plane;
 
 typedef struct s_cylinder
@@ -89,7 +101,9 @@ typedef struct s_cylinder
 	t_vector	orient;
 	float		diameter;
 	float		height;
-	int			color;
+	// int			color;
+	t_color		color;
+
 }	t_cylinder;
 
 typedef struct s_sphere
@@ -98,7 +112,9 @@ typedef struct s_sphere
 	t_vector	coords;
 	float		diameter;
 	float		r2;
-	int			color;
+	// int			color;
+	t_color		color;
+
 }	t_sphere;
 
 typedef union u_object

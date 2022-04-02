@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:37:46 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/19 01:38:40 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/02 02:47:55 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int parse_vector(char *str, t_vector *vect)
 	return (ret);
 }
 
-int parse_color(char *str, int *color)
+int parse_color(char *str, t_color *color)
 {
 	char **tmp;
 	int ret;
@@ -42,13 +42,32 @@ int parse_color(char *str, int *color)
 		ret = 1;
 	else
 	{
-		*color = str_to_int_color(tmp[0]);
-		*color = (*color << 8) + str_to_int_color(tmp[1]);
-		*color = (*color << 8) + str_to_int_color(tmp[2]);
+		color->r = (float) str_to_int_color(tmp[0]) / 255;
+		color->g = (float) str_to_int_color(tmp[1]) / 255;
+		color->b = (float) str_to_int_color(tmp[2]) / 255;
 	}
 	free_array(tmp);
 	return (ret);
 }
+
+// int parse_color(char *str, int *color)
+// {
+// 	char **tmp;
+// 	int ret;
+
+// 	ret = 0;
+// 	tmp = ft_split(str, ',');
+// 	if (array_length(tmp) != 3)
+// 		ret = 1;
+// 	else
+// 	{
+// 		*color = str_to_int_color(tmp[0]);
+// 		*color = (*color << 8) + str_to_int_color(tmp[1]);
+// 		*color = (*color << 8) + str_to_int_color(tmp[2]);
+// 	}
+// 	free_array(tmp);
+// 	return (ret);
+// }
 
 int parse_float(char *str, float *num)
 {
