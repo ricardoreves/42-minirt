@@ -12,132 +12,7 @@
 
 #include "minirt.h"
 
-t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_vect *pHit, t_vect *nHit)
-{
-	t_vector	l;
-	float		tca;
-	float		d2;
-	float		thc;
-	float		t[2];
-
-	vectres(&l, &ray->or, &sp->coords);
-	tca = dot_prod(&l, &ray->dir);
-	if (tca < 0)
-		return (FALSE);
-	d2 = dot_prod(&l, &l) - tca * tca;
-	if (d2 > sp->r2)
-		return (FALSE);
-	thc = sqrt(sp->r2 - d2);
-	t[0] = tca - thc;
-	t[1] = tca + thc;
-	// printf("test\n");
-	if (t[0] < 0 && t[1] < 0)
-		return (FALSE);
-	if (t[0] < 0 || (t[1] > 0 && t[1] < t[0]))
-		t[0] = t[1];
-	ray_mul(pHit, ray, t[0]);
-	vectres(nHit, &sp->coords, pHit);
-	normalize(nHit);
-	return (TRUE);
-}
-
-void	swap(float *a, float *b)
-{
-	float	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-t_bool	quadratic_solve(float a, float b, float c, float *t0, float *t1)
-{
-	float	discr;
-	float	q;
-
-	discr = b * b - 4 * a * c;
-	if (discr < 0)
-		return (FALSE);
-	if (discr == 0)
-	{
-		*t0 = - 0.5 * b / a;
-		*t0 = *t1;
-		return (TRUE);
-	}
-	discr = sqrt(discr);
-	if ( b > 0)
-		q = -0.5 * (b + discr);
-	else
-		q = -0.5 * (b - discr);
-	*t0 = q / a;
-	*t1 = c / q;
-	if (*t0 > *t1)
-		swap(t0, t1);
-	return (TRUE);
-}
-
-// t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_vect *pHit, t_vect *nHit)
-// {
-// 	t_vector	l;
-// 	float		a;
-// 	float		b;
-// 	float		c;
-// 	float		t[2];
-
-// 	vectres(&l, &sp->coords, &ray->or);
-// 	a = dot_prod(&ray->dir, &ray->dir);
-// 	b = 2 * dot_prod(&ray->dir, &l);
-// 	c = dot_prod(&l, &l) - sp->r2;
-// 	if (!quadratic_solve(a, b, c, &t[0], &t[1]))
-// 		return (FALSE);
-// 	if (t[0] < 0 && t[1] < 0)
-// 		return (FALSE);
-// 	if (t[0] < 0 || (t[1] > 0 && t[1] < t[0]))
-// 		t[0] = t[1];
-// 	ray_mul(pHit, ray, t[0]);
-// 	vectres(nHit, &sp->coords, pHit);
-// 	normalize(nHit);
-// 	return (TRUE);
-// }
-
-t_bool	plane_inter(t_ray *r, t_plane *pl, t_vect *pHit, t_vect *nHit)
-{
-	float	denom;
-	float	t;
-
-	denom = dot_prod(normalize(&pl->orient), &r->dir);
-	vectres(pHit, &r->or, &pl->coords);
-	t = dot_prod(pHit, &pl->orient) / denom;
-	if (t < 0)
-		return (FALSE);
-	ray_mul(pHit, r, t);
-	vect_cpy(nHit, &pl->orient);
-	normalize(nHit);
-	return (TRUE);
-}
-
-t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_vect *pHit, t_vect *nHit)
-{
-	(void) r;
-	(void) pHit;
-	(void) nHit;
-	(void) cy;
-
-	return (FALSE);
-}
-
-int	intersect(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit)
-{
-	if (obj->id == id_sphere)
-		return (sphere_inter(ray, &obj->object.sphere, pHit, nHit));
-	if (obj->id == id_plane)
-		return (plane_inter(ray, &obj->object.plane, pHit, nHit));
-	if (obj->id == id_cylinder)
-		return (cylinder_inter(ray, &obj->object.cylinder, pHit, nHit));
-	return (FALSE);
-}
-
-t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit)
+t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *or, t_vect *nHit)
 {
 	float		min_dist;
 	float		dist;
@@ -147,9 +22,9 @@ t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit)
 	min_dist = INFINITY;
 	while (obj)
 	{
-		if (intersect(ray, obj, pHit, nHit))
+		if (intersect(ray, obj, or, nHit))
 		{
-			dist = distance(&ray->or, pHit);
+			dist = distance(&ray->or, or);
 			if (dist < min_dist)
 			{
 				closest_obj = obj;
@@ -161,54 +36,64 @@ t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit)
 	return (closest_obj);
 }
 
-t_color	*color_obj(t_obj *obj)
-{
-	if (obj && obj->id == id_sphere)
-		return (&obj->object.sphere.color);
-	if (obj && obj->id == id_plane)
-		return (&obj->object.plane.color);
-	if (obj && obj->id == id_cylinder)
-		return (&obj->object.cylinder.color);
-	return (0);
-}
-
 // int	raytrace(t_ray *ray, t_rt *rt)
 // {
-// 	t_vect		pHit;
+// 	t_vect		or;
 // 	t_vect		nHit;
 // 	t_object	*closest_obj;
 
 // 	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y, ray->or.z + 1); // careful need to be transform with matrix to world
 // 	vectres(&ray->dir, &ray->or, &ray->dir);
 // 	normalize(&ray->dir);
-// 	closest_obj = get_closest_obj(ray, rt->objs, &pHit, &nHit);
+// 	closest_obj = get_closest_obj(ray, rt->objs, &or, &nHit);
 // 	if (!closest_obj)
 // 		return (0);
 // 	return (color2rgb(color_obj(closest_obj)));
 // }
 
-int	raytrace(t_ray *ray, t_rt *rt)
+void	build_ray(t_ray *ray, t_vect *or, t_vect *dir)
 {
-	t_vect		pHit;
-	t_vect		nHit;
-	t_object	*closest_obj;
-	t_ray		shadow_ray;
-	t_bool		in_shadow;
+	ray->or.x = or->x;
+	ray->or.y = or->y;
+	ray->or.z = or->z;
+	ray->dir.x = dir->x;
+	ray->dir.y = dir->y;
+	ray->dir.z = dir->z;
+}
 
+void	build_camray(t_rt *rt, t_ray *ray, int x, int y)
+{
+	t_camera	*cam;
+
+	cam = &rt->camera;
+	vect_init(&ray->or, cam->coords.x, cam->coords.y, cam->coords.z);
+	ray->dir.x = (2.0 * ((float) x + 0.5) / (float) rt->width - 1.0) * cam->scale * rt->aspectRatio;
+	ray->dir.y = (1.0 - 2.0 * ((float) y + 0.5) / (float) rt->height) * cam->scale;
 	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y, ray->or.z + 1); // careful need to be transform with matrix to world
 	vectres(&ray->dir, &ray->or, &ray->dir);
 	normalize(&ray->dir);
-	closest_obj = get_closest_obj(ray, rt->objs, &pHit, &nHit);
+}
+
+int	raytrace(t_rt *rt, int x, int y)
+{
+	t_ray		nHit;
+	t_object	*closest_obj;
+	t_ray		shadow_ray;
+	t_bool		in_shadow;
+	t_ray		ray;
+
+	build_camray(rt, &ray, x, y);
+	closest_obj = get_closest_obj(&ray, rt->objs, &nHit.or, &nHit.dir);
 	if (!closest_obj)
 		return (0);
-	shadow_ray.or = pHit;
-	vectres(&shadow_ray.dir, &pHit, &rt->light.coords);
+	shadow_ray.or = nHit.or;
+	vectres(&shadow_ray.dir, &nHit.or, &rt->light.coords);
 	normalize(&shadow_ray.dir);
 	in_shadow = FALSE;
-	if (get_closest_obj(&shadow_ray, rt->objs, &pHit, &nHit))
+	if (get_closest_obj(&shadow_ray, rt->objs, &nHit.or, &nHit.dir))
 		in_shadow = TRUE;
 	if (in_shadow)
 		return (color_mul(color_obj(closest_obj), 0.2));
 	return (color_mul(color_obj(closest_obj),
-			rt->light.brightness * dot_prod(&shadow_ray.dir, &nHit)));
+			rt->light.brightness * dot_prod(&shadow_ray.dir, &nHit.dir)));
 }

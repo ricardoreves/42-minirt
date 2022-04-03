@@ -6,11 +6,22 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/02 03:04:31 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/03 20:17:38 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_color	*color_obj(t_obj *obj)
+{
+	if (obj && obj->id == id_sphere)
+		return (&obj->object.sphere.color);
+	if (obj && obj->id == id_plane)
+		return (&obj->object.plane.color);
+	if (obj && obj->id == id_cylinder)
+		return (&obj->object.cylinder.color);
+	return (0);
+}
 
 int	color2rgb(t_color *c)
 {

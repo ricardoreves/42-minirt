@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/03 02:54:51 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/03 20:39:28 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 #  define L_KEY 37
 #  define C_KEY 5
 #  define D_KEY 2
+#  define LEFT_CLICK 1
+#  define RIGHT_CLICK 2
+
 # elif defined __unix__
 #  define ESCAPE_KEY 65307
 # endif
@@ -71,12 +74,13 @@ typedef struct s_img
 
 typedef struct s_event
 {
-	int	x;
-	int	y;
-	int	lastx;
-	int	lasty;
-	int	key[MAX_KEY];
-	int	mouse;
+	int		x;
+	int		y;
+	int		lastx;
+	int		lasty;
+	int		key[MAX_KEY];
+	int		mouse;
+	t_obj	*selection;
 }	t_event;
 
 typedef struct s_rt
@@ -125,9 +129,15 @@ int		handle_mousemove(int x, int y, t_rt *rt);
 void	clear_img(t_img *img);
 void	putpixel(t_img *img, int x, int y, int color);
 void	gen_img(t_rt *rt);
+void	render(t_rt *rt);
 
 /* ray.c */
-int	raytrace(t_ray *ray, t_rt *rt);
+int		raytrace(t_rt *rt, int x, int y);
+void	build_camray(t_rt *rt, t_ray *ray, int x, int y);
+void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
+
+/* inter.c */
+int		intersect(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit);
 
 /* vector.c */
 void	vect_init(t_vector *v, float x, float y, float z);
@@ -147,6 +157,7 @@ int		clamp_color(t_color *c1, t_color *c2);
 int		avg_color(t_color *c1, t_color *c2);
 int		color2rgb(t_color *c);
 int		color_mul(t_color *c, float p);
+t_color	*color_obj(t_obj *obj);
 
 /* array_utils.c */
 void	free_array(char *arr[]);
