@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 18:31:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/04 01:34:01 by bgoncalv         ###   ########.fr       */
+/*   Created: 2022/04/04 00:54:18 by bgoncalv          #+#    #+#             */
+/*   Updated: 2022/04/04 01:12:43 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef PARSING_H
+# define PARSING_H
+# include "minirt.h"
 
-int	msg_quit(char *s)
-{
-	ft_putendl_fd(s, 1);
-	return (EXIT_FAILURE);
-}
 
-int	main(int argc, char **argv)
-{
-	t_rt *rt;
 
-	rt = ft_calloc(sizeof(t_rt), 1);
-	if (argc != 2)
-		show_error(USAGE_MESSAGE);
-	else if (open_file(rt, argv[1]))
-	{
-		rt_init(rt, argv[1]);
-		render(rt);
-		mlx_loop(rt->mlx);
-	}
-	rt_free(rt);
-	return (0);
-}
+#endif

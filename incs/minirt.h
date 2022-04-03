@@ -6,15 +6,18 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/03 20:39:28 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/04 01:26:46 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# define FOCAL_DIST 0.5
 # define WIN_WIDTH 1200
 # define WIN_HEIGHT 800
+# define DECO_WIDTH 60
+# define COLORDEF 0x81A1C1
 # define MAX_KEY 300
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
@@ -23,6 +26,7 @@
 #  define L_KEY 37
 #  define C_KEY 5
 #  define D_KEY 2
+#  define I_KEY 34
 #  define LEFT_CLICK 1
 #  define RIGHT_CLICK 2
 
@@ -47,6 +51,8 @@
 # include "mlx.h"
 # include "libft.h"
 # include "objects.h"
+# include "ui.h"
+# include "parsing.h"
 
 typedef enum e_bool {FALSE, TRUE}	t_bool;
 typedef t_vector					t_vect;
@@ -98,13 +104,8 @@ typedef struct s_rt
 	t_object	*objs;
 	size_t		num_objs;
 	t_event		event;
+	int			display_info;
 }	t_rt;
-
-/* test.c */
-void	init_test(t_rt *rt);
-
-/* main.c */
-int		msg_quit(char *s);
 
 /* window.c */
 void	rt_init(t_rt *rt, char *path);
@@ -125,6 +126,16 @@ int		handle_mousedown(int button, int x, int y, t_rt *rt);
 int		handle_mouseup(int button, int x, int y, t_rt *rt);
 int		handle_mousemove(int x, int y, t_rt *rt);
 
+/* deco.c */
+void	draw_deco(t_rt *rt, int width, int color);
+void	put_info(t_rt *rt);
+
+/* test.c */
+void	init_test(t_rt *rt);
+
+/* main.c */
+int		msg_quit(char *s);
+
 /* image.c*/
 void	clear_img(t_img *img);
 void	putpixel(t_img *img, int x, int y, int color);
@@ -141,7 +152,7 @@ int		intersect(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit);
 
 /* vector.c */
 void	vect_init(t_vector *v, float x, float y, float z);
-void	vectres(t_vector *dst, t_vector *a, t_vector *b);
+t_vect	*vectres(t_vector *dst, t_vector *a, t_vector *b);
 t_vect	*normalize(t_vector *v);
 float	distance(t_vect *a, t_vect *b);
 float	dot_prod(t_vector *v1, t_vector *v2);
@@ -158,19 +169,8 @@ int		avg_color(t_color *c1, t_color *c2);
 int		color2rgb(t_color *c);
 int		color_mul(t_color *c, float p);
 t_color	*color_obj(t_obj *obj);
-
-/* array_utils.c */
-void	free_array(char *arr[]);
-void	print_array(char *arr[]);
-int		array_length(char *arr[]);
-
-/* convert.c */
-float	str_to_float(char *str);
-int		str_to_int_color(char *str);
-
-/* error.c */
-int		show_parsing_error(char **params, char *msg, int num);
-int		show_error(char *msg);
+t_color	*color_part(t_color *c, float p);
+int		blend_color(t_color *c, t_color *l);
 
 /* object_utils.c */
 void	push_object(t_object *obj, t_object **objs);
@@ -201,6 +201,19 @@ int		parse_light(t_rt *rt, char *line, int num);
 int		parse_plane(t_rt *rt, char *line, int num);
 int		parse_sphere(t_rt *rt, char *line, int num);
 int		parse_cylinder(t_rt *rt, char *line, int num);
+
+/* array_utils.c */
+void	free_array(char *arr[]);
+void	print_array(char *arr[]);
+int		array_length(char *arr[]);
+
+/* convert.c */
+float	str_to_float(char *str);
+int		str_to_int_color(char *str);
+
+/* error.c */
+int		show_parsing_error(char **params, char *msg, int num);
+int		show_error(char *msg);
 
 /* debug.c */
 void	rt_dump(t_rt *rt);

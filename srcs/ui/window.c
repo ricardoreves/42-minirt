@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/03 02:50:33 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/04 01:18:27 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	rt_init(t_rt *rt, char *path)
 	}
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	hook_init(rt);
+	rt->display_info = 1;
 }
 
 void	rt_clear(t_rt *rt)

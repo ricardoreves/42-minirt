@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:18:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/03 02:55:02 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/04 01:28:07 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int	handle_keydown(int key, t_rt *rt)
 	if (key == ESCAPE_KEY)
 		exit_win(rt);
 	switch_var(&rt->event.key[key]);
+	if (key == I_KEY)
+	{
+		switch_var(&rt->display_info);
+		render(rt);
+	}
 	return (0);
 }
 

@@ -6,13 +6,13 @@
 #    By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:19:59 by rpinto-r          #+#    #+#              #
-#    Updated: 2022/04/02 21:52:46 by bgoncalv         ###   ########.fr        #
+#    Updated: 2022/04/04 01:07:15 by bgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### VARIABLES ###
 CC               = gcc
-CFLAGS           = -Werror -Wextra -Wall
+CFLAGS           = -Werror -Wextra -Wall -O3
 CDEBUG           = -g3 -fsanitize=address
 RM               = rm -rf
 NORM             = norminette

@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/02 21:57:12 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/03 20:47:38 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ float	vectlen(t_vector *v)
 	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));
 }
 
-void	vectres(t_vector *dst, t_vector *a, t_vector *b)
+t_vect	*vectres(t_vector *dst, t_vector *a, t_vector *b)
 {
 	dst->x = b->x - a->x;
 	dst->y = b->y - a->y;
 	dst->z = b->z - a->z;
+	return (dst);
 }
 
 t_vector	*normalize(t_vector *v)

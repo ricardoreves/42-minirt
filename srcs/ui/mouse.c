@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:19:31 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/03 04:42:12 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/04 00:39:59 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 t_object *create_plane(t_rt *rt, int x, int y)
 {
 	t_object	*obj;
+	t_ray		camray;
 
+	printf("add plane\n");
 	obj = create_object(rt);
 	obj->id = id_plane;
-	obj->object.plane.coords.x = rt->camera.coords.x + ((float) x / rt->width - 0.5) * 20;   // not correct should be calculaed with ray
-	obj->object.plane.coords.y = rt->camera.coords.y + ((float) y / rt->height - 0.5) * 20;   // same here
-	obj->object.plane.coords.z = rt->camera.coords.z + 50;
+	build_camray(rt, &camray, x, y);
+	ray_mul(&obj->object.plane.coords, &camray, 30);
 	obj->object.plane.orient.x = 0.0;   // not correct should be calculaed with ray
 	obj->object.plane.orient.y = 1.0;   // same here
 	obj->object.plane.orient.z = 0.0;
@@ -34,12 +35,13 @@ t_object *create_plane(t_rt *rt, int x, int y)
 t_object *create_sphere(t_rt *rt, int x, int y)
 {
 	t_object	*obj;
-	
+	t_ray		camray;
+
+	printf("add sp\n");
 	obj = create_object(rt);
 	obj->id = id_sphere;
-	obj->object.sphere.coords.x = rt->camera.coords.x + ((float) x / rt->width - 0.5) * 20;   // not correct should be calculaed with ray
-	obj->object.sphere.coords.y = rt->camera.coords.y + ((float) y / rt->height - 0.5) * 20;   // same here
-	obj->object.sphere.coords.z = rt->camera.coords.z + 50;
+	build_camray(rt, &camray, x, y);
+	ray_mul(&obj->object.sphere.coords, &camray, 50);
 	obj->object.sphere.color.r = 0;
 	obj->object.sphere.color.g = 0.5;
 	obj->object.sphere.color.b = 0;

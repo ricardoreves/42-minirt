@@ -6,28 +6,28 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/03 20:38:33 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/04 01:28:07 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	clear_img(t_img *img)
-{
-	ft_bzero(img->addr, WIN_HEIGHT * WIN_WIDTH * img->bits_per_pixel / 8);
-}
+// void	clear_img(t_img *img)
+// {
+// 	ft_bzero(img->addr, WIN_HEIGHT * WIN_WIDTH * img->bits_per_pixel / 8);
+// }
 
-void	putpixel(t_img *img, int x, int y, int color)
-{
-	char	*dst;
+// void	putpixel(t_img *img, int x, int y, int color)
+// {
+// 	char	*dst;
 
-	if (0 <= x && x < WIN_WIDTH && 0 <= y && y < WIN_HEIGHT)
-	{
-		dst = img->addr
-			+ (y * img->line_length + x * (img->bits_per_pixel / 8));
-		*(unsigned int *)dst = color;
-	}
-}
+// 	if (0 <= x && x < WIN_WIDTH && 0 <= y && y < WIN_HEIGHT)
+// 	{
+// 		dst = img->addr
+// 			+ (y * img->line_length + x * (img->bits_per_pixel / 8));
+// 		*(unsigned int *)dst = color;
+// 	}
+// }
 
 void	gen_img(t_rt *rt)
 {
@@ -59,4 +59,6 @@ void	render(t_rt *rt)
 {
 	gen_img(rt);
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->img.img, 0, 0);
+	if (rt->display_info)
+		put_info(rt);
 }
