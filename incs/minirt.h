@@ -6,17 +6,23 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/02 03:01:08 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/03 02:54:51 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIN_WIDTH 1500
-# define WIN_HEIGHT 1200
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 800
+# define MAX_KEY 300
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
+#  define S_KEY 1
+#  define P_KEY 35
+#  define L_KEY 37
+#  define C_KEY 5
+#  define D_KEY 2
 # elif defined __unix__
 #  define ESCAPE_KEY 65307
 # endif
@@ -42,6 +48,7 @@
 typedef enum e_bool {FALSE, TRUE}	t_bool;
 typedef t_vector					t_vect;
 typedef t_object					t_obj;
+
 enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -62,6 +69,16 @@ typedef struct s_img
 	int		addr_incr;
 }	t_img;
 
+typedef struct s_event
+{
+	int	x;
+	int	y;
+	int	lastx;
+	int	lasty;
+	int	key[MAX_KEY];
+	int	mouse;
+}	t_event;
+
 typedef struct s_rt
 {
 	char		*path;
@@ -76,6 +93,7 @@ typedef struct s_rt
 	t_light		light;
 	t_object	*objs;
 	size_t		num_objs;
+	t_event		event;
 }	t_rt;
 
 /* test.c */
@@ -89,6 +107,19 @@ void	rt_init(t_rt *rt, char *path);
 void	rt_clear(t_rt *rt);
 int		close_window(t_rt *rt);
 void	rt_free(t_rt *rt);
+
+/* event.c */
+void	hook_init(t_rt *rt);
+int		exit_win(t_rt *rt);
+
+/* keyboard */
+int		handle_keydown(int key, t_rt *rt);
+int		handle_keyup(int key, t_rt *rt);
+
+/* mouse */
+int		handle_mousedown(int button, int x, int y, t_rt *rt);
+int		handle_mouseup(int button, int x, int y, t_rt *rt);
+int		handle_mousemove(int x, int y, t_rt *rt);
 
 /* image.c*/
 void	clear_img(t_img *img);

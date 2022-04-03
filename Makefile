@@ -6,7 +6,7 @@
 #    By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:19:59 by rpinto-r          #+#    #+#              #
-#    Updated: 2022/04/02 02:46:38 by bgoncalv         ###   ########.fr        #
+#    Updated: 2022/04/02 21:52:46 by bgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,14 @@ RM               = rm -rf
 NORM             = norminette
 NAME             = minirt
 SRCS_INC         = ./incs
-SRCS_DIR         = ./srcs
-SRCS_NAME        = main.c color.c vector.c ray.c window.c image.c keyboard.c parsing.c parsing_utils.c parsing_utils2.c array_utils.c convert.c error.c file.c object_utils.c number.c debug.c
-SRCS             = $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
+SRCS             = $(wildcard ./srcs/utils/*.c) \
+				   $(wildcard ./srcs/main/*.c) \
+				   $(wildcard ./srcs/parsing/*.c) \
+				   $(wildcard ./srcs/rt/*.c) \
+				   $(wildcard ./srcs/ui/*.c)
 OBJS             = $(SRCS:.c=.o)
 SCENE		     = ./scenes/mandatory.rt
-DEV_SRCS         = $(patsubst %/main.c, %/dev.c, $(SRCS)) 
+DEV_SRCS         = $(patsubst %/main.c, %/dev.c, $(SRCS))
 DEV_OBJS         = $(DEV_SRCS:.c=.o)
 
 ### LIBRARIES ###
