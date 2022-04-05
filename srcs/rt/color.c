@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/05 00:15:48 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/05 20:11:09 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,87 +41,10 @@ int	color2rgb(t_color *c)
 	return (color);
 }
 
-int	blend_color(t_color *c, t_color *l)
-{
-	c->r *= l->r;
-	c->g *= l->g;
-	c->b *= l->b;
-	
-
-	// if (l->r < c->r)
-	// 	c->r = l->r;
-	// if (l->g < c->g)
-	// 	c->g = l->g;
-	// if (l->b < c->b)
-	// 	c->b = l->b;
-	return (color2rgb(c));
-}
-
 t_color *color_set(t_color *color, float r, float g, float b)
 {
 	color->r = r;
-	color->r = g;
-	color->r = b;
+	color->g = g;
+	color->b = b;
 	return (color);
 }
-
-int	clamp_color(t_color *c1, t_color *c2)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = (int) ((c1->r + c2->r) * 255);
-	g = (int) ((c1->g + c2->g) * 255);
-	b = (int) ((c1->b + c2->b) * 255);
-	if (r > 255)
-		r = 255;
-	if (g > 255)
-		g = 255;
-	if (b > 255)
-		b = 255;
-	return ((r << 16) + (g << 8) + b);
-}
-
-int	avg_color(t_color *c1, t_color *c2)
-{
-	int	color;
-
-	color = ((int) ((c1->r + c2->r) * 255 * 0.5)) << 16;
-	color += ((int) ((c1->g + c2->g) * 255 * 0.5)) << 8;
-	color += (int) ((c1->b + c2->b) * 255 * 0.5);
-	return (color);
-}
-
-// int	clamp_color(int c1, int c2)
-// {
-// 	int	r;
-// 	int	g;
-// 	int	b;
-
-// 	r = c1 >> 16 & 255 + c2 >> 16 & 255;
-// 	g = c1 >> 8 & 255 + c2 >> 8 & 255;
-// 	b = c1 & 255 + c2 & 255;
-// 	if (r > 255)
-// 		r = 255;
-// 	if (g > 255)
-// 		g = 255;
-// 	if (b > 255)
-// 		b = 255;
-// 	return (r << 16 + g << 8 + b);
-// }
-
-// int	avg_color(int c1, int c2)
-// {
-// 	int	r;
-// 	int	g;
-// 	int	b;
-
-// 	r = c1 >> 16 & 255 + c2 >> 16 & 255;
-// 	g = c1 >> 8 & 255 + c2 >> 8 & 255;
-// 	b = c1 & 255 + c2 & 255;
-// 	r /= 2;
-// 	g /= 2;
-// 	b /= 2;
-// 	return (r << 16 + g << 8 + b);
-// }

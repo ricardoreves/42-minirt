@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/04 21:18:40 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:03:28 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_vect *pHit, t_vect *nHit)
 	thc = sqrt(sp->r2 - d2);
 	t[0] = tca - thc;
 	t[1] = tca + thc;
-	// printf("test\n");
 	if (t[0] < 0 && t[1] < 0)
 		return (FALSE);
 	if (t[0] < 0 || (t[1] > 0 && t[1] < t[0]))
@@ -104,17 +103,17 @@ t_bool	plane_inter(t_ray *r, t_plane *pl, t_vect *pHit, t_vect *nHit)
 {
 	float	denom;
 	float	t;
+	t_vect	tmp;
 
 	denom = dot_prod(normalize(&pl->orient), &r->dir);
 	if (denom == 0)
 		return (FALSE);
-	vectres(pHit, &r->or, &pl->coords);
-	t = dot_prod(pHit, &pl->orient) / denom;
+	vectres(&tmp, &r->or, &pl->coords);
+	t = dot_prod(&tmp, &pl->orient) / denom;
 	if (t < 0)
 		return (FALSE);
 	ray_mul(pHit, r, t);
-	*nHit = pl->orient;
-	normalize(nHit);
+	vect_cpy(nHit, &pl->orient);
 	return (TRUE);
 }
 

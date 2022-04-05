@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/04 23:26:42 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:38:57 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ int		color_mul(t_color *c, float p);
 t_color	*color_obj(t_obj *obj);
 t_color	*color_part(t_color *c, float p);
 int		blend_color(t_color *c, t_color *l);
+t_color *color_set(t_color *color, float r, float g, float b);
 
 /* object_utils.c */
 void	push_object(t_object *obj, t_object **objs);
