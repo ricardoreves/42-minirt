@@ -17,22 +17,23 @@ t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit)
 	float		min_dist;
 	float		dist;
 	t_object	*closest_obj;
-	t_vect		tmp_pHit;
-	t_vect		tmp_nHit;
+	t_vect		tmp_nHit[2];
 
 	closest_obj = NULL;
 	min_dist = INFINITY;
 	while (obj)
 	{
-		if (intersect(ray, obj, &tmp_pHit, &tmp_nHit))
+		if (intersect(ray, obj, &tmp_nHit[0], &tmp_nHit[1]))
 		{
-			dist = distance(&ray->or, &tmp_pHit);
+			dist = distance(&ray->or, &tmp_nHit[0]);
 			if (dist < min_dist)
 			{
 				closest_obj = obj;
 				min_dist = dist;
-				vect_cpy(pHit, &tmp_pHit);
-				vect_cpy(nHit, &tmp_nHit);
+				if (pHit)
+					*pHit = tmp_nHit[0];
+				if (nHit)
+					*nHit = tmp_nHit[1];
 			}
 		}
 		obj = obj->next;
@@ -70,20 +71,6 @@ void	build_camray(t_rt *rt, t_ray *ray, int x, int y)
 	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y, ray->or.z + FOCAL_DIST); // careful need to be transform with matrix to world
 	vectres(&ray->dir, &ray->or, &ray->dir);
 	normalize(&ray->dir);
-}
-
-t_color	*add_light(t_color *color, t_color *light, float p2)
-{
-	color->r = color->r * light->r * p2;
-	color->g = color->g * light->g * p2;
-	color->b = color->b * light->b * p2;
-	if (color->r > 1)
-		color->r = 1;
-	if (color->g > 1)
-		color->g = 1;
-	if (color->b > 1)
-		color->b = 1;
-	return (color);
 }
 
 typedef struct s_rays
@@ -136,19 +123,29 @@ int	raytrace(t_rt *rt, int x, int y)
 	t_colors	l;
 	t_object	*closest_obj;
 	float		dot_p;
+	t_vect		spec;
 
 	build_camray(rt, &r.camray, x, y);
 	closest_obj = get_closest_obj(&r.camray, rt->objs, &r.nHit.or, &r.nHit.dir);
 	if (!closest_obj)
 		return (BG_COLOR);
 	ft_memset(&l, 0, sizeof(l));
+	
 	l.ambient = *color_obj(closest_obj);
 	add_light(&l.ambient, &rt->ambient.color, rt->ambient.lighting);
 	build_ray(&r.shadow_ray, &r.nHit.or, vectres(&r.shadow_ray.dir, &r.nHit.or, &rt->light.coords));
-	if (get_closest_obj(&r.shadow_ray, rt->objs, &r.nHit.or, &r.nHit.dir))
+	if (get_closest_obj(&r.shadow_ray, rt->objs, NULL, NULL))
 		return (light2rgb(&l));
+	
 	l.diffuse = *color_obj(closest_obj);
 	dot_p = dot_prod(&r.shadow_ray.dir, &r.nHit.dir);
 	add_light(&l.diffuse, &rt->light.color, rt->light.brightness * dot_p);
+	
+	vect_mul(&spec, &r.nHit.dir, dot_p * 2);
+	vectres(&spec, &spec, &r.shadow_ray.dir);
+	dot_p = dot_prod(&spec, &r.camray.dir);
+	dot_p = pow(dot_p, 20) * 1;    //here can be changed n value to add to spheres
+	if (dot_p > 0)
+		add_light(&l.specular, color_set(&l.specular, 1, 1, 1), rt->light.brightness * dot_p);
 	return (light2rgb(&l));
 }

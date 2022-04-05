@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/05 18:38:57 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/05 23:44:40 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,32 +148,28 @@ int		raytrace(t_rt *rt, int x, int y);
 t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit);
 void	build_camray(t_rt *rt, t_ray *ray, int x, int y);
 void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
+t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 
 /* inter.c */
 int		intersect(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit);
 
 /* vector.c */
-void	vect_init(t_vector *v, float x, float y, float z);
-t_vect	*vectres(t_vector *dst, t_vector *a, t_vector *b);
-t_vect	*normalize(t_vector *v);
-float	distance(t_vect *a, t_vect *b);
-float	dot_prod(t_vector *v1, t_vector *v2);
-t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
+t_vect	*vect_init(t_vector *v, float x, float y, float z);
 float	vectlen(t_vector *v);
-void	vect_cpy(t_vector *dst, t_vector *src);
+t_vect	*vectres(t_vector *dst, t_vector *a, t_vector *b);
+t_vect	*vect_add(t_vector *dst, t_vector *a, t_vector *b);
+t_vect	*vect_mul(t_vect *dst, t_vect *v, float f);
+t_vect	*normalize(t_vector *v);
+float	dot_prod(t_vector *v1, t_vector *v2);
+float	distance(t_vect *a, t_vect *b);
 t_vect	*vect_inv(t_vect *v);
 
 /* color.c */
-// int		clamp_color(int c1, int c2);
-// int		avg_color(int c1, int c2);
-int		clamp_color(t_color *c1, t_color *c2);
-int		avg_color(t_color *c1, t_color *c2);
 int		color2rgb(t_color *c);
-int		color_mul(t_color *c, float p);
 t_color	*color_obj(t_obj *obj);
 t_color	*color_part(t_color *c, float p);
-int		blend_color(t_color *c, t_color *l);
 t_color *color_set(t_color *color, float r, float g, float b);
+t_color	*add_light(t_color *color, t_color *light, float p2);
 
 /* object_utils.c */
 void	push_object(t_object *obj, t_object **objs);

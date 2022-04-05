@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/04 00:06:07 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/06 00:10:49 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_ambient
 {
 	t_object_id	id;
 	float		lighting;
-	// int		color;
 	t_color		color;
 
 }	t_ambient;
@@ -71,7 +70,6 @@ typedef struct s_light
 	t_object_id	id;
 	t_vector	coords;
 	float		brightness;
-	// int			color;
 	t_color		color;
 }	t_light;
 
@@ -89,7 +87,6 @@ typedef struct s_plane
 	t_object_id	id;
 	t_vector	coords;
 	t_vector	orient;
-	// int			color;
 	t_color		color;
 
 }	t_plane;
@@ -101,7 +98,6 @@ typedef struct s_cylinder
 	t_vector	orient;
 	float		diameter;
 	float		height;
-	// int			color;
 	t_color		color;
 
 }	t_cylinder;
@@ -112,7 +108,6 @@ typedef struct s_sphere
 	t_vector	coords;
 	float		diameter;
 	float		r2;
-	// int			color;
 	t_color		color;
 
 }	t_sphere;
