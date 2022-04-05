@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/04 00:14:31 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/05 00:15:48 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,17 @@ int	color2rgb(t_color *c)
 
 int	blend_color(t_color *c, t_color *l)
 {
-	if (l->r < c->r)
-		c->r = l->r;
-	if (l->g < c->g)
-		c->g = l->g;
-	if (l->b < c->b)
-		c->b = l->b;
+	c->r *= l->r;
+	c->g *= l->g;
+	c->b *= l->b;
+	
+
+	// if (l->r < c->r)
+	// 	c->r = l->r;
+	// if (l->g < c->g)
+	// 	c->g = l->g;
+	// if (l->b < c->b)
+	// 	c->b = l->b;
 	return (color2rgb(c));
 }
 

@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/04 01:26:46 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:26:42 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define WIN_HEIGHT 800
 # define DECO_WIDTH 60
 # define COLORDEF 0x81A1C1
+# define BG_COLOR 0x000000
 # define MAX_KEY 300
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
@@ -144,6 +145,7 @@ void	render(t_rt *rt);
 
 /* ray.c */
 int		raytrace(t_rt *rt, int x, int y);
+t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit);
 void	build_camray(t_rt *rt, t_ray *ray, int x, int y);
 void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
 

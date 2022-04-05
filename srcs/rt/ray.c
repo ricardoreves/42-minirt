@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *or, t_vect *nHit)
+t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit)
 {
 	float		min_dist;
 	float		dist;
@@ -22,9 +22,9 @@ t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *or, t_vect *nHit)
 	min_dist = INFINITY;
 	while (obj)
 	{
-		if (intersect(ray, obj, or, nHit))
+		if (intersect(ray, obj, pHit, nHit))
 		{
-			dist = distance(&ray->or, or);
+			dist = distance(&ray->or, pHit);
 			if (dist < min_dist)
 			{
 				closest_obj = obj;
@@ -33,6 +33,8 @@ t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *or, t_vect *nHit)
 		}
 		obj = obj->next;
 	}
+	if (closest_obj)
+		intersect(ray, closest_obj, pHit, nHit);
 	return (closest_obj);
 }
 
@@ -82,41 +84,57 @@ t_color	*add_light(t_color *light, t_color *l2, float p2)
 	return (light);
 }
 
-int	raytrace(t_rt *rt, int x, int y)
+typedef struct s_rays
 {
 	t_ray		camray;
 	t_ray		shadow_ray;
 	t_ray		nHit;
-	t_object	*closest_obj;
-	t_color		light;
+}	t_rays;
 
-	build_camray(rt, &camray, x, y);
-	closest_obj = get_closest_obj(&camray, rt->objs, &nHit.or, &nHit.dir);
+int	raytrace(t_rt *rt, int x, int y)
+{
+	t_rays		r;
+	t_color		light;
+	t_object	*closest_obj;
+	float		dot_p;
+
+	build_camray(rt, &r.camray, x, y);
+	closest_obj = get_closest_obj(&r.camray, rt->objs, &r.nHit.or, &r.nHit.dir);
 	if (!closest_obj)
-		return (0);
+		return (BG_COLOR);
 	light = rt->ambient.color;
 	color_part(&light, rt->ambient.lighting);
-	build_ray(&shadow_ray, &nHit.or, vectres(&shadow_ray.dir, &nHit.or, &rt->light.coords));
-	if (get_closest_obj(&shadow_ray, rt->objs, &nHit.or, &nHit.dir))
+	build_ray(&r.shadow_ray, &r.nHit.or, vectres(&r.shadow_ray.dir, &r.nHit.or, &rt->light.coords));
+	if (get_closest_obj(&r.shadow_ray, rt->objs, &r.nHit.or, &r.nHit.dir))
 		return (avg_color(color_obj(closest_obj), &light));
-	add_light(&light, &rt->light.color, rt->light.brightness * dot_prod(&shadow_ray.dir, &nHit.dir));
+	dot_p = dot_prod(&r.shadow_ray.dir, &r.nHit.dir);
+	add_light(&light, &rt->light.color, rt->light.brightness * dot_p);
+	if (x ==1 && y == 1)
+	{
+		printf ("%f, %f, %f\n", light.r, light.g, light.b);
+		printf ("%f, %f, %f\n", rt->ambient.color.r, rt->ambient.color.g, rt->ambient.color.b);
+	}
 	return (avg_color(color_obj(closest_obj), &light));
 }
 
+
 // int	raytrace(t_rt *rt, int x, int y)
 // {
-// 	t_ray		camray;
-// 	t_ray		shadow_ray;
-// 	t_ray		nHit;
+// 	t_rays		r;
+// 	t_color		light;
 // 	t_object	*closest_obj;
+// 	float		dot_p;
 
-// 	build_camray(rt, &camray, x, y);
-// 	closest_obj = get_closest_obj(&camray, rt->objs, &nHit.or, &nHit.dir);
+// 	build_camray(rt, &r.camray, x, y);
+// 	closest_obj = get_closest_obj(&r.camray, rt->objs, &r.nHit.or, &r.nHit.dir);
 // 	if (!closest_obj)
-// 		return (0);
-// 	build_ray(&shadow_ray, &nHit.or, vectres(&shadow_ray.dir, &nHit.or, &rt->light.coords));
-// 	if (get_closest_obj(&shadow_ray, rt->objs, &nHit.or, &nHit.dir))
-// 		return (color_mul(color_obj(closest_obj), 0.2));
-// 	return (color_mul(color_obj(closest_obj),
-// 			rt->light.brightness * dot_prod(&shadow_ray.dir, &nHit.dir)));
+// 		return (BG_COLOR);
+// 	light = rt->ambient.color;
+// 	color_part(&light, rt->ambient.lighting);
+// 	build_ray(&r.shadow_ray, &r.nHit.or, vectres(&r.shadow_ray.dir, &r.nHit.or, &rt->light.coords));
+// 	if (get_closest_obj(&r.shadow_ray, rt->objs, &r.nHit.or, &r.nHit.dir))
+// 		return (avg_color(color_obj(closest_obj), &light));
+// 	dot_p = dot_prod(&r.shadow_ray.dir, &r.nHit.dir);
+// 	add_light(&light, &rt->light.color, rt->light.brightness * dot_p);
+// 	return (avg_color(color_obj(closest_obj), &light));
 // }
