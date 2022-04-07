@@ -6,13 +6,16 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/07 21:29:27 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:45:39 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# define SPECULAR_KV 0.0
+# define SPECULAR_N 0.0
+# define MIRROR 0.0
 # define FOCAL_DIST 0.5
 # define WIN_WIDTH 1200
 # define WIN_HEIGHT 800
