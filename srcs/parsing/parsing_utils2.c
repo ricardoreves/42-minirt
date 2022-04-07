@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:37:46 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/02 02:47:55 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:31:41 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	parse_extra_params(t_object *obj, char *str)
+{
+	char **tmp;
+	int ret;
+	int	i;
+
+	i = -1;
+	ret = 0;
+	tmp = ft_split(str, ',');
+	while (tmp && tmp[++i])
+		if (!is_float(tmp[i]))
+			ret = 1;
+	if (array_length(tmp) != 3)
+		ret = 1;
+	else
+	{
+		obj->speckv = str_to_float(tmp[0]);
+		obj->specn = str_to_float(tmp[1]);
+		obj->mirror = str_to_float(tmp[2]);
+	}
+	free_array(tmp);
+	return (ret);
+}
 
 int parse_vector(char *str, t_vector *vect)
 {
