@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/02 02:33:34 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:39:41 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int parse_plane(t_rt *rt, char *line, int num)
 	t_plane plane;
 
 	params = ft_split(line, ' ');
-	if (array_length(params) != 4)
+	if (array_length(params) < 4)
 		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
 	ft_bzero(&plane, sizeof(t_plane));
 	plane.id = id_plane;
@@ -76,6 +76,8 @@ int parse_plane(t_rt *rt, char *line, int num)
 	obj = create_object(rt);
 	obj->id = id_plane;
 	obj->object.plane = plane;
+	if (array_length(params) == 5 && parse_extra_params(obj, params[4])) 
+		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
 	free_array(params);
 	return (0);
 }
@@ -87,7 +89,7 @@ int parse_sphere(t_rt *rt, char *line, int num)
 	t_sphere sphere;
 
 	params = ft_split(line, ' ');
-	if (array_length(params) != 4)
+	if (array_length(params) < 4)
 		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
 	ft_bzero(&sphere, sizeof(t_sphere));
 	sphere.id = id_sphere;
@@ -101,6 +103,8 @@ int parse_sphere(t_rt *rt, char *line, int num)
 	obj->id = id_sphere;
 	sphere.r2 = sphere.diameter * sphere.diameter * 0.25;
 	obj->object.sphere = sphere;
+	if (array_length(params) == 5 && parse_extra_params(obj, params[4])) 
+		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
 	free_array(params);
 	return (0);
 }
@@ -112,7 +116,7 @@ int parse_cylinder(t_rt *rt, char *line, int num)
 	t_cylinder cylinder;
 
 	params = ft_split(line, ' ');
-	if (array_length(params) != 6)
+	if (array_length(params) < 6)
 		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
 	ft_bzero(&cylinder, sizeof(t_cylinder));
 	cylinder.id = id_cylinder;
@@ -120,15 +124,15 @@ int parse_cylinder(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
 	if (parse_vector(params[2], &cylinder.orient))
 		return (show_parsing_error(params, ERR_INVALID_NB_ORIENT, num));
-	if (parse_float(params[3], &cylinder.diameter))
-		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
-	if (parse_float(params[4], &cylinder.height))
+	if (parse_float(params[3], &cylinder.diameter) && parse_float(params[4], &cylinder.height))
 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
 	if (parse_color(params[5], &cylinder.color))
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
 	obj = create_object(rt);
 	obj->id = id_cylinder;
 	obj->object.cylinder = cylinder;
+	if (array_length(params) == 7 && parse_extra_params(obj, params[6])) 
+		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
 	free_array(params);
 	return (0);
 }
