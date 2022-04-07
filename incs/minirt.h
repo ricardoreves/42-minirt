@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/05 23:44:40 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/07 02:58:57 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define DECO_WIDTH 60
 # define COLORDEF 0x81A1C1
 # define BG_COLOR 0x000000
-# define MAX_KEY 300
+# define MAX_KEY 65535
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
 #  define S_KEY 1
@@ -30,9 +30,16 @@
 #  define I_KEY 34
 #  define LEFT_CLICK 1
 #  define RIGHT_CLICK 2
-
 # elif defined __unix__
 #  define ESCAPE_KEY 65307
+#  define S_KEY 115
+#  define P_KEY 112
+#  define L_KEY 108
+#  define C_KEY 99
+#  define D_KEY 100
+#  define I_KEY 105
+#  define LEFT_CLICK 1
+#  define RIGHT_CLICK 2
 # endif
 # define USAGE_MESSAGE "Usage: ./minirt scenes/mandatory.c"
 # define SCENE_CHARSET "ACLsplcy0123456789-,. \n"
