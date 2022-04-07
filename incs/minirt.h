@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/07 02:58:57 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/07 21:29:27 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ int		is_ulong(char *str);
 char	*sanitize_line(char *line);
 int		parse_line(t_rt *rt, char *line, int num);
 int		parse_vector(char *str, t_vector *vect);
+int		parse_extra_params(t_object *obj, char *str);
 // int		parse_color(char *str, int *color);
 int		parse_color(char *str, t_color *color);
 int		parse_float(char *str, float *num);
