@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:37:46 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/07 22:31:41 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:52:38 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,14 @@ int parse_vector(char *str, t_vector *vect)
 {
 	char **tmp;
 	int ret;
+	int	i;
 
+	i = -1;
 	ret = 0;
 	tmp = ft_split(str, ',');
+	while (tmp && tmp[++i])
+		if (!is_float(tmp[i]))
+			ret = 1;
 	if (array_length(tmp) != 3)
 		ret = 1;
 	else
@@ -59,9 +64,14 @@ int parse_color(char *str, t_color *color)
 {
 	char **tmp;
 	int ret;
+	int	i;
 
+	i = -1;
 	ret = 0;
 	tmp = ft_split(str, ',');
+	while (tmp && tmp[++i])
+		if (!is_ulong(tmp[i]))
+			ret = 1;
 	if (array_length(tmp) != 3)
 		ret = 1;
 	else
