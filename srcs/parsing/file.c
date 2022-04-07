@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:36:59 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/21 02:38:19 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:56:41 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int read_file(t_rt *rt, int fd)
 			ret = 1;
 		free(line);
 	}
-	if (is_invalid_file(rt))
+	if (!ret && is_invalid_file(rt))
 		ret = 1;
 	close(fd);
 	return (ret);
