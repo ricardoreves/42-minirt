@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/05 23:45:14 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/06 01:30:02 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,4 @@ t_vect	*vect_mul(t_vect *dst, t_vect *v, float f)
 	return (dst);
 }
 
-t_vector	*normalize(t_vector *v)
-{
-	float	norm;
 
-	norm = 1 / vectlen(v);
-	v->x *= norm;
-	v->y *= norm;
-	v->z *= norm;
-	return (v);
-}

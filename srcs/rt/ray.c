@@ -93,21 +93,9 @@ int	light2rgb(t_colors *l)
 	float	g;
 	float	b;
 
-	r = 0;
-	g = 0;
-	b = 0;
-	r += l->ambient.r;
-	g += l->ambient.g;
-	b += l->ambient.b;
-	r += l->diffuse.r;
-	g += l->diffuse.g;
-	b += l->diffuse.b;
-	r += l->specular.r;
-	g += l->specular.g;
-	b += l->specular.b;
-	// r = l->ambient.r + l->diffuse.r + l->specular.r;
-	// g = l->ambient.g + l->diffuse.g + l->specular.g;
-	// b = l->ambient.b + l->diffuse.b + l->specular.b;
+	r = l->ambient.r + l->diffuse.r + l->specular.r;
+	g = l->ambient.g + l->diffuse.g + l->specular.g;
+	b = l->ambient.b + l->diffuse.b + l->specular.b;
 	if (r > 1)
 		r = 1;
 	if (g > 1)
@@ -145,7 +133,6 @@ int	raytrace(t_rt *rt, int x, int y)
 	vectres(&spec, &spec, &r.shadow_ray.dir);
 	dot_p = dot_prod(&spec, &r.camray.dir);
 	dot_p = pow(dot_p, 20) * 1;    //here can be changed n value to add to spheres
-	if (dot_p > 0)
-		add_light(&l.specular, color_set(&l.specular, 1, 1, 1), rt->light.brightness * dot_p);
+	add_light(&l.specular, color_set(&l.specular, 1, 1, 1), rt->light.brightness * dot_p);
 	return (light2rgb(&l));
 }

@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 21:54:52 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/05 20:25:32 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/06 01:30:02 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,16 @@ t_vector	*vect_inv(t_vect *v)
 	v->x = -v->x;
 	v->y = -v->y;
 	v->z = -v->z;
+	return (v);
+}
+
+t_vector	*normalize(t_vector *v)
+{
+	float	norm;
+
+	norm = 1 / vectlen(v);
+	v->x *= norm;
+	v->y *= norm;
+	v->z *= norm;
 	return (v);
 }

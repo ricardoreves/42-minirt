@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/05 20:27:27 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/06 04:01:19 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_vect *pHit, t_vect *nHit)
 	t[1] = tca + thc;
 	if (t[0] < 0 && t[1] < 0)
 		return (FALSE);
-	if (t[0] < 0 || (t[1] > 0 && t[1] < t[0]))
+	if (t[0] < 0 || t[1] < t[0])
 		t[0] = t[1];
 	ray_mul(pHit, ray, t[0]);
 	vectres(nHit, &sp->coords, pHit);
@@ -40,64 +40,6 @@ t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_vect *pHit, t_vect *nHit)
 	return (TRUE);
 }
 
-// void	swap(float *a, float *b)
-// {
-// 	float	tmp;
-
-// 	tmp = *a;
-// 	*a = *b;
-// 	*b = tmp;
-// }
-
-// t_bool	quadratic_solve(float a, float b, float c, float *t0, float *t1)
-// {
-// 	float	discr;
-// 	float	q;
-
-// 	discr = b * b - 4 * a * c;
-// 	if (discr < 0)
-// 		return (FALSE);
-// 	if (discr == 0)
-// 	{
-// 		*t0 = - 0.5 * b / a;
-// 		*t0 = *t1;
-// 		return (TRUE);
-// 	}
-// 	discr = sqrt(discr);
-// 	if ( b > 0)
-// 		q = -0.5 * (b + discr);
-// 	else
-// 		q = -0.5 * (b - discr);
-// 	*t0 = q / a;
-// 	*t1 = c / q;
-// 	if (*t0 > *t1)
-// 		swap(t0, t1);
-// 	return (TRUE);
-// }
-
-// t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_vect *pHit, t_vect *nHit)
-// {
-// 	t_vector	l;
-// 	float		a;
-// 	float		b;
-// 	float		c;
-// 	float		t[2];
-
-// 	vectres(&l, &sp->coords, &ray->or);
-// 	a = dot_prod(&ray->dir, &ray->dir);
-// 	b = 2 * dot_prod(&ray->dir, &l);
-// 	c = dot_prod(&l, &l) - sp->r2;
-// 	if (!quadratic_solve(a, b, c, &t[0], &t[1]))
-// 		return (FALSE);
-// 	if (t[0] < 0 && t[1] < 0)
-// 		return (FALSE);
-// 	if (t[0] < 0 || (t[1] > 0 && t[1] < t[0]))
-// 		t[0] = t[1];
-// 	ray_mul(pHit, ray, t[0]);
-// 	vectres(nHit, &sp->coords, pHit);
-// 	normalize(nHit);
-// 	return (TRUE);
-// }
 
 t_bool	plane_inter(t_ray *r, t_plane *pl, t_vect *pHit, t_vect *nHit)
 {
@@ -105,7 +47,7 @@ t_bool	plane_inter(t_ray *r, t_plane *pl, t_vect *pHit, t_vect *nHit)
 	float	t;
 	t_vect	tmp;
 
-	denom = dot_prod(normalize(&pl->orient), &r->dir);
+	denom = dot_prod(&pl->orient, &r->dir);
 	if (denom == 0)
 		return (FALSE);
 	vectres(&tmp, &r->or, &pl->coords);
@@ -137,3 +79,4 @@ int	intersect(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit)
 		return (cylinder_inter(ray, &obj->object.cylinder, pHit, nHit));
 	return (FALSE);
 }
+

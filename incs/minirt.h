@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/05 23:44:40 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/06 01:32:42 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define WIN_HEIGHT 800
 # define DECO_WIDTH 60
 # define COLORDEF 0x81A1C1
-# define BG_COLOR 0x000000
+# define BG_COLOR 0x222222
 # define MAX_KEY 300
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53

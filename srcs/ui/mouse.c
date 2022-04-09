@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:19:31 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/05 02:51:10 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/09 04:04:11 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ t_object *create_plane(t_rt *rt, t_ray *mouse_ray)
 {
 	t_object	*obj;
 
-	printf("add plane\n");
 	obj = create_object(rt);
 	obj->id = id_plane;
 	ray_mul(&obj->object.plane.coords, mouse_ray, 30);
 	obj->object.plane.coords.y -= 10;
-	printf("%f\n", obj->object.plane.coords.y);
 	obj->object.plane.orient.x = 0.0;   // not correct should be calculaed with ray
 	obj->object.plane.orient.y = 1.0;   // same here
 	obj->object.plane.orient.z = 0.0;
@@ -36,7 +34,6 @@ t_object *create_sphere(t_rt *rt, t_ray *mouse_ray)
 {
 	t_object	*obj;
 
-	printf("add sp\n");
 	obj = create_object(rt);
 	obj->id = id_sphere;
 	ray_mul(&obj->object.sphere.coords, mouse_ray, 50);
