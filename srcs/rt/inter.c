@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/06 04:01:19 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/11 01:11:12 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_vect *pHit, t_vect *nHit)
 		return (FALSE);
 	if (t[0] < 0 || t[1] < t[0])
 		t[0] = t[1];
+	if (!pHit || !nHit)
+		return (TRUE);
 	ray_mul(pHit, ray, t[0]);
 	vectres(nHit, &sp->coords, pHit);
 	normalize(nHit);
@@ -52,10 +54,14 @@ t_bool	plane_inter(t_ray *r, t_plane *pl, t_vect *pHit, t_vect *nHit)
 		return (FALSE);
 	vectres(&tmp, &r->or, &pl->coords);
 	t = dot_prod(&tmp, &pl->orient) / denom;
-	if (t < 0)
+	if (t < EPSILON)
 		return (FALSE);
+	if (!pHit || !nHit)
+		return (TRUE);
 	ray_mul(pHit, r, t);
 	*nHit = pl->orient;
+	if (dot_prod(nHit, &r->dir) > 0)
+		vect_inv(nHit);
 	return (TRUE);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/06 00:10:49 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:31:18 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define ERR_MISSING_LIGHT_PARAMS "missing light params"
 # define ERR_MISSING_CAMERA_PARAMS "missing camera params"
 # define ERR_MISSING_AMBIENT_PARAMS "missing ambient params"
+# define ERR_INVALID_EXTRA_PARAMS "invalid extra params"
 # define ERR_INVALID_NB_PARAMS "invalid number of params"
 # define ERR_INVALID_NB_COORDS "invalid number of coordinates values"
 # define ERR_INVALID_NB_ORIENT "invalid number of orientation values"
@@ -123,6 +124,9 @@ typedef struct s_object
 {
 	t_object_id		id;
 	t_object_union	object;
+	float			speckv;
+	float			specn;
+	float			mirror;
 	struct s_object	*next;
 }	t_object;
 

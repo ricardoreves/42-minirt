@@ -6,20 +6,24 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/06 01:32:42 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/11 01:32:39 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# define EPSILON 0.001
+# define SPECULAR_KV 0.5
+# define SPECULAR_N 20
+# define MIRROR 0.0
 # define FOCAL_DIST 0.5
 # define WIN_WIDTH 1200
 # define WIN_HEIGHT 800
 # define DECO_WIDTH 60
 # define COLORDEF 0x81A1C1
-# define BG_COLOR 0x222222
-# define MAX_KEY 300
+# define BG_COLOR 0x000000
+# define MAX_KEY 65535
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
 #  define S_KEY 1
@@ -30,9 +34,16 @@
 #  define I_KEY 34
 #  define LEFT_CLICK 1
 #  define RIGHT_CLICK 2
-
 # elif defined __unix__
 #  define ESCAPE_KEY 65307
+#  define S_KEY 115
+#  define P_KEY 112
+#  define L_KEY 108
+#  define C_KEY 99
+#  define D_KEY 100
+#  define I_KEY 105
+#  define LEFT_CLICK 1
+#  define RIGHT_CLICK 2
 # endif
 # define USAGE_MESSAGE "Usage: ./minirt scenes/mandatory.c"
 # define SCENE_CHARSET "ACLsplcy0123456789-,. \n"
@@ -144,11 +155,13 @@ void	gen_img(t_rt *rt);
 void	render(t_rt *rt);
 
 /* ray.c */
-int		raytrace(t_rt *rt, int x, int y);
-t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit);
 void	build_camray(t_rt *rt, t_ray *ray, int x, int y);
 void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
 t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
+
+/* raytrace.c */
+int		raytrace(t_rt *rt, int x, int y);
+t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_ray *nHit);
 
 /* inter.c */
 int		intersect(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit);
@@ -190,6 +203,7 @@ int		is_ulong(char *str);
 char	*sanitize_line(char *line);
 int		parse_line(t_rt *rt, char *line, int num);
 int		parse_vector(char *str, t_vector *vect);
+int		parse_extra_params(t_object *obj, char *str);
 // int		parse_color(char *str, int *color);
 int		parse_color(char *str, t_color *color);
 int		parse_float(char *str, float *num);

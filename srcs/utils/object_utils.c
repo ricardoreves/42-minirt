@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/03 02:25:34 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:47:17 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ t_object *create_object(t_rt *rt)
 	t_object *obj;
 
 	obj = ft_calloc(sizeof(t_object), 1);
+	obj->speckv = SPECULAR_KV;
+	obj->specn = SPECULAR_N;
+	obj->mirror = MIRROR;
 	push_object(obj, &rt->objs);
 	rt->num_objs++;
 	return (obj);

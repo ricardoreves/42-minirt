@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/05 20:17:02 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/09 04:28:50 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ t_color *color_set(t_color *color, float r, float g, float b)
 
 t_color	*add_light(t_color *color, t_color *light, float p2)
 {
+	if (p2 > 1)
+		p2 = 1;
+	if (p2 < 0)
+		p2 = 0;
 	color->r = color->r * light->r * p2;
 	color->g = color->g * light->g * p2;
 	color->b = color->b * light->b * p2;
