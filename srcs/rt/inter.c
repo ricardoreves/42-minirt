@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/15 00:28:05 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/15 01:08:07 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_bool	infinite_cyl_inter(t_ray *r, t_cylinder *cy, t_hit *hit)
 	vect_sub(&v, &cy->coords, &hit->pHit);
 	hit->nHit = cross_prod(&v, &cy->orient);
 	hit->nHit = cross_prod(&hit->nHit, &cy->orient);
-	normalize(&hit->nHit); // maybe need to inverse?
+	normalize(&hit->nHit);
 	if (dot_prod(&hit->nHit, &r->dir))
 		vect_inv(&hit->nHit);
 	return (TRUE);
@@ -91,18 +91,23 @@ t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_hit *hit)
 	t_plane	pl;
 	t_hit	tmp_hit;
 
-	if (infinite_cyl_inter(r, cy, hit) == FALSE)
-		return (FALSE);
-	if (pow(distance(&cy->coords, &hit->pHit), 2) > pow(cy->height * 0.5, 2) + cy->r2)
-		return (FALSE);
+	hit->t = INFINITY;
 	pl.coords = cy->p1;
 	pl.orient = cy->orient;
-	if (plane_inter(r, &pl, &tmp_hit) && distance(&tmp_hit.pHit, &cy->p1) < cy->diameter * 0.5)
+	if (plane_inter(r, &pl, &tmp_hit)
+		&& distance(&tmp_hit.pHit, &cy->p1) <= cy->diameter * 0.5 && hit->t > tmp_hit.t)
 		*hit = tmp_hit;
 	pl.coords = cy->p2;
-	if (plane_inter(r, &pl, &tmp_hit) && distance(&tmp_hit.pHit, &cy->p2) < cy->diameter * 0.5)
+	if (plane_inter(r, &pl, &tmp_hit)
+		&& distance(&tmp_hit.pHit, &cy->p2) <= cy->diameter * 0.5
+		&& hit->t > tmp_hit.t)
 		*hit = tmp_hit;
-	return (TRUE);
+	if (infinite_cyl_inter(r, cy, &tmp_hit)
+		&& pow(distance(&cy->coords, &tmp_hit.pHit), 2) 
+		<= pow(cy->height * 0.5, 2) + cy->r2
+		&& hit->t > tmp_hit.t)
+		*hit = tmp_hit;
+	return (hit->t < INFINITY);
 }
 
 int	intersect(t_ray *ray, t_object *obj, t_hit *hit)
@@ -115,4 +120,3 @@ int	intersect(t_ray *ray, t_object *obj, t_hit *hit)
 		return (cylinder_inter(ray, &obj->object.cylinder, hit));
 	return (FALSE);
 }
-
