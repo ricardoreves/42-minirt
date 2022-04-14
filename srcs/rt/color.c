@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/09 04:28:50 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/14 00:36:32 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,11 @@ t_color	*add_light(t_color *color, t_color *light, float p2)
 		color->g = 1;
 	if (color->b > 1)
 		color->b = 1;
+	if (color->r < 0)
+		color->r = 0;
+	if (color->g < 0)
+		color->g = 0;
+	if (color->b < 0)
+		color->b = 0;
 	return (color);
 }

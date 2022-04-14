@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:19:31 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/09 04:04:11 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:08:04 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	handle_mousedown(int button, int x, int y, t_rt *rt)
 	else if (button == LEFT_CLICK && (rt->event.key[P_KEY]))
 		rt->event.selection = create_plane(rt, &mouse_ray);
 	else
-		rt->event.selection = get_closest_obj(&mouse_ray, rt->objs, &nHit.or, &nHit.dir);
+		rt->event.selection = get_closest_obj(&mouse_ray, rt->objs, &nHit);
 	return (0);
 }
 

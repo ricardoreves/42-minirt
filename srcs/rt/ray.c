@@ -34,6 +34,6 @@ void	build_camray(t_rt *rt, t_ray *ray, int x, int y)
 	ray->dir.y = (1.0 - 2.0 * ((float) y + 0.5) / (float) rt->height) * cam->scale;
 	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y
 				, ray->or.z + FOCAL_DIST); // careful need to be transform with matrix to world
-	vectres(&ray->dir, &ray->or, &ray->dir);
+	vect_sub(&ray->dir, &ray->or, &ray->dir);
 	normalize(&ray->dir);
 }

@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   object_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/07 22:47:17 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/11 23:52:04 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	object_norm(t_obj *objs)
+{
+	t_cylinder	*cy;
+
+	while (objs)
+	{
+		if (objs->id == id_sphere)
+			objs->object.sphere.r2 = pow(objs->object.sphere.diameter / 2, 2);
+		if (objs->id == id_cylinder)
+		{
+			cy = &objs->object.cylinder;
+			cy->r2 = cy->diameter * cy->diameter * 0.25;
+			vect_mul(&cy->delta_p, &cy->orient, cy->height);
+			vect_mul(&cy->p1, &cy->orient, -0.5 * cy->height);
+		}
+		objs = objs->next;
+	}
+}
 
 void push_object(t_object *obj, t_object **objs)
 {

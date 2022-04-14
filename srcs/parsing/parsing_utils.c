@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/10 00:41:15 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/12 03:36:50 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int parse_sphere(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
 	obj = create_object(rt);
 	obj->id = id_sphere;
-	sphere.r2 = sphere.diameter * sphere.diameter * 0.25;
 	obj->object.sphere = sphere;
 	if (array_length(params) == 5 && parse_extra_params(obj, params[4])) 
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
@@ -131,6 +130,7 @@ int parse_cylinder(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
 	obj = create_object(rt);
 	obj->id = id_cylinder;
+	// normalize(&cylinder.orient);
 	obj->object.cylinder = cylinder;
 	if (array_length(params) == 7 && parse_extra_params(obj, params[6])) 
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));

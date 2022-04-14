@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/07 22:31:18 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/14 01:23:35 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ typedef struct s_vector
 	float	y;
 	float	z;
 }	t_vector;
+
+typedef struct s_quadratic
+{
+	float	a;
+	float	b;
+	float	c;
+	float	delta;
+	float	t1;
+	float	t2;
+}	t_quadratic;
 
 typedef struct s_color
 {
@@ -99,6 +109,9 @@ typedef struct s_cylinder
 	t_vector	orient;
 	float		diameter;
 	float		height;
+	float		r2;
+	t_vector	p1;
+	t_vector	delta_p;
 	t_color		color;
 
 }	t_cylinder;

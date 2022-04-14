@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/11 02:35:43 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/14 03:14:35 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,8 @@ int	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 	
 	l.ambient = *color_obj(closest_obj);
 	add_light(&l.ambient, &rt->ambient.color, rt->ambient.lighting);
-	build_ray(&r->lightray, &r->nHit.or, vectres(&r->lightray.dir, &r->nHit.or, &rt->light.coords));
-	// if (shadow_rt(&r->lightray, rt->objs))
-	
+	build_ray(&r->lightray, &r->nHit.or, vect_sub(&r->lightray.dir, &r->nHit.or, &rt->light.coords));
+	ray_mul(&r->lightray.or, &r->lightray, 0.01); // to modify
 	if (get_closest_obj(&r->lightray, rt->objs, &nHit)
 		&& distance(&r->lightray.or, &light->coords) > distance(&nHit.or, &r->lightray.or))
 		return (light2rgb(&l));
@@ -106,7 +105,7 @@ int	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 	add_light(&l.diffuse, &rt->light.color, rt->light.brightness * dot_p);
 	
 	vect_mul(&spec, &r->nHit.dir, dot_p * 2);
-	vectres(&spec, &spec, &r->lightray.dir);
+	vect_sub(&spec, &spec, &r->lightray.dir);
 	dot_p = dot_prod(&spec, &r->camray.dir);
 	dot_p = pow(dot_p, closest_obj->specn) * closest_obj->speckv;
 	add_light(&l.specular, color_set(&l.specular, 1, 1, 1), rt->light.brightness * dot_p);
@@ -126,35 +125,3 @@ int	raytrace(t_rt *rt, int x, int y)
 	color = lightrays(rt, &r, closest_obj, &rt->light);
 	return (color);
 }
-
-// int	raytrace(t_rt *rt, int x, int y)
-// {
-// 	t_rays		r;
-// 	t_colors	l;
-// 	t_object	*closest_obj;
-// 	float		dot_p;
-// 	t_vect		spec;
-
-// 	build_camray(rt, &r.camray, x, y);
-// 	closest_obj = get_closest_obj(&r.camray, rt->objs, &r.nHit);
-// 	if (!closest_obj)
-// 		return (BG_COLOR);
-// 	ft_memset(&l, 0, sizeof(l));
-	
-// 	l.ambient = *color_obj(closest_obj);
-// 	add_light(&l.ambient, &rt->ambient.color, rt->ambient.lighting);
-// 	build_ray(&r.lightray, &r.nHit.or, vectres(&r.lightray.dir, &r.nHit.or, &rt->light.coords));
-// 	if (shadow_rt(&r.lightray, rt->objs))
-// 		return (light2rgb(&l));
-	
-// 	l.diffuse = *color_obj(closest_obj);
-// 	dot_p = dot_prod(&r.lightray.dir, &r.nHit.dir);
-// 	add_light(&l.diffuse, &rt->light.color, rt->light.brightness * dot_p);
-	
-// 	vect_mul(&spec, &r.nHit.dir, dot_p * 2);
-// 	vectres(&spec, &spec, &r.lightray.dir);
-// 	dot_p = dot_prod(&spec, &r.camray.dir);
-// 	dot_p = pow(dot_p, closest_obj->specn) * closest_obj->speckv;
-// 	add_light(&l.specular, color_set(&l.specular, 1, 1, 1), rt->light.brightness * dot_p);
-// 	return (light2rgb(&l));
-// }

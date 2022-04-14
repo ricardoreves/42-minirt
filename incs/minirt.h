@@ -6,14 +6,14 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/11 01:32:39 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/14 02:56:44 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define EPSILON 0.001
+# define EPSILON 0.0001
 # define SPECULAR_KV 0.5
 # define SPECULAR_N 20
 # define MIRROR 0.0
@@ -169,11 +169,12 @@ int		intersect(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit);
 /* vector.c */
 t_vect	*vect_init(t_vector *v, float x, float y, float z);
 float	vectlen(t_vector *v);
-t_vect	*vectres(t_vector *dst, t_vector *a, t_vector *b);
+t_vect	*vect_sub(t_vector *dst, t_vector *a, t_vector *b);
 t_vect	*vect_add(t_vector *dst, t_vector *a, t_vector *b);
 t_vect	*vect_mul(t_vect *dst, t_vect *v, float f);
 t_vect	*normalize(t_vector *v);
 float	dot_prod(t_vector *v1, t_vector *v2);
+t_vect	cross_prod(t_vect *u, t_vect *v);
 float	distance(t_vect *a, t_vect *b);
 t_vect	*vect_inv(t_vect *v);
 
@@ -184,10 +185,14 @@ t_color	*color_part(t_color *c, float p);
 t_color *color_set(t_color *color, float r, float g, float b);
 t_color	*add_light(t_color *color, t_color *light, float p2);
 
+/* quadratic.c */
+t_bool	solve_quadratic(t_quadratic *q);
+
 /* object_utils.c */
 void	push_object(t_object *obj, t_object **objs);
 t_obj	*create_object(t_rt *rt);
 void	free_objects(t_object **objs);
+void	object_norm(t_obj *objs);
 
 /* file.c */
 int		read_file(t_rt *rt, int fd);

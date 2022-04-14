@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 21:54:52 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/06 01:30:02 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/14 02:40:49 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 float	dot_prod(t_vector *v1, t_vector *v2)
 {
 	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+}
+
+t_vect	cross_prod(t_vect *u, t_vect *v)
+{
+	t_vect	dst;
+
+	dst.x = u->y * v->z - u->z * v->y;
+	dst.y = u->z * v->x - u->x * v->z;
+	dst.z = u->x * v->y - u->y * v->x;
+	return (dst);
 }
 
 float	distance(t_vect *a, t_vect *b)
