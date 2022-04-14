@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/11 23:52:04 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/14 17:14:56 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	object_norm(t_obj *objs)
 			cy->r2 = cy->diameter * cy->diameter * 0.25;
 			vect_mul(&cy->delta_p, &cy->orient, cy->height);
 			vect_mul(&cy->p1, &cy->orient, -0.5 * cy->height);
+			vect_mul(&cy->p2, &cy->orient, 0.5 * cy->height);
 		}
 		objs = objs->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/12 03:36:50 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/14 17:08:09 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,12 @@ int parse_cylinder(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
 	if (parse_vector(params[2], &cylinder.orient))
 		return (show_parsing_error(params, ERR_INVALID_NB_ORIENT, num));
-	if (parse_float(params[3], &cylinder.diameter) && parse_float(params[4], &cylinder.height))
+	if (parse_float(params[3], &cylinder.diameter) || parse_float(params[4], &cylinder.height))
 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
 	if (parse_color(params[5], &cylinder.color))
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
 	obj = create_object(rt);
 	obj->id = id_cylinder;
-	// normalize(&cylinder.orient);
 	obj->object.cylinder = cylinder;
 	if (array_length(params) == 7 && parse_extra_params(obj, params[6])) 
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));

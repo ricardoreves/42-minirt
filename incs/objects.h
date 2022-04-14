@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/14 01:23:35 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/14 17:55:20 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ typedef	struct s_ray
 	t_vector	dir;
 }	t_ray;
 
+typedef	struct s_hit
+{
+	t_vector	nHit;
+	t_vector	pHit;
+	float		t;
+}	t_hit;
+
 typedef struct s_ambient
 {
 	t_object_id	id;
@@ -111,6 +118,7 @@ typedef struct s_cylinder
 	float		height;
 	float		r2;
 	t_vector	p1;
+	t_vector	p2;
 	t_vector	delta_p;
 	t_color		color;
 

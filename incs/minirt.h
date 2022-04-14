@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/14 02:56:44 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/14 17:53:05 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,10 +161,10 @@ t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 
 /* raytrace.c */
 int		raytrace(t_rt *rt, int x, int y);
-t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_ray *nHit);
+t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_hit *hit);
 
 /* inter.c */
-int		intersect(t_ray *ray, t_object *obj, t_vect *pHit, t_vect *nHit);
+int		intersect(t_ray *ray, t_object *obj, t_hit *hit);
 
 /* vector.c */
 t_vect	*vect_init(t_vector *v, float x, float y, float z);
