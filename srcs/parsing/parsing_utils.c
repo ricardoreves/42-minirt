@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/15 20:23:40 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/15 21:28:43 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int parse_light(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
 	if (parse_float(params[2], &light->brightness))
 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
-	printf("%f\n", light->brightness);
 	if (parse_color(params[3], &light->color))
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
 	free_array(params);
