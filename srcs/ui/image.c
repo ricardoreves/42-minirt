@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/11 21:53:31 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/15 01:45:36 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	gen_img(t_rt *rt)
 	int			y;
 	char		*pix;
 	t_camera	*cam;
-
+	t_rays		r;
+	
 	y = 0;
 	cam = &rt->camera;
 	pix = rt->img.addr;
@@ -48,7 +49,8 @@ void	gen_img(t_rt *rt)
 		x = 0;
 		while (x < rt->width)
 		{
-			*(unsigned int *)pix = raytrace(rt, x, y);
+			build_camray(rt, &r.prime_ray, x, y);
+			*(unsigned int *)pix = raytrace(rt, &r);
 			pix += rt->img.addr_incr;
 			x++;
 		}

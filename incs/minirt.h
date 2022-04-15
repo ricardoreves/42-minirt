@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/14 17:53:05 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:04:12 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
 t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 
 /* raytrace.c */
-int		raytrace(t_rt *rt, int x, int y);
+int		raytrace(t_rt *rt, t_rays *r);
 t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_hit *hit);
 
 /* inter.c */
@@ -177,6 +177,7 @@ float	dot_prod(t_vector *v1, t_vector *v2);
 t_vect	cross_prod(t_vect *u, t_vect *v);
 float	distance(t_vect *a, t_vect *b);
 t_vect	*vect_inv(t_vect *v);
+t_vect	reflect_vect(t_vector v, t_vector n);
 
 /* color.c */
 int		color2rgb(t_color *c);
@@ -184,6 +185,7 @@ t_color	*color_obj(t_obj *obj);
 t_color	*color_part(t_color *c, float p);
 t_color *color_set(t_color *color, float r, float g, float b);
 t_color	*add_light(t_color *color, t_color *light, float p2);
+int		mix_color(int c1, float p1, int c2, float p2);
 
 /* quadratic.c */
 t_bool	solve_quadratic(t_quadratic *q);

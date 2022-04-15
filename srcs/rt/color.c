@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/14 00:36:32 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:15:23 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,15 @@ t_color	*add_light(t_color *color, t_color *light, float p2)
 	if (color->b < 0)
 		color->b = 0;
 	return (color);
+}
+
+int	mix_color(int c1, float p1, int c2, float p2)
+{
+	int	dst;
+
+	dst = (int) (((float) ((c1 >> 16) & 0xff)) * p1 + ((float) ((c2 >> 16) & 0xff) * p2));
+	dst = dst << 16;
+	dst += ((int) (((float) ((c1 >> 8) & 0xff)) * p1 + ((float) ((c2 >> 8) & 0xff) * p2))) << 8;
+	dst += ((int) (((float) (c1 & 0xff)) * p1 + ((float) (c2 & 0xff) * p2)));
+	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/14 17:55:20 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/15 01:44:15 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,14 @@ typedef	struct s_hit
 	t_vector	pHit;
 	float		t;
 }	t_hit;
+
+typedef struct s_rays
+{
+	t_ray	prime_ray;
+	t_ray	shadowray;
+	t_hit	hit;
+	t_hit	shadow_hit;
+}	t_rays;
 
 typedef struct s_ambient
 {
