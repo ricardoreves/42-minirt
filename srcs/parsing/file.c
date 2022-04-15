@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:36:59 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/07 22:56:41 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/15 19:08:27 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int is_invalid_file(t_rt *rt)
 		return (show_error(ERR_MISSING_AMBIENT_PARAMS));
 	if (!rt->camera.id)
 		return (show_error(ERR_MISSING_CAMERA_PARAMS));
-	if (!rt->light.id)
+	if (!rt->light)
 		return (show_error(ERR_MISSING_LIGHT_PARAMS));
 	return (0);
 }

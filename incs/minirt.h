@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/15 15:53:05 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:59:37 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct s_rt
 	t_img		img;
 	t_camera	camera;
 	t_ambient	ambient;
-	t_light		light;
+	t_light		*light;
 	t_object	*objs;
 	size_t		num_objs;
 	t_event		event;
@@ -226,6 +226,11 @@ int		parse_cylinder(t_rt *rt, char *line, int num);
 void	free_array(char *arr[]);
 void	print_array(char *arr[]);
 int		array_length(char *arr[]);
+
+/* ligth_utils.c */
+void	push_light(t_light *new_light, t_light **lights);
+t_light	*create_light(t_rt *rt);
+void	free_lights(t_light **lights);
 
 /* convert.c */
 float	str_to_float(char *str);

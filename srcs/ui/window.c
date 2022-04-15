@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/05 18:55:24 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/15 20:33:23 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void rt_free(t_rt *rt)
 {
 	if (rt)
 	{	
+		if (rt->light)
+			free_lights(&rt->light);
 		if (rt->objs)
 			free_objects(&rt->objs);
 		free(rt);

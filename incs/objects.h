@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/15 01:44:15 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/15 19:05:21 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,11 @@ typedef struct s_ambient
 
 typedef struct s_light
 {
-	t_object_id	id;
-	t_vector	coords;
-	float		brightness;
-	t_color		color;
+	t_object_id		id;
+	t_vector		coords;
+	float			brightness;
+	t_color			color;
+	struct s_light	*next;
 }	t_light;
 
 typedef struct s_camera

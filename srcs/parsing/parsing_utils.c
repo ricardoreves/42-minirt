@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/14 17:08:09 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/15 20:23:40 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,20 @@ int parse_ambient(t_rt *rt, char *line, int num)
 int parse_light(t_rt *rt, char *line, int num)
 {
 	char **params;
-	t_light light;
+	t_light *light;
 
 	params = ft_split(line, ' ');
-	if (rt->light.id)
-		return (show_parsing_error(params, ERR_TOO_MANY_LIGTHS, num));
 	if (array_length(params) != 4)
 		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
-	ft_bzero(&light, sizeof(t_light));
-	light.id = id_light;
-	if (parse_vector(params[1], &light.coords))
+	light = create_light(rt);
+	light->id = id_light;
+	if (parse_vector(params[1], &light->coords))
 		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
-	if (parse_float(params[2], &light.brightness))
+	if (parse_float(params[2], &light->brightness))
 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
-	if (parse_color(params[3], &light.color))
+	printf("%f\n", light->brightness);
+	if (parse_color(params[3], &light->color))
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
-	rt->light = light;
 	free_array(params);
 	return (0);
 }
