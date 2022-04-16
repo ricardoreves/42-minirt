@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/16 03:01:44 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 18:18:02 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,18 @@ int		anti_aliasing(t_rt *rt, float x, float y)
 	return (big_mix(c));
 }
 
+int	smart_rt(t_rt *rt, float x, float y)
+{
+	t_rays	r;
+
+	if (rt->img.antialiasing_on && !rt->event.mouse)
+		return (anti_aliasing(rt, x, y));
+	build_camray(rt, &r.prime_ray, x, y);
+	if (rt->event.mouse)
+		return (color2rgb(raytrace(rt, &r, 0)));
+	return (color2rgb(raytrace(rt, &r, MAX_REFLECT)));
+}
+
 void	gen_img(t_rt *rt)
 {
 	float		x;
@@ -86,7 +98,7 @@ void	gen_img(t_rt *rt)
 	cam = &rt->camera;
 	pix = rt->img.addr;
 	cam->scale = tan(cam->fov / 2 * M_PI / 180);
-	rt->aspectRatio = (float) rt->width / rt->height;     //careful when resizing if height > width
+	rt->aspectRatio = (float) rt->width / rt->height;
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	object_norm(rt->objs);
 	rt->bg_color = rgb2color(0x151515);
@@ -95,39 +107,11 @@ void	gen_img(t_rt *rt)
 		x = -1;
 		while (++x < rt->width)
 		{
-			*(unsigned int *)pix = anti_aliasing(rt, x, y);
+			*(unsigned int *)pix = smart_rt(rt, x, y);
 			pix += rt->img.addr_incr;
 		}
 	}
 }
-
-// void	gen_img(t_rt *rt)
-// {
-// 	float		x;
-// 	float		y;
-// 	char		*pix;
-// 	t_camera	*cam;
-// 	t_rays		r;
-	
-// 	y = -1;
-// 	cam = &rt->camera;
-// 	pix = rt->img.addr;
-// 	cam->scale = tan(cam->fov / 2 * M_PI / 180);
-// 	rt->aspectRatio = (float) rt->width / rt->height;     //careful when resizing if height > width
-// 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
-// 	object_norm(rt->objs);
-// 	rt->bg_color = rgb2color(0x151515);
-// 	while (++y < rt->height)
-// 	{
-// 		x = -1;
-// 		while (++x < rt->width)
-// 		{
-// 			build_camray(rt, &r.prime_ray, x, y);
-// 			*(unsigned int *)pix = color2rgb(raytrace(rt, &r, MAX_REFLECT));
-// 			pix += rt->img.addr_incr;
-// 		}
-// 	}
-// }
 
 void	render(t_rt *rt)
 {

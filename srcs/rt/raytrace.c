@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/16 02:26:56 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 16:11:48 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ t_color	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 	add_light(&l.ambient, &rt->ambient.color, rt->ambient.lighting);
 	build_ray(&r->shadowray, &r->hit.pHit, vect_sub(&r->shadowray.dir, &r->hit.pHit, &rt->light->coords));
 	ray_mul(&r->shadowray.or, &r->shadowray, 0.01); // to modify
-	if (get_closest_obj(&r->shadowray, rt->objs, &r->shadow_hit)
-		&& distance(&r->shadowray.or, &light->coords) > distance(&r->shadow_hit.pHit, &r->shadowray.or))
+	if (rt->event.mouse || (get_closest_obj(&r->shadowray, rt->objs, &r->shadow_hit)
+		&& distance(&r->shadowray.or, &light->coords) > distance(&r->shadow_hit.pHit, &r->shadowray.or)))
 		return (light2rgb(&l));
 
 	l.diffuse = *color_obj(closest_obj);

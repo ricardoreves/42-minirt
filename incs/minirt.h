@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/16 02:39:32 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 18:21:33 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define BG_COLOR 0xCFCFFF
 # define MAX_KEY 65535
 # define MAX_REFLECT 5
+# define ANTIALIASING_ON TRUE
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
 #  define S_KEY 1
@@ -89,6 +90,7 @@ typedef struct s_img
 	int		line_length;
 	int		endian;
 	int		addr_incr;
+	t_bool	antialiasing_on;
 }	t_img;
 
 typedef struct s_event

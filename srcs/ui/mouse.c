@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:19:31 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/14 18:00:13 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 18:10:37 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,14 @@ int	handle_mouseup(int button, int x, int y, t_rt *rt)
 	(void) y;
 	rt->event.mouse &= ~(1 << button);
 	rt->event.selection = NULL;
+	if (ANTIALIASING_ON)
+		rt->img.antialiasing_on = FALSE;
+	render(rt);
+	if (ANTIALIASING_ON)
+	{
+		rt->img.antialiasing_on = TRUE;
+		render(rt);
+	}
 	return (0);
 }
 

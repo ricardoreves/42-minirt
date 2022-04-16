@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/16 02:39:02 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 16:19:31 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	rt_init(t_rt *rt, char *path)
 	rt->img.img = mlx_new_image(rt->mlx, WIN_WIDTH, WIN_HEIGHT);
 	rt->img.addr = mlx_get_data_addr(rt->img.img, &rt->img.bits_per_pixel,
 		&rt->img.line_length, &rt->img.endian);
+	rt->img.antialiasing_on = ANTIALIASING_ON;
 	if (!rt->img.img)
 	{
 		rt_clear(rt);
