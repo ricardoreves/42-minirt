@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/15 01:45:36 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 03:01:44 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,35 +28,106 @@
 // 		*(unsigned int *)dst = color;
 // 	}
 // }
+int		big_mix(t_color	c[9])
+{
+	t_color	r;
+	int		i;
+
+	i = 0;
+	color_set(&r, 0, 0, 0);
+	while (i < 9)
+	{
+		r.r += c[i].r;
+		r.g += c[i].g;
+		r.b += c[i].b;
+		i++;
+	}
+	r.r /= 9;
+	r.g /= 9;
+	r.b /= 9;
+	return (color2rgb(r));
+}
+
+int		anti_aliasing(t_rt *rt, float x, float y)
+{
+	t_color	c[9];
+	int		i;
+	int		j;
+	t_rays	r;
+
+	y -= 0.33;
+	i = 0;
+	j = 0;
+	while (i < 3)
+	{
+		j = 0;
+		x -= 0.99;
+		while (j < 3)
+		{
+			build_camray(rt, &r.prime_ray, x, y);
+			c[i * 3 + j] = raytrace(rt, &r, MAX_REFLECT);
+			x += 0.33;
+			j++;
+		}
+		y += 0.33;
+		i++;
+	}
+	return (big_mix(c));
+}
 
 void	gen_img(t_rt *rt)
 {
-	int			x;
-	int			y;
+	float		x;
+	float		y;
 	char		*pix;
 	t_camera	*cam;
-	t_rays		r;
 	
-	y = 0;
+	y = -1;
 	cam = &rt->camera;
 	pix = rt->img.addr;
 	cam->scale = tan(cam->fov / 2 * M_PI / 180);
 	rt->aspectRatio = (float) rt->width / rt->height;     //careful when resizing if height > width
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	object_norm(rt->objs);
-	while (y < rt->height)
+	rt->bg_color = rgb2color(0x151515);
+	while (++y < rt->height)
 	{
-		x = 0;
-		while (x < rt->width)
+		x = -1;
+		while (++x < rt->width)
 		{
-			build_camray(rt, &r.prime_ray, x, y);
-			*(unsigned int *)pix = raytrace(rt, &r);
+			*(unsigned int *)pix = anti_aliasing(rt, x, y);
 			pix += rt->img.addr_incr;
-			x++;
 		}
-		y++;
 	}
 }
+
+// void	gen_img(t_rt *rt)
+// {
+// 	float		x;
+// 	float		y;
+// 	char		*pix;
+// 	t_camera	*cam;
+// 	t_rays		r;
+	
+// 	y = -1;
+// 	cam = &rt->camera;
+// 	pix = rt->img.addr;
+// 	cam->scale = tan(cam->fov / 2 * M_PI / 180);
+// 	rt->aspectRatio = (float) rt->width / rt->height;     //careful when resizing if height > width
+// 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
+// 	object_norm(rt->objs);
+// 	rt->bg_color = rgb2color(0x151515);
+// 	while (++y < rt->height)
+// 	{
+// 		x = -1;
+// 		while (++x < rt->width)
+// 		{
+// 			build_camray(rt, &r.prime_ray, x, y);
+// 			*(unsigned int *)pix = color2rgb(raytrace(rt, &r, MAX_REFLECT));
+// 			pix += rt->img.addr_incr;
+// 		}
+// 	}
+// }
 
 void	render(t_rt *rt)
 {

@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/15 01:08:07 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 02:25:18 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_hit *hit)
 	thc = sqrt(sp->r2 - d2);
 	hit->t = tca - thc;
 	t2 = tca + thc;
-	if (hit->t < 0 && t2 < 0)
+	if (hit->t < EPSILON && t2 < EPSILON)
 		return (FALSE);
-	if (hit->t < 0 || t2 < hit->t)
+	if (hit->t < EPSILON || t2 < hit->t)
 		hit->t = t2;
 	ray_mul(&hit->pHit, ray, hit->t);
 	vect_sub(&hit->nHit, &sp->coords, &hit->pHit);
@@ -71,9 +71,9 @@ t_bool	infinite_cyl_inter(t_ray *r, t_cylinder *cy, t_hit *hit)
 	q.a = dot_prod(&u, &u);
 	q.b = 2 * dot_prod(&u, &v);
 	q.c = dot_prod(&v, &v) - cy->r2;
-	if (!solve_quadratic(&q) || (q.t2 <= 0 && q.t1 <= 0))
+	if (!solve_quadratic(&q) || (q.t2 <= EPSILON && q.t1 <= EPSILON))
 		return (FALSE);
-	if (q.t1 <= 0 || (q.t2 > 0 && (q.t2 < q.t1)))
+	if (q.t1 <= EPSILON || (q.t2 > EPSILON && (q.t2 < q.t1)))
 		q.t1 = q.t2;
 	hit->t = q.t1;
 	ray_mul(&hit->pHit, r, q.t1);
@@ -107,7 +107,7 @@ t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_hit *hit)
 		<= pow(cy->height * 0.5, 2) + cy->r2
 		&& hit->t > tmp_hit.t)
 		*hit = tmp_hit;
-	return (hit->t < INFINITY);
+	return (hit->t < INFINITY && hit->t > EPSILON);
 }
 
 int	intersect(t_ray *ray, t_object *obj, t_hit *hit)

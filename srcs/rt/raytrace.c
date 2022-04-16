@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/15 19:11:29 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/16 02:26:56 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,23 @@ typedef struct s_colors
 	t_color	specular;
 }	t_colors;
 
-int	light2rgb(t_colors *l)
+t_color	light2rgb(t_colors *l)
 {
-	float	r;
-	float	g;
-	float	b;
+	t_color	c;
 
-	r = l->ambient.r + l->diffuse.r + l->specular.r;
-	g = l->ambient.g + l->diffuse.g + l->specular.g;
-	b = l->ambient.b + l->diffuse.b + l->specular.b;
-	if (r > 1)
-		r = 1;
-	if (g > 1)
-		g = 1;
-	if (b > 1)
-		b = 1;
-	return (((int) (r * 255) << 16) + ((int) (g * 255) << 8) + (int) (b * 255));
+	c.r = l->ambient.r + l->diffuse.r + l->specular.r;
+	c.g = l->ambient.g + l->diffuse.g + l->specular.g;
+	c.b = l->ambient.b + l->diffuse.b + l->specular.b;
+	if (c.r > 1)
+		c.r = 1;
+	if (c.g > 1)
+		c.g = 1;
+	if (c.b > 1)
+		c.b = 1;
+	return (c);
 }
 
-int	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
+t_color	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 {
 	t_colors	l;
 	float		dot_p;
@@ -88,11 +86,11 @@ int	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 	if (get_closest_obj(&r->shadowray, rt->objs, &r->shadow_hit)
 		&& distance(&r->shadowray.or, &light->coords) > distance(&r->shadow_hit.pHit, &r->shadowray.or))
 		return (light2rgb(&l));
-	
+
 	l.diffuse = *color_obj(closest_obj);
 	dot_p = dot_prod(&r->shadowray.dir, &r->hit.nHit);
 	add_light(&l.diffuse, &rt->light->color, rt->light->brightness * dot_p);
-	
+
 	vect_mul(&spec, &r->hit.nHit, dot_p * 2);
 	vect_sub(&spec, &spec, &r->shadowray.dir);
 	dot_p = dot_prod(&spec, &r->prime_ray.dir);
@@ -101,23 +99,23 @@ int	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 	return (light2rgb(&l));
 }
 
-int	raytrace(t_rt *rt, t_rays *r)
+t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
 {
 	t_object	*closest_obj;
-	int			color;
-	int			reflect_color;
+	t_color		color;
+	t_color		reflect_color;
 	t_rays		reflect;
 
 	closest_obj = get_closest_obj(&r->prime_ray, rt->objs, &r->hit);
 	if (!closest_obj)
-		return (BG_COLOR);
+		return (rt->bg_color);
 	color = lightrays(rt, r, closest_obj, rt->light);
-	if (closest_obj->mirror > 0)
+	if (closest_obj->mirror > 0 && max_reflect--)
 	{
 		reflect.prime_ray.or = r->hit.pHit;
 		reflect.prime_ray.dir = reflect_vect(r->prime_ray.dir, r->hit.nHit);
 		normalize(&reflect.prime_ray.dir);
-		reflect_color = raytrace(rt, &reflect);
+		reflect_color = raytrace(rt, &reflect, max_reflect);
 		color = mix_color(color, 1 - closest_obj->mirror, reflect_color, closest_obj->mirror);
 	}
 	return (color);

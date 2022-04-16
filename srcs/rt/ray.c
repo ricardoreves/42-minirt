@@ -23,15 +23,15 @@ void	build_ray(t_ray *ray, t_vect *or, t_vect *dir)
 	normalize(&ray->dir);
 }
 
-void	build_camray(t_rt *rt, t_ray *ray, int x, int y)
+void	build_camray(t_rt *rt, t_ray *ray, float x, float y)
 {
 	t_camera	*cam;
 
 	cam = &rt->camera;
 	vect_init(&ray->or, cam->coords.x, cam->coords.y, cam->coords.z);
-	ray->dir.x = (2.0 * ((float) x + 0.5) / (float) rt->width - 1.0)
+	ray->dir.x = (2.0 * (x + 0.5) / (float) rt->width - 1.0)
 					* cam->scale * rt->aspectRatio;
-	ray->dir.y = (1.0 - 2.0 * ((float) y + 0.5) / (float) rt->height) * cam->scale;
+	ray->dir.y = (1.0 - 2.0 * (y + 0.5) / (float) rt->height) * cam->scale;
 	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y
 				, ray->or.z + FOCAL_DIST); // careful need to be transform with matrix to world
 	vect_sub(&ray->dir, &ray->or, &ray->dir);

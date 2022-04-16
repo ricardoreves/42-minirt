@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/15 18:59:37 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/16 02:39:32 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define COLORDEF 0x81A1C1
 # define BG_COLOR 0xCFCFFF
 # define MAX_KEY 65535
+# define MAX_REFLECT 5
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
 #  define S_KEY 1
@@ -104,8 +105,8 @@ typedef struct s_event
 typedef struct s_rt
 {
 	char		*path;
-	int			width;
-	int			height;
+	float		width;
+	float		height;
 	float		aspectRatio;
 	void		*mlx;
 	void		*mlx_win;
@@ -117,6 +118,7 @@ typedef struct s_rt
 	size_t		num_objs;
 	t_event		event;
 	int			display_info;
+	t_color		bg_color;
 }	t_rt;
 
 /* window.c */
@@ -155,12 +157,12 @@ void	gen_img(t_rt *rt);
 void	render(t_rt *rt);
 
 /* ray.c */
-void	build_camray(t_rt *rt, t_ray *ray, int x, int y);
+void	build_camray(t_rt *rt, t_ray *ray, float x, float y);
 void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
 t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 
 /* raytrace.c */
-int		raytrace(t_rt *rt, t_rays *r);
+t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect);
 t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_hit *hit);
 
 /* inter.c */
@@ -180,12 +182,13 @@ t_vect	*vect_inv(t_vect *v);
 t_vect	reflect_vect(t_vector v, t_vector n);
 
 /* color.c */
-int		color2rgb(t_color *c);
+int		color2rgb(t_color c);
 t_color	*color_obj(t_obj *obj);
 t_color	*color_part(t_color *c, float p);
 t_color *color_set(t_color *color, float r, float g, float b);
 t_color	*add_light(t_color *color, t_color *light, float p2);
-int		mix_color(int c1, float p1, int c2, float p2);
+t_color	mix_color(t_color c1, float p1, t_color c2, float p2);
+t_color	rgb2color(int rgb);
 
 /* quadratic.c */
 t_bool	solve_quadratic(t_quadratic *q);

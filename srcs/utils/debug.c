@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 00:34:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/15 20:22:54 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/16 02:14:32 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void rt_dump(t_rt *rt)
 	{
 		printf("\nambient:\n");
 		printf("id    : %d\n", rt->ambient.id);
-		printf("color : %d\n", color2rgb(&rt->ambient.color));
+		printf("color : %d\n", color2rgb(rt->ambient.color));
 		printf("ligth : %f\n", rt->ambient.lighting);
 	}
 	if (rt->camera.id)
@@ -44,7 +44,7 @@ void rt_dump(t_rt *rt)
 		printf("cx    : %f\n", tmp2->coords.x);
 		printf("cy    : %f\n", tmp2->coords.y);
 		printf("cz    : %f\n", tmp2->coords.z);
-		printf("color : %d\n", color2rgb(&tmp2->color));
+		printf("color : %d\n", color2rgb(tmp2->color));
 		printf("bright: %f\n", tmp2->brightness);
 		tmp2 = tmp2->next;
 	}
@@ -61,7 +61,7 @@ void rt_dump(t_rt *rt)
 			printf("ox    : %f\n", tmp->object.plane.orient.x);
 			printf("oy    : %f\n", tmp->object.plane.orient.y);
 			printf("oz    : %f\n", tmp->object.plane.orient.z);
-			printf("color : %d\n", color2rgb(&tmp->object.plane.color));
+			printf("color : %d\n", color2rgb(tmp->object.plane.color));
 		}
 		if (tmp->id == id_cylinder)
 		{
@@ -75,7 +75,7 @@ void rt_dump(t_rt *rt)
 			printf("oz    : %f\n", tmp->object.cylinder.orient.z);
 			printf("diamet: %f\n", tmp->object.cylinder.diameter);
 			printf("height: %f\n", tmp->object.cylinder.height);
-			printf("color : %d\n", color2rgb(&tmp->object.cylinder.color));
+			printf("color : %d\n", color2rgb(tmp->object.cylinder.color));
 		}
 		if (tmp->id == id_sphere)
 		{
@@ -85,7 +85,7 @@ void rt_dump(t_rt *rt)
 			printf("cy    : %f\n", tmp->object.sphere.coords.y);
 			printf("cz    : %f\n", tmp->object.sphere.coords.z);
 			printf("diamet: %f\n", tmp->object.sphere.diameter);
-			printf("color : %d\n", color2rgb(&tmp->object.sphere.color));
+			printf("color : %d\n", color2rgb(tmp->object.sphere.color));
 		}
 		tmp = tmp->next;
 	}
