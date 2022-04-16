@@ -23,17 +23,49 @@ void	build_ray(t_ray *ray, t_vect *or, t_vect *dir)
 	normalize(&ray->dir);
 }
 
+void	lookAt(t_rt *rt)
+{
+	t_vect	forward;
+	t_vect	right;
+	t_vect	up;
+	t_vect	tmp;
+
+	tmp = vector(0, 1, 0);
+	forward = rt->camera.orient;
+	normalize(&forward);
+	right = cross_prod(&tmp, &forward);
+	up = cross_prod(&forward, &right);
+	rt->cam_matrix[0][0] = right.x;
+	rt->cam_matrix[0][1] = right.y;
+	rt->cam_matrix[0][2] = right.z;
+	rt->cam_matrix[1][0] = up.x;
+	rt->cam_matrix[1][1] = up.y;
+	rt->cam_matrix[1][2] = up.z;
+	rt->cam_matrix[2][0] = forward.x;
+	rt->cam_matrix[2][1] = forward.y;
+	rt->cam_matrix[2][2] = forward.z;
+}
+
+t_vector	camToWorld(t_rt *rt, t_vect *v)
+{
+	t_vect	dst;
+
+	dst.x = v->x * rt->cam_matrix[0][0] + v->y * rt->cam_matrix[1][0] + v->z * rt->cam_matrix[2][0];
+	dst.y = v->x * rt->cam_matrix[0][1] + v->y * rt->cam_matrix[1][1] + v->z * rt->cam_matrix[2][1];
+	dst.z = v->x * rt->cam_matrix[0][2] + v->y * rt->cam_matrix[1][2] + v->z * rt->cam_matrix[2][2];
+	return (dst);
+}
+
 void	build_camray(t_rt *rt, t_ray *ray, float x, float y)
 {
 	t_camera	*cam;
 
 	cam = &rt->camera;
-	vect_init(&ray->or, cam->coords.x, cam->coords.y, cam->coords.z);
+	ray->or = vector(cam->coords.x, cam->coords.y, cam->coords.z);
 	ray->dir.x = (2.0 * (x + 0.5) / (float) rt->width - 1.0)
 					* cam->scale * rt->aspectRatio;
 	ray->dir.y = (1.0 - 2.0 * (y + 0.5) / (float) rt->height) * cam->scale;
-	vect_init(&ray->dir, ray->or.x + ray->dir.x, ray->or.y + ray->dir.y
-				, ray->or.z + FOCAL_DIST); // careful need to be transform with matrix to world
-	vect_sub(&ray->dir, &ray->or, &ray->dir);
+	ray->dir.z = FOCAL_DIST;
+	ray->dir = camToWorld(rt, &ray->dir);
 	normalize(&ray->dir);
 }

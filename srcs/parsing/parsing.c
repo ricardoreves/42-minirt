@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/21 14:06:30 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:00:51 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int parse_camera(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_INVALID_NB_ORIENT, num));
 	if (parse_ulong(params[3], &camera.fov))
 		return (show_parsing_error(params, ERR_NOT_A_ULONG, num));
+	normalize(&camera.orient);
 	rt->camera = camera;
 	free_array(params);
 	return (0);

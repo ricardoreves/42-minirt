@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/15 21:28:43 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:00:12 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int parse_cylinder(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
 	if (parse_color(params[5], &cylinder.color))
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
+	normalize(&cylinder.orient);
 	obj = create_object(rt);
 	obj->id = id_cylinder;
 	obj->object.cylinder = cylinder;

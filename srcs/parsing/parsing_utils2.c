@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:37:46 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/09 04:20:59 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:00:25 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,25 +83,6 @@ int parse_color(char *str, t_color *color)
 	free_array(tmp);
 	return (ret);
 }
-
-// int parse_color(char *str, int *color)
-// {
-// 	char **tmp;
-// 	int ret;
-
-// 	ret = 0;
-// 	tmp = ft_split(str, ',');
-// 	if (array_length(tmp) != 3)
-// 		ret = 1;
-// 	else
-// 	{
-// 		*color = str_to_int_color(tmp[0]);
-// 		*color = (*color << 8) + str_to_int_color(tmp[1]);
-// 		*color = (*color << 8) + str_to_int_color(tmp[2]);
-// 	}
-// 	free_array(tmp);
-// 	return (ret);
-// }
 
 int parse_float(char *str, float *num)
 {

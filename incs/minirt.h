@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/16 18:31:33 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 21:23:53 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_rt
 	float		width;
 	float		height;
 	float		aspectRatio;
+	float		cam_matrix[4][4];
 	void		*mlx;
 	void		*mlx_win;
 	t_img		img;
@@ -162,7 +163,8 @@ void	render(t_rt *rt);
 /* ray.c */
 void	build_camray(t_rt *rt, t_ray *ray, float x, float y);
 void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
-t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
+t_vect	camToWorld(t_rt *rt, t_vect *v);
+void	lookAt(t_rt *rt);
 
 /* raytrace.c */
 t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect);
@@ -172,7 +174,7 @@ t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_hit *hit);
 int		intersect(t_ray *ray, t_object *obj, t_hit *hit);
 
 /* vector.c */
-t_vect	*vect_init(t_vector *v, float x, float y, float z);
+t_vect	vector(float x, float y, float z);
 float	vectlen(t_vector *v);
 t_vect	*vect_sub(t_vector *dst, t_vector *a, t_vector *b);
 t_vect	*vect_add(t_vector *dst, t_vector *a, t_vector *b);
@@ -183,6 +185,7 @@ t_vect	cross_prod(t_vect *u, t_vect *v);
 float	distance(t_vect *a, t_vect *b);
 t_vect	*vect_inv(t_vect *v);
 t_vect	reflect_vect(t_vector v, t_vector n);
+t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 
 /* color.c */
 int		color2rgb(t_color c);

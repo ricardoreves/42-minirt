@@ -6,17 +6,19 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/15 03:50:58 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:01:02 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vect	*vect_init(t_vector *v, float x, float y, float z)
+t_vect	vector(float x, float y, float z)
 {
-	v->x = x;
-	v->y = y;
-	v->z = z;
+	t_vector v;
+
+	v.x = x;
+	v.y = y;
+	v.z = z;
 	return (v);
 }
 

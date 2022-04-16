@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/16 18:18:02 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 00:53:09 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void	gen_img(t_rt *rt)
 	rt->aspectRatio = (float) rt->width / rt->height;
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	object_norm(rt->objs);
-	rt->bg_color = rgb2color(0x151515);
+	rt->bg_color = rgb2color(0x424242);
+	lookAt(rt);
 	while (++y < rt->height)
 	{
 		x = -1;

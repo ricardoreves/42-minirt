@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/16 16:11:48 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:12:17 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ t_color	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 	vect_mul(&spec, &r->hit.nHit, dot_p * 2);
 	vect_sub(&spec, &spec, &r->shadowray.dir);
 	dot_p = dot_prod(&spec, &r->prime_ray.dir);
-	dot_p = pow(dot_p, closest_obj->specn) * closest_obj->speckv;
+	if (dot_p > EPSILON)
+		dot_p = pow(dot_p, closest_obj->specn) * closest_obj->speckv;
 	add_light(&l.specular, color_set(&l.specular, 1, 1, 1), rt->light->brightness * dot_p);
 	return (light2rgb(&l));
 }
