@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/16 18:21:33 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 18:31:33 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@
 # define ANTIALIASING_ON TRUE
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
+#  define A_KEY 0
 #  define S_KEY 1
+#  define D_KEY 2
+#  define C_KEY 5
+#  define I_KEY 34
 #  define P_KEY 35
 #  define L_KEY 37
-#  define C_KEY 5
-#  define D_KEY 2
-#  define I_KEY 34
 #  define LEFT_CLICK 1
 #  define RIGHT_CLICK 2
 # elif defined __unix__
@@ -90,7 +91,7 @@ typedef struct s_img
 	int		line_length;
 	int		endian;
 	int		addr_incr;
-	t_bool	antialiasing_on;
+	int		antialiasing_on;
 }	t_img;
 
 typedef struct s_event

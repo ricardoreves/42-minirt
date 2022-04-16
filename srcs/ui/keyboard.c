@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:18:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/05 02:54:13 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/16 18:31:03 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int	handle_keydown(int key, t_rt *rt)
 	if (key == I_KEY)
 	{
 		switch_var(&rt->display_info);
+		render(rt);
+	}
+	if (key == A_KEY)
+	{
+		switch_var(&rt->img.antialiasing_on);
 		render(rt);
 	}
 	return (0);
