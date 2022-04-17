@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 03:46:47 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 04:33:56 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	object_norm(t_obj *objs)
 			cy->p2 = vect_mul(cy->orient, 0.5 * cy->height);
 			cy->p2 = vect_add(cy->p2, cy->coords);
 		}
+		if (objs->mirror < 0)
+			objs->refract = -objs->mirror;
 		objs = objs->next;
 	}
 }

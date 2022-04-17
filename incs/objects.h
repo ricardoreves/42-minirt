@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 01:32:47 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 04:22:53 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ typedef struct s_object
 	float			speckv;
 	float			specn;
 	float			mirror;
+	float			refract;
 	struct s_object	*next;
 }	t_object;
 

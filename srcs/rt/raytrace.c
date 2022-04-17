@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 04:12:41 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 04:55:54 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,23 @@ t_color	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 	return (light2rgb(&l));
 }
 
-t_color	refraction_ray(t_rt *rt, t_rays *r, int max_reflect)
+t_color	refraction_ray(t_rt *rt, t_rays *r, int max_reflect, t_obj *obj)
 {
-	t_color color;
-
-	(void) rt;
-	(void) r;
+	// t_color color;
+	float	eta;
 	(void) max_reflect;
+	(void) rt;
 	
-	color = newcolor(0, 0, 0);
-	return (color);
+	eta = 1 / obj->refract;
+	r->prime_ray.or = r->hit.pHit;
+	r->prime_ray.dir = refract_vect(r->prime_ray.dir, r->hit.nHit, eta);
+	ray_mul(&r->prime_ray.or, &r->prime_ray, EPSILON);
+	intersect(&r->prime_ray, obj, &r->hit);
+	r->prime_ray.or = r->hit.pHit;
+	r->hit.nHit = vect_inv(r->hit.nHit);
+	r->prime_ray.dir = refract_vect(r->prime_ray.dir, r->hit.nHit, eta);
+	return (raytrace(rt, r, max_reflect));
+	// return (color);
 }
 
 t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
@@ -122,7 +129,8 @@ t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
 	}
 	if (closest_obj->mirror < 0 && max_reflect--)
 	{
-		color = mix_color(refraction_ray(rt, r, max_reflect), 0.7, color, 0.3);
+		color = mix_color(refraction_ray(rt, r, max_reflect, closest_obj),
+			0.7, color, 0.3);
 	}
 	return (color);
 }

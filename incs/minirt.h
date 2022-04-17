@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 04:04:51 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 04:26:15 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,9 @@ float	dot_prod(t_vector v1, t_vector v2);
 t_vect	cross_prod(t_vect u, t_vect v);
 float	distance(t_vect a, t_vect b);
 t_vect	vect_inv(t_vect v);
-t_vect	reflect_vect(t_vector v, t_vector n);
 t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
+t_vect	reflect_vect(t_vector v, t_vector n);
+t_vect	refract_vect(t_vector v, t_vector n, float eta);
 
 /* color.c */
 t_color newcolor(float r, float g, float b);
