@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 18:15:00 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 19:43:53 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 #  define RIGHT_CLICK 2
 # elif defined __unix__
 #  define ESCAPE_KEY 65307
+#  define A_KEY 97
 #  define S_KEY 115
 #  define P_KEY 112
 #  define L_KEY 108
