@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 18:17:53 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 19:07:57 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,9 @@ typedef struct s_object
 	t_vector		e2;
 	t_vector		coords;
 	t_color			color;
-	t_color			color_check;
+	t_color			second_color;
+	float			pattern_len;
+	int				pattern_num;
 	struct s_object	*next;
 }	t_object;
 

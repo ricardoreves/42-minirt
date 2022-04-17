@@ -25,7 +25,7 @@ void	set_patternref(t_rt *rt, t_obj *obj)
 	obj->e2 = cross_prod(n, obj->e1);
 	normalize(&obj->e1);
 	normalize(&obj->e2);
-	obj->color_check = newcolor(0, 0, 0);
+	obj->second_color = newcolor(0, 0, 0);
 }
 
 t_color	checkboard_color(t_obj *obj, t_vector pHit)
@@ -37,5 +37,5 @@ t_color	checkboard_color(t_obj *obj, t_vector pHit)
 	mu[1] = dot_prod(pi, obj->e2);
 	if (((int) (2 * mu[0]) + (int) mu[1]) & 1)
 		return (obj->color);
-	return (obj->color_check);
+	return (obj->second_color);
 }
