@@ -6,16 +6,18 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 04:33:56 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 18:23:13 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	object_norm(t_obj *objs)
+void	object_norm(t_rt *rt)
 {
 	t_cylinder	*cy;
+	t_obj		*objs;
 
+	objs = rt->objs;
 	while (objs)
 	{
 		if (objs->id == id_sphere)
@@ -31,8 +33,21 @@ void	object_norm(t_obj *objs)
 			cy->p2 = vect_mul(cy->orient, 0.5 * cy->height);
 			cy->p2 = vect_add(cy->p2, cy->coords);
 		}
+		objs->refract = 0;
 		if (objs->mirror < 0)
 			objs->refract = -objs->mirror;
+		set_patternref(rt, objs);
+
+		// to take off later;
+		if (objs->id == id_sphere)
+			objs->color = objs->object.sphere.color;
+		if (objs->id == id_plane)
+			objs->color = objs->object.plane.color;
+		if (objs->id == id_cylinder)
+			objs->color = objs->object.cylinder.color;
+		objs->color = color_obj(objs);
+		// end takeoff
+
 		objs = objs->next;
 	}
 }

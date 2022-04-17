@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 04:22:53 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 18:17:53 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef	struct s_hit
 	t_vector	nHit;
 	t_vector	pHit;
 	float		t;
+	t_color		color;
 }	t_hit;
 
 typedef struct s_rays
@@ -115,7 +116,6 @@ typedef struct s_plane
 	t_vector	coords;
 	t_vector	orient;
 	t_color		color;
-
 }	t_plane;
 
 typedef struct s_cylinder
@@ -130,7 +130,6 @@ typedef struct s_cylinder
 	t_vector	p2;
 	t_vector	delta_p;
 	t_color		color;
-
 }	t_cylinder;
 
 typedef struct s_sphere
@@ -140,7 +139,6 @@ typedef struct s_sphere
 	float		diameter;
 	float		r2;
 	t_color		color;
-
 }	t_sphere;
 
 typedef union u_object
@@ -158,6 +156,11 @@ typedef struct s_object
 	float			specn;
 	float			mirror;
 	float			refract;
+	t_vector		e1;
+	t_vector		e2;
+	t_vector		coords;
+	t_color			color;
+	t_color			color_check;
 	struct s_object	*next;
 }	t_object;
 

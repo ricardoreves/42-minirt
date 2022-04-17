@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 04:06:14 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 17:00:19 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	gen_img(t_rt *rt)
 	cam->scale = tan(cam->fov / 2 * M_PI / 180);
 	rt->aspectRatio = (float) rt->width / rt->height;
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
-	object_norm(rt->objs);
+	object_norm(rt);
 	rt->bg_color = rgb2color(0x424242);
 	lookat(rt);
 	while (++y < rt->height)

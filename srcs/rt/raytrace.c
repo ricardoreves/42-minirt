@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 04:55:54 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 18:23:12 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ t_object	*get_closest_obj(t_ray *ray, t_object *obj, t_hit *hit)
 		}
 		obj = obj->next;
 	}
+	if (closest_obj)
+		hit->color = closest_obj->color;
+	if (closest_obj && closest_obj->mirror == 0)
+		hit->color = checkboard_color(closest_obj, hit->pHit);
 	return (closest_obj);
 }
 
@@ -66,7 +70,7 @@ t_color	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 	t_vect		spec;
 
 	ft_memset(&l, 0, sizeof(l));
-	l.ambient = *color_obj(closest_obj);
+	l.ambient = r->hit.color;
 	add_light(&l.ambient, rt->ambient.color, rt->ambient.lighting);
 	r->shadowray.or = r->hit.pHit;
 	r->shadowray.dir = vect_sub(r->hit.pHit, rt->light->coords);
@@ -75,7 +79,7 @@ t_color	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 	if (rt->event.mouse || (get_closest_obj(&r->shadowray, rt->objs, &r->shadow_hit)
 		&& distance(r->shadowray.or, light->coords) > distance(r->shadow_hit.pHit, r->shadowray.or)))
 		return (light2rgb(&l));
-	l.diffuse = *color_obj(closest_obj);
+	l.diffuse = r->hit.color;
 	dot_p = dot_prod(r->shadowray.dir, r->hit.nHit);
 	add_light(&l.diffuse, rt->light->color, rt->light->brightness * dot_p);
 	spec = vect_mul(r->hit.nHit, dot_p * 2);
@@ -90,7 +94,6 @@ t_color	lightrays(t_rt *rt, t_rays *r, t_object *closest_obj, t_light *light)
 
 t_color	refraction_ray(t_rt *rt, t_rays *r, int max_reflect, t_obj *obj)
 {
-	// t_color color;
 	float	eta;
 	(void) max_reflect;
 	(void) rt;
@@ -104,7 +107,6 @@ t_color	refraction_ray(t_rt *rt, t_rays *r, int max_reflect, t_obj *obj)
 	r->hit.nHit = vect_inv(r->hit.nHit);
 	r->prime_ray.dir = refract_vect(r->prime_ray.dir, r->hit.nHit, eta);
 	return (raytrace(rt, r, max_reflect));
-	// return (color);
 }
 
 t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
