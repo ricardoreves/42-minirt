@@ -1,58 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   vector3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 03:43:52 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 03:50:17 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vect	vector(float x, float y, float z)
+t_vector	*ray_mul(t_vect *dst, t_ray *r, float t)
 {
-	t_vector	v;
-
-	v.x = x;
-	v.y = y;
-	v.z = z;
-	return (v);
-}
-
-float	vectlen(t_vector v)
-{
-	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
-}
-
-t_vect	vect_sub(t_vector a, t_vector b)
-{
-	t_vect	dst;
-	
-	dst.x = b.x - a.x;
-	dst.y = b.y - a.y;
-	dst.z = b.z - a.z;
+	dst->x = r->or.x + t * r->dir.x;
+	dst->y = r->or.y + t * r->dir.y;
+	dst->z = r->or.z + t * r->dir.z;
 	return (dst);
 }
 
-t_vect	vect_add(t_vector a, t_vector b)
+t_vector	reflect_vect(t_vector v, t_vector n)
 {
 	t_vect	dst;
-	
-	dst.x = b.x + a.x;
-	dst.y = b.y + a.y;
-	dst.z = b.z + a.z;
+
+	dst = vect_mul(n, 2 * dot_prod(v, n));
+	dst = vect_sub(dst, v);
 	return (dst);
 }
 
-t_vect	vect_mul(t_vect v, float f)
+t_vector	refract_vect(t_vector v, t_vector n, float eta) // eta = n1/n2
 {
+	float	c1;
+	float	c2;
 	t_vect	dst;
-	
-	dst.x = v.x * f;
-	dst.y = v.y * f;
-	dst.z = v.z * f;
+
+	c1 = dot_prod(v, n);
+	c2 = sqrt(1 - eta * eta * (1 - c1 * c1));
+
+
+	dst = vector(0, 0, 0);
 	return (dst);
 }
+

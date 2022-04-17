@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:48:14 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 04:04:51 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,24 +174,24 @@ int		intersect(t_ray *ray, t_object *obj, t_hit *hit);
 
 /* vector.c */
 t_vect	vector(float x, float y, float z);
-float	vectlen(t_vector *v);
-t_vect	*vect_sub(t_vector *dst, t_vector *a, t_vector *b);
-t_vect	*vect_add(t_vector *dst, t_vector *a, t_vector *b);
-t_vect	*vect_mul(t_vect *dst, t_vect *v, float f);
+float	vectlen(t_vector v);
+t_vect	vect_sub(t_vector a, t_vector b);
+t_vect	vect_add(t_vector a, t_vector b);
+t_vect	vect_mul(t_vect v, float f);
 t_vect	*normalize(t_vector *v);
-float	dot_prod(t_vector *v1, t_vector *v2);
-t_vect	cross_prod(t_vect *u, t_vect *v);
-float	distance(t_vect *a, t_vect *b);
-t_vect	*vect_inv(t_vect *v);
+float	dot_prod(t_vector v1, t_vector v2);
+t_vect	cross_prod(t_vect u, t_vect v);
+float	distance(t_vect a, t_vect b);
+t_vect	vect_inv(t_vect v);
 t_vect	reflect_vect(t_vector v, t_vector n);
 t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 
 /* color.c */
+t_color newcolor(float r, float g, float b);
 int		color2rgb(t_color c);
 t_color	*color_obj(t_obj *obj);
 t_color	*color_part(t_color *c, float p);
-t_color *color_set(t_color *color, float r, float g, float b);
-t_color	*add_light(t_color *color, t_color *light, float p2);
+void	add_light(t_color *color, t_color light, float p2);
 t_color	mix_color(t_color c1, float p1, t_color c2, float p2);
 t_color	rgb2color(int rgb);
 

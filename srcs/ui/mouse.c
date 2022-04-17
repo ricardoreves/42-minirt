@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:19:31 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 02:04:34 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 02:17:13 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	handle_mousedown(int button, int x, int y, t_rt *rt)
 	build_camray(rt, &mouse_ray, x, y);
 	if (y < 0)
 		return (0);
+	printf("mouse %i\n", button);
 	rt->event.mouse |= (1 << button);
 	if (rt->event.mouse & LEFT_CLICK)
 		rt->event.selection = get_closest_obj(&mouse_ray, rt->objs, &hit);
@@ -53,13 +54,15 @@ int	handle_mouseup(int button, int x, int y, t_rt *rt)
 
 	(void) x;
 	(void) y;
+	if (button != LEFT_CLICK)
+		return (0);
 	alias = rt->img.antialiasing_on;
 	rt->event.mouse &= ~(1 << button);
 	rt->event.selection = NULL;
-	if (ANTIALIASING_ON && alias)
+	if (alias)
 		rt->img.antialiasing_on = FALSE;
 	render(rt);
-	if (ANTIALIASING_ON && alias)
+	if (alias)
 	{
 		rt->img.antialiasing_on = TRUE;
 		render(rt);

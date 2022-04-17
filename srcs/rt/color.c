@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 01:29:04 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 03:59:11 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ int	color2rgb(t_color c)
 	return (color);
 }
 
-t_color	*color_set(t_color *color, float r, float g, float b)
+t_color	newcolor(float r, float g, float b)
 {
-	color->r = r;
-	color->g = g;
-	color->b = b;
-	return (color);
+	t_color	c;
+
+	c.r = r;
+	c.g = g;
+	c.b = b;
+	return (c);
 }

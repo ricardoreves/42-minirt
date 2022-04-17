@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:17:54 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 03:46:47 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	object_norm(t_obj *objs)
 			cy = &objs->object.cylinder;
 			normalize(&cy->orient);
 			cy->r2 = cy->diameter * cy->diameter * 0.25;
-			vect_mul(&cy->delta_p, &cy->orient, cy->height);
-			vect_mul(&cy->p1, &cy->orient, -0.5 * cy->height);
-			vect_add(&cy->p1, &cy->p1, &cy->coords);
-			vect_mul(&cy->p2, &cy->orient, 0.5 * cy->height);
-			vect_add(&cy->p2, &cy->p2, &cy->coords);
+			cy->delta_p = vect_mul(cy->orient, cy->height);
+			cy->p1 = vect_mul(cy->orient, -0.5 * cy->height);
+			cy->p1 = vect_add(cy->p1, cy->coords);
+			cy->p2 = vect_mul(cy->orient, 0.5 * cy->height);
+			cy->p2 = vect_add(cy->p2, cy->coords);
 		}
 		objs = objs->next;
 	}

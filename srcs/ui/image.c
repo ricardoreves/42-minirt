@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 01:58:17 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 04:06:14 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	big_mix(t_color	c[9])
 	int		i;
 
 	i = 0;
-	color_set(&r, 0, 0, 0);
+	r = newcolor(0, 0, 0);
 	while (i < 9)
 	{
 		r.r += c[i].r;

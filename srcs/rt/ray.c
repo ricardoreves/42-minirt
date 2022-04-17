@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:48:55 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 01:54:17 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 03:32:26 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	lookat(t_rt *rt)
 	tmp = vector(0, 1, 0);
 	forward = rt->camera.orient;
 	normalize(&forward);
-	right = cross_prod(&tmp, &forward);
-	up = cross_prod(&forward, &right);
+	right = cross_prod(tmp, forward);
+	up = cross_prod(forward, right);
 	rt->cam_matrix[0][0] = right.x;
 	rt->cam_matrix[0][1] = right.y;
 	rt->cam_matrix[0][2] = right.z;
