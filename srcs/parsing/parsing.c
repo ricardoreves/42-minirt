@@ -6,16 +6,16 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:00:51 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:26:26 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int parse_camera(t_rt *rt, char *line, int num)
+int	parse_camera(t_rt *rt, char *line, int num)
 {
-	char **params;
-	t_camera camera;
+	char		**params;
+	t_camera	camera;
 
 	params = ft_split(line, ' ');
 	if (rt->camera.id)
@@ -36,9 +36,9 @@ int parse_camera(t_rt *rt, char *line, int num)
 	return (0);
 }
 
-int has_line_valid_charset(char *line)
+int	has_line_valid_charset(char *line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line && line[++i])
@@ -47,10 +47,10 @@ int has_line_valid_charset(char *line)
 	return (1);
 }
 
-char *sanitize_line(char *line)
+char	*sanitize_line(char *line)
 {
-	int i;
-	char *tmp;
+	int		i;
+	char	*tmp;
 
 	i = -1;
 	tmp = line;
@@ -62,7 +62,7 @@ char *sanitize_line(char *line)
 	return (line);
 }
 
-int parse_line(t_rt *rt, char *line, int num)
+int	parse_line(t_rt *rt, char *line, int num)
 {
 	// printf("[line:%d]%s\n", num, line);
 	if (has_line_valid_charset(line))

@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/15 01:11:48 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:17:54 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	object_norm(t_obj *objs)
 	}
 }
 
-void push_object(t_object *obj, t_object **objs)
+void	push_object(t_object *obj, t_object **objs)
 {
-	t_object *tmp;
+	t_object	*tmp;
 
 	if (!(*objs))
 		*objs = obj;
@@ -50,9 +50,9 @@ void push_object(t_object *obj, t_object **objs)
 	}
 }
 
-t_object *create_object(t_rt *rt)
+t_object	*create_object(t_rt *rt)
 {
-	t_object *obj;
+	t_object	*obj;
 
 	obj = ft_calloc(sizeof(t_object), 1);
 	obj->speckv = SPECULAR_KV;
@@ -63,10 +63,10 @@ t_object *create_object(t_rt *rt)
 	return (obj);
 }
 
-void free_objects(t_object **objs)
+void	free_objects(t_object **objs)
 {
-	t_object *tmp;
-	t_object *obj;
+	t_object	*tmp;
+	t_object	*obj;
 
 	obj = *objs;
 	while (obj)

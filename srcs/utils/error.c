@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 18:32:38 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 15:59:05 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:20:59 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int show_parsing_error(char **arr, char *msg, int num)
+int	show_parsing_error(char **arr, char *msg, int num)
 {
 	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(msg, 2);
@@ -27,7 +27,7 @@ int show_parsing_error(char **arr, char *msg, int num)
 	return (1);
 }
 
-int show_error(char *msg)
+int	show_error(char *msg)
 {
 	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(msg, 2);

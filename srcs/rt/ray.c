@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray->c                                              :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:48:55 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/24 15:57:27 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:54:17 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	build_ray(t_ray *ray, t_vect *or, t_vect *dir)
 	normalize(&ray->dir);
 }
 
-void	lookAt(t_rt *rt)
+void	lookat(t_rt *rt)
 {
 	t_vect	forward;
 	t_vect	right;
@@ -46,13 +46,13 @@ void	lookAt(t_rt *rt)
 	rt->cam_matrix[2][2] = forward.z;
 }
 
-t_vector	camToWorld(t_rt *rt, t_vect *v)
+t_vector	cam2world(float m[4][4], t_vect *v)
 {
 	t_vect	dst;
 
-	dst.x = v->x * rt->cam_matrix[0][0] + v->y * rt->cam_matrix[1][0] + v->z * rt->cam_matrix[2][0];
-	dst.y = v->x * rt->cam_matrix[0][1] + v->y * rt->cam_matrix[1][1] + v->z * rt->cam_matrix[2][1];
-	dst.z = v->x * rt->cam_matrix[0][2] + v->y * rt->cam_matrix[1][2] + v->z * rt->cam_matrix[2][2];
+	dst.x = v->x * m[0][0] + v->y * m[1][0] + v->z * m[2][0];
+	dst.y = v->x * m[0][1] + v->y * m[1][1] + v->z * m[2][1];
+	dst.z = v->x * m[0][2] + v->y * m[1][2] + v->z * m[2][2];
 	return (dst);
 }
 
@@ -63,9 +63,9 @@ void	build_camray(t_rt *rt, t_ray *ray, float x, float y)
 	cam = &rt->camera;
 	ray->or = vector(cam->coords.x, cam->coords.y, cam->coords.z);
 	ray->dir.x = (2.0 * (x + 0.5) / (float) rt->width - 1.0)
-					* cam->scale * rt->aspectRatio;
+		* cam->scale * rt->aspectRatio;
 	ray->dir.y = (1.0 - 2.0 * (y + 0.5) / (float) rt->height) * cam->scale;
 	ray->dir.z = FOCAL_DIST;
-	ray->dir = camToWorld(rt, &ray->dir);
+	ray->dir = cam2world(rt->cam_matrix, &ray->dir);
 	normalize(&ray->dir);
 }

@@ -6,16 +6,16 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:00:12 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:25:45 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int parse_ambient(t_rt *rt, char *line, int num)
+int	parse_ambient(t_rt *rt, char *line, int num)
 {
-	char **params;
-	t_ambient ambient;
+	char		**params;
+	t_ambient	ambient;
 
 	params = ft_split(line, ' ');
 	if (rt->ambient.id)
@@ -33,10 +33,10 @@ int parse_ambient(t_rt *rt, char *line, int num)
 	return (0);
 }
 
-int parse_light(t_rt *rt, char *line, int num)
+int	parse_light(t_rt *rt, char *line, int num)
 {
-	char **params;
-	t_light *light;
+	char	**params;
+	t_light	*light;
 
 	params = ft_split(line, ' ');
 	if (array_length(params) != 4)
@@ -53,11 +53,11 @@ int parse_light(t_rt *rt, char *line, int num)
 	return (0);
 }
 
-int parse_plane(t_rt *rt, char *line, int num)
+int	parse_plane(t_rt *rt, char *line, int num)
 {
-	char **params;
-	t_object *obj;
-	t_plane plane;
+	char		**params;
+	t_object	*obj;
+	t_plane		plane;
 
 	params = ft_split(line, ' ');
 	if (array_length(params) < 4)
@@ -74,17 +74,17 @@ int parse_plane(t_rt *rt, char *line, int num)
 	obj = create_object(rt);
 	obj->id = id_plane;
 	obj->object.plane = plane;
-	if (array_length(params) == 5 && parse_extra_params(obj, params[4])) 
+	if (array_length(params) == 5 && parse_extra_params(obj, params[4]))
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
 	free_array(params);
 	return (0);
 }
 
-int parse_sphere(t_rt *rt, char *line, int num)
+int	parse_sphere(t_rt *rt, char *line, int num)
 {
-	char **params;
-	t_object *obj;
-	t_sphere sphere;
+	char		**params;
+	t_object	*obj;
+	t_sphere	sphere;
 
 	params = ft_split(line, ' ');
 	if (array_length(params) < 4)
@@ -100,17 +100,17 @@ int parse_sphere(t_rt *rt, char *line, int num)
 	obj = create_object(rt);
 	obj->id = id_sphere;
 	obj->object.sphere = sphere;
-	if (array_length(params) == 5 && parse_extra_params(obj, params[4])) 
+	if (array_length(params) == 5 && parse_extra_params(obj, params[4]))
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
 	free_array(params);
 	return (0);
 }
 
-int parse_cylinder(t_rt *rt, char *line, int num)
+int	parse_cylinder(t_rt *rt, char *line, int num)
 {
-	char **params;
-	t_object *obj;
-	t_cylinder cylinder;
+	char		**params;
+	t_object	*obj;
+	t_cylinder	cylinder;
 
 	params = ft_split(line, ' ');
 	if (array_length(params) < 6)
@@ -129,7 +129,7 @@ int parse_cylinder(t_rt *rt, char *line, int num)
 	obj = create_object(rt);
 	obj->id = id_cylinder;
 	obj->object.cylinder = cylinder;
-	if (array_length(params) == 7 && parse_extra_params(obj, params[6])) 
+	if (array_length(params) == 7 && parse_extra_params(obj, params[6]))
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
 	free_array(params);
 	return (0);

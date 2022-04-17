@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dev.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:48:04 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/03/20 01:34:10 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:55:48 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_rt *rt;
 

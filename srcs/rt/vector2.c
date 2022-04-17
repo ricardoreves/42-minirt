@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   number.c                                           :+:      :+:    :+:   */
+/*   vector2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 00:55:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:20:19 by bgoncalv         ###   ########.fr       */
+/*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
+/*   Updated: 2022/04/17 01:42:37 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	is_float(char *str)
+t_vector	*ray_mul(t_vect *dst, t_ray *r, float t)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i])
-	{
-		if (ft_isdigit(str[i]) != 1 && str[i] != '-' && str[i] != '.')
-			return (0);
-		i++;
-	}
-	return (1);
+	dst->x = r->or.x + t * r->dir.x;
+	dst->y = r->or.y + t * r->dir.y;
+	dst->z = r->or.z + t * r->dir.z;
+	return (dst);
 }
 
-int	is_ulong(char *str)
+t_vector	reflect_vect(t_vector v, t_vector n)
 {
-	int	i;
+	t_vect	dst;
 
-	i = 0;
-	while (str[i] && str[i])
-	{
-		if (ft_isdigit(str[i]) != 1)
-			return (0);
-		i++;
-	}
-	return (1);
+	vect_mul(&dst, &n, 2 * dot_prod(&v, &n));
+	vect_sub(&dst, &dst, &v);
+	return (dst);
 }

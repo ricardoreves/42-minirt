@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:36:59 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/15 19:08:27 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:23:04 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int is_invalid_file(t_rt *rt)
+int	is_invalid_file(t_rt *rt)
 {
 	if (!rt->ambient.id)
 		return (show_error(ERR_MISSING_AMBIENT_PARAMS));
@@ -23,9 +23,9 @@ int is_invalid_file(t_rt *rt)
 	return (0);
 }
 
-int	 is_rt_file(char *path)
+int	is_rt_file(char *path)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(path) - 3;
 	if (len > 3)
@@ -33,11 +33,11 @@ int	 is_rt_file(char *path)
 	return (0);
 }
 
-int read_file(t_rt *rt, int fd)
+int	read_file(t_rt *rt, int fd)
 {
-	int num;
-	int ret;
-	char *line;
+	int		num;
+	int		ret;
+	char	*line;
 
 	num = 0;
 	ret = 0;
@@ -46,7 +46,7 @@ int read_file(t_rt *rt, int fd)
 		num++;
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		line = sanitize_line(line);
 		if (parse_line(rt, line, num))
 			ret = 1;
@@ -58,9 +58,9 @@ int read_file(t_rt *rt, int fd)
 	return (ret);
 }
 
-int open_file(t_rt *rt, char *path)
+int	open_file(t_rt *rt, char *path)
 {
-	int fd;
+	int	fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)

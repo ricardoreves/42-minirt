@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/16 02:25:18 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:41:44 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_hit *hit)
 	pl.coords = cy->p1;
 	pl.orient = cy->orient;
 	if (plane_inter(r, &pl, &tmp_hit)
-		&& distance(&tmp_hit.pHit, &cy->p1) <= cy->diameter * 0.5 && hit->t > tmp_hit.t)
+		&& distance(&tmp_hit.pHit, &cy->p1)
+		<= cy->diameter * 0.5 && hit->t > tmp_hit.t)
 		*hit = tmp_hit;
 	pl.coords = cy->p2;
 	if (plane_inter(r, &pl, &tmp_hit)
@@ -103,7 +104,7 @@ t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_hit *hit)
 		&& hit->t > tmp_hit.t)
 		*hit = tmp_hit;
 	if (infinite_cyl_inter(r, cy, &tmp_hit)
-		&& pow(distance(&cy->coords, &tmp_hit.pHit), 2) 
+		&& pow(distance(&cy->coords, &tmp_hit.pHit), 2)
 		<= pow(cy->height * 0.5, 2) + cy->r2
 		&& hit->t > tmp_hit.t)
 		*hit = tmp_hit;

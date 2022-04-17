@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/16 21:23:53 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:48:14 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,7 @@ void	render(t_rt *rt);
 /* ray.c */
 void	build_camray(t_rt *rt, t_ray *ray, float x, float y);
 void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
-t_vect	camToWorld(t_rt *rt, t_vect *v);
-void	lookAt(t_rt *rt);
+void	lookat(t_rt *rt);
 
 /* raytrace.c */
 t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect);

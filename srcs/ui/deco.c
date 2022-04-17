@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 00:46:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/16 18:44:15 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 02:04:09 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	put_info(t_rt *rt)
 	draw_deco(rt, DECO_WIDTH, COLORDEF);
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->img.img, 0, 0);
 	offy = WIN_HEIGHT - DECO_WIDTH - 70;
-	mlx_string_put(m, w, 30, WIN_HEIGHT - 45, c, "add sphere   : S + left click");
-	mlx_string_put(m, w, 30, WIN_HEIGHT - 25, c, "add plane    : P + left click");
-	mlx_string_put(m, w, 30, WIN_HEIGHT - 05, c, "add cylinder : C + left click (not yet)");
-	mlx_string_put(m, w, WIN_WIDTH - 200, WIN_HEIGHT - 45, c, "A to enable/cancel antialiasing");
-	mlx_string_put(m, w, WIN_WIDTH - 200, WIN_HEIGHT - 25, c, "I to hide info");
-	mlx_string_put(m, w, WIN_WIDTH - 200, WIN_HEIGHT - 5, c, "ESC to quit");
+	mlx_string_put(m, w, WIN_WIDTH - 200, WIN_HEIGHT - 45, c,
+		"A to enable/cancel antialiasing");
+	mlx_string_put(m, w, WIN_WIDTH - 200, WIN_HEIGHT - 25, c,
+		"I to hide info");
+	mlx_string_put(m, w, WIN_WIDTH - 200, WIN_HEIGHT - 5, c,
+		"ESC to quit");
 }

@@ -6,45 +6,11 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:19:31 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/16 18:34:30 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 02:04:34 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-t_object *create_plane(t_rt *rt, t_ray *mouse_ray)
-{
-	t_object	*obj;
-
-	obj = create_object(rt);
-	obj->id = id_plane;
-	ray_mul(&obj->object.plane.coords, mouse_ray, 30);
-	obj->object.plane.coords.y -= 10;
-	obj->object.plane.orient.x = 0.0;   // not correct should be calculaed with ray
-	obj->object.plane.orient.y = 1.0;   // same here
-	obj->object.plane.orient.z = 0.0;
-	obj->object.plane.color.r = 0.8;
-	obj->object.plane.color.g = 0.8;
-	obj->object.plane.color.b = 0.8;
-	render(rt);
-	return (obj);
-}
-
-t_object *create_sphere(t_rt *rt, t_ray *mouse_ray)
-{
-	t_object	*obj;
-
-	obj = create_object(rt);
-	obj->id = id_sphere;
-	ray_mul(&obj->object.sphere.coords, mouse_ray, 50);
-	obj->object.sphere.color.r = 0;
-	obj->object.sphere.color.g = 0.5;
-	obj->object.sphere.color.b = 0;
-	obj->object.sphere.diameter = 1.0;
-	obj->object.sphere.r2 = 1.0;
-	render(rt);
-	return (obj);
-}
 
 void	move_obj(t_rt *rt, int x, int y)
 {
@@ -76,21 +42,17 @@ int	handle_mousedown(int button, int x, int y, t_rt *rt)
 	if (y < 0)
 		return (0);
 	rt->event.mouse |= (1 << button);
-	if (button == LEFT_CLICK && (rt->event.key[S_KEY]))
-		rt->event.selection = create_sphere(rt, &mouse_ray);
-	else if (button == LEFT_CLICK && (rt->event.key[P_KEY]))
-		rt->event.selection = create_plane(rt, &mouse_ray);
-	else
+	if (rt->event.mouse & LEFT_CLICK)
 		rt->event.selection = get_closest_obj(&mouse_ray, rt->objs, &hit);
 	return (0);
 }
 
 int	handle_mouseup(int button, int x, int y, t_rt *rt)
 {
-	(void) x;
-	(void) y;
 	int		alias;
 
+	(void) x;
+	(void) y;
 	alias = rt->img.antialiasing_on;
 	rt->event.mouse &= ~(1 << button);
 	rt->event.selection = NULL;
@@ -117,7 +79,7 @@ int	handle_mousemove(int x, int y, t_rt *rt)
 	dx = rt->event.x - rt->event.lastx;
 	dy = rt->event.y - rt->event.lasty;
 	if (rt->event.selection && !rt->event.key[S_KEY] && !rt->event.key[P_KEY]
-			&& !rt->event.key[C_KEY])
+		&& !rt->event.key[C_KEY])
 		move_obj(rt, x, y);
 	return (0);
 }

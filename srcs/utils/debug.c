@@ -6,16 +6,16 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 00:34:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/16 02:14:32 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:21:21 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void rt_dump(t_rt *rt)
+void	rt_dump(t_rt *rt)
 {
-	t_object *tmp;
-	t_light *tmp2;
+	t_object	*tmp;
+	t_light		*tmp2;
 
 	if (rt->ambient.id == id_ambient)
 	{

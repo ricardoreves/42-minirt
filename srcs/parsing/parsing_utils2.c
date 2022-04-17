@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:37:46 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:00:25 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/17 01:25:31 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	parse_extra_params(t_object *obj, char *str)
 {
-	char **tmp;
-	int ret;
-	int	i;
+	char	**tmp;
+	int		ret;
+	int		i;
 
 	i = -1;
 	ret = 0;
@@ -36,11 +36,11 @@ int	parse_extra_params(t_object *obj, char *str)
 	return (ret);
 }
 
-int parse_vector(char *str, t_vector *vect)
+int	parse_vector(char *str, t_vector *vect)
 {
-	char **tmp;
-	int ret;
-	int	i;
+	char	**tmp;
+	int		ret;
+	int		i;
 
 	i = -1;
 	ret = 0;
@@ -60,11 +60,11 @@ int parse_vector(char *str, t_vector *vect)
 	return (ret);
 }
 
-int parse_color(char *str, t_color *color)
+int	parse_color(char *str, t_color *color)
 {
-	char **tmp;
-	int ret;
-	int	i;
+	char	**tmp;
+	int		ret;
+	int		i;
 
 	i = -1;
 	ret = 0;
@@ -84,7 +84,7 @@ int parse_color(char *str, t_color *color)
 	return (ret);
 }
 
-int parse_float(char *str, float *num)
+int	parse_float(char *str, float *num)
 {
 	if (!is_float(str))
 		return (1);
@@ -92,7 +92,7 @@ int parse_float(char *str, float *num)
 	return (0);
 }
 
-int parse_ulong(char *str, size_t *num)
+int	parse_ulong(char *str, size_t *num)
 {
 	if (!is_ulong(str))
 		return (1);
