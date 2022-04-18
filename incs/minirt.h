@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 19:43:53 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/18 02:40:56 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # define SPECULAR_KV 0.5
 # define SPECULAR_N 20
 # define MIRROR 0.0
+# define REFRACT 0.0
+# define PATTERN_LEN 0.0
+# define PATTERN_NUM 0
 # define FOCAL_DIST 0.5
 # define WIN_WIDTH 1200
 # define WIN_HEIGHT 800
@@ -50,7 +53,7 @@
 #  define RIGHT_CLICK 2
 # endif
 # define USAGE_MESSAGE "Usage: ./minirt scenes/mandatory.c"
-# define SCENE_CHARSET "ACLsplcy0123456789-,. \n"
+# define SCENE_CHARSET "ACLsplcy0123456789-;,. \n"
 # define ERR_FILE_NOT_FOUND "file not found"
 # define ERR_IS_NOT_RT_FILE "isn't a rt file"
 # define ERR_FORBIDDEN_CHAR "contain forbidden character"
@@ -206,7 +209,7 @@ t_bool	solve_quadratic(t_quadratic *q);
 
 /* object_utils.c */
 void	push_object(t_object *obj, t_object **objs);
-t_obj	*create_object(t_rt *rt);
+t_obj	*create_object(t_rt *rt, t_object_id id);
 void	free_objects(t_object **objs);
 void	object_norm(t_rt *rt);
 
@@ -227,6 +230,7 @@ int		parse_vector(char *str, t_vector *vect);
 int		parse_extra_params(t_object *obj, char *str);
 // int		parse_color(char *str, int *color);
 int		parse_color(char *str, t_color *color);
+int		parse_colors(char *str, t_color *color, t_color *color2);
 int		parse_float(char *str, float *num);
 int		parse_ulong(char *str, size_t *num);
 int		parse_ambient(t_rt *rt, char *line, int num);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 18:23:13 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/18 02:33:31 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,18 @@ void	push_object(t_object *obj, t_object **objs)
 	}
 }
 
-t_object	*create_object(t_rt *rt)
+t_object	*create_object(t_rt *rt, t_object_id id)
 {
 	t_object	*obj;
 
 	obj = ft_calloc(sizeof(t_object), 1);
+	obj->id = id;
 	obj->speckv = SPECULAR_KV;
 	obj->specn = SPECULAR_N;
 	obj->mirror = MIRROR;
+	obj->refract = REFRACT;
+	obj->pattern_len = PATTERN_LEN;
+	obj->pattern_num = PATTERN_NUM;
 	push_object(obj, &rt->objs);
 	rt->num_objs++;
 	return (obj);

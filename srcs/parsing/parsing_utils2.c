@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:37:46 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:25:31 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/18 02:28:54 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ int	parse_extra_params(t_object *obj, char *str)
 	while (tmp && tmp[++i])
 		if (!is_float(tmp[i]))
 			ret = 1;
-	if (array_length(tmp) != 3)
+	if (array_length(tmp) != 6)
 		ret = 1;
 	else
 	{
 		obj->speckv = str_to_float(tmp[0]);
 		obj->specn = str_to_float(tmp[1]);
 		obj->mirror = str_to_float(tmp[2]);
+		obj->refract = str_to_float(tmp[3]);
+		obj->pattern_len = str_to_float(tmp[4]);
+		obj->pattern_num = ft_atoi(tmp[5]);
 	}
 	free_array(tmp);
 	return (ret);
@@ -56,6 +59,25 @@ int	parse_vector(char *str, t_vector *vect)
 		vect->y = str_to_float(tmp[1]);
 		vect->z = str_to_float(tmp[2]);
 	}
+	free_array(tmp);
+	return (ret);
+}
+
+int	parse_colors(char *str, t_color *color, t_color *color2)
+{
+	char	**tmp;
+	int		ret;
+	int		i;
+
+	i = -1;
+	ret = 0;
+	tmp = ft_split(str, ';');
+	if (array_length(tmp) < 1 || array_length(tmp) > 2)
+		ret = 1;
+	if (array_length(tmp) == 1)
+		ret = parse_color(tmp[0], color);
+	if (array_length(tmp) == 2)
+		ret = parse_color(tmp[1], color2);
 	free_array(tmp);
 	return (ret);
 }
