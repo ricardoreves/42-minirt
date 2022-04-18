@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/18 02:40:13 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/18 03:41:13 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ int	parse_plane(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
 	if (parse_colors(params[3], &obj->color, &obj->second_color))
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
-	plane.id = id_plane;
 	plane.coords = obj->coords;
-	plane.color = obj->color;
 	obj->object.plane = plane;
 	if (array_length(params) == 5 && parse_extra_params(obj, params[4]))
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
@@ -98,9 +96,7 @@ int	parse_sphere(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
 	if (parse_colors(params[3], &obj->color, &obj->second_color))
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
-	sphere.id = id_sphere;
 	sphere.coords = obj->coords;
-	sphere.color = obj->color;
 	obj->object.sphere = sphere;
 	if (array_length(params) == 5 && parse_extra_params(obj, params[4]))
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
@@ -128,9 +124,7 @@ int	parse_cylinder(t_rt *rt, char *line, int num)
 		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
 	if (parse_colors(params[5], &obj->color, &obj->second_color))
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
-	cylinder.id = id_cylinder;
 	cylinder.coords = obj->coords;
-	cylinder.color = obj->color;
 	obj->object.cylinder = cylinder;
 	if (array_length(params) == 7 && parse_extra_params(obj, params[6]))
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
