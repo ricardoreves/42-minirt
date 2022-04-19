@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/19 02:53:03 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 23:23:31 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum e_object_id
 	id_camera,
 	id_plane,
 	id_cylinder,
+	id_cone,
 	id_sphere
 }	t_obj_id;
 
@@ -116,8 +117,8 @@ typedef struct s_camera
 typedef struct s_plane
 {
 	t_obj_id	id;
-	t_vect	coords;
-	t_vect	orient;
+	t_vect		coords;
+	t_vect		orient;
 	t_color		color;
 }	t_plane;
 
@@ -144,17 +145,30 @@ typedef struct s_sphere
 	t_color		color;
 }	t_sphere;
 
+typedef struct s_cone
+{
+	t_obj_id	id;
+	t_vect		coords;
+	t_vect		orient;
+	float		h;
+	float		angle;
+	float		cos2;
+	t_vect		c2;
+	t_color		color;
+}	t_cone;
+
 typedef union u_object
 {
 	t_sphere	sphere;
 	t_plane		plane;
 	t_cylinder	cylinder;
+	t_cone		cone;
 }	t_obj_union;
 
 typedef struct s_obj
 {
 	t_obj_id		id;
-	t_obj_union	object;
+	t_obj_union		object;
 	float			speckv;
 	float			specn;
 	float			mirror;

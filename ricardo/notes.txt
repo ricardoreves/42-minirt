@@ -48,3 +48,5 @@ cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
 ∗the cylinder diameter: 14.2
 ∗the cylinder height: 21.42
 ∗R,G,B colors in range [0,255]: 10, 0, 255
+
+speckv, specn, miror, refract, pattern_len, pattern_num

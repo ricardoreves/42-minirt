@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/19 02:08:05 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 21:41:24 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	parse_light(t_rt *rt, char *line, int num)
 int	parse_plane(t_rt *rt, char *line, int num)
 {
 	char		**params;
-	t_obj	*obj;
+	t_obj		*obj;
 	t_plane		plane;
 
 	params = ft_split(line, ' ');
@@ -82,7 +82,7 @@ int	parse_plane(t_rt *rt, char *line, int num)
 int	parse_sphere(t_rt *rt, char *line, int num)
 {
 	char		**params;
-	t_obj	*obj;
+	t_obj		*obj;
 	t_sphere	sphere;
 
 	params = ft_split(line, ' ');
@@ -107,7 +107,7 @@ int	parse_sphere(t_rt *rt, char *line, int num)
 int	parse_cylinder(t_rt *rt, char *line, int num)
 {
 	char		**params;
-	t_obj	*obj;
+	t_obj		*obj;
 	t_cylinder	cylinder;
 
 	params = ft_split(line, ' ');

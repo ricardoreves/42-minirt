@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/19 02:08:05 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 21:24:50 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ void	object_norm(t_rt *rt)
 	{
 		if (objs->id == id_sphere)
 			objs->object.sphere.r2 = pow(objs->object.sphere.diameter / 2, 2);
+		if (objs->id == id_cone)
+		{
+			normalize(&objs->object.cone.orient);
+			objs->object.cone.cos2 = pow(cos(objs->object.cone.angle), 2);
+			objs->object.cone.c2 = vect_mul(objs->object.cone.orient, objs->object.cone.h);
+			objs->object.cone.c2 = vect_add(objs->object.cone.c2, objs->object.cone.coords);
+		}
 		if (objs->id == id_cylinder)
 		{
 			cy = &objs->object.cylinder;
