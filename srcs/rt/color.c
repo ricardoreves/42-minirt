@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 17:34:43 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 03:06:27 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,24 @@ t_color	*color_part(t_color *c, float p)
 	return (c);
 }
 
-t_color	color_obj(t_obj *obj)
+t_color	color_mul(t_color c, float p)
 {
-	if (obj && obj->id == id_sphere)
-		return (obj->object.sphere.color);
-	if (obj && obj->id == id_plane)
-		return (obj->object.plane.color);
-	if (obj && obj->id == id_cylinder)
-		return (obj->object.cylinder.color);
-	return (newcolor(0, 0, 0));
+	c.r *= c.r * p;
+	c.g *= c.g * p;
+	c.b *= c.b * p;
+	return (c);
 }
+
+// t_color	color_obj(t_obj *obj)
+// {
+// 	if (obj && obj->id == id_sphere)
+// 		return (obj->object.sphere.color);
+// 	if (obj && obj->id == id_plane)
+// 		return (obj->object.plane.color);
+// 	if (obj && obj->id == id_cylinder)
+// 		return (obj->object.cylinder.color);
+// 	return (newcolor(0, 0, 0));
+// }
 
 t_color	rgb2color(int rgb)
 {

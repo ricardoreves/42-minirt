@@ -6,13 +6,13 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 05:09:08 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 02:08:24 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	*ray_mul(t_vect *dst, t_ray *r, float t)
+t_vect	*ray_mul(t_vect *dst, t_ray *r, float t)
 {
 	dst->x = r->or.x + t * r->dir.x;
 	dst->y = r->or.y + t * r->dir.y;
@@ -20,7 +20,7 @@ t_vector	*ray_mul(t_vect *dst, t_ray *r, float t)
 	return (dst);
 }
 
-t_vector	reflect_vect(t_vector v, t_vector n)
+t_vect	reflect_vect(t_vect v, t_vect n)
 {
 	t_vect	dst;
 
@@ -29,7 +29,7 @@ t_vector	reflect_vect(t_vector v, t_vector n)
 	return (dst);
 }
 
-t_vector	refract_vect(t_vector v, t_vector n, float eta) // eta = n1/n2
+t_vect	refract_vect(t_vect v, t_vect n, float eta) // eta = n1/n2
 {
 	float	c1;
 	float	c2;

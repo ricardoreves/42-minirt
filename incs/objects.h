@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 19:07:57 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 02:53:03 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ typedef enum e_object_id
 	id_plane,
 	id_cylinder,
 	id_sphere
-}	t_object_id;
+}	t_obj_id;
 
-typedef struct s_vector
+typedef struct s_vect
 {
 	float	x;
 	float	y;
 	float	z;
-}	t_vector;
+}	t_vect;
 
 typedef struct s_quadratic
 {
@@ -64,29 +64,32 @@ typedef struct s_color
 
 typedef	struct s_ray
 {
-	t_vector	or;
-	t_vector	dir;
+	t_vect	or;
+	t_vect	dir;
 }	t_ray;
 
 typedef	struct s_hit
 {
-	t_vector	nHit;
-	t_vector	pHit;
+	t_vect		nHit;
+	t_vect		pHit;
 	float		t;
 	t_color		color;
 }	t_hit;
 
-typedef struct s_rays
+
+typedef struct s_colors
 {
-	t_ray	prime_ray;
-	t_ray	shadowray;
-	t_hit	hit;
-	t_hit	shadow_hit;
-}	t_rays;
+	t_color	ambient;
+	t_color	diffuse;
+	t_color	specular;
+	t_color	reflect;
+	t_color	refract;
+	int		is_shadow;
+}	t_colors;
 
 typedef struct s_ambient
 {
-	t_object_id	id;
+	t_obj_id	id;
 	float		lighting;
 	t_color		color;
 
@@ -94,8 +97,8 @@ typedef struct s_ambient
 
 typedef struct s_light
 {
-	t_object_id		id;
-	t_vector		coords;
+	t_obj_id		id;
+	t_vect			coords;
 	float			brightness;
 	t_color			color;
 	struct s_light	*next;
@@ -103,39 +106,39 @@ typedef struct s_light
 
 typedef struct s_camera
 {
-	t_object_id	id;
-	t_vector	coords;
-	t_vector	orient;
+	t_obj_id	id;
+	t_vect		coords;
+	t_vect		orient;
 	size_t		fov;
 	float		scale;
 }	t_camera;
 
 typedef struct s_plane
 {
-	t_object_id	id;
-	t_vector	coords;
-	t_vector	orient;
+	t_obj_id	id;
+	t_vect	coords;
+	t_vect	orient;
 	t_color		color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_object_id	id;
-	t_vector	coords;
-	t_vector	orient;
+	t_obj_id	id;
+	t_vect		coords;
+	t_vect		orient;
 	float		diameter;
 	float		height;
 	float		r2;
-	t_vector	p1;
-	t_vector	p2;
-	t_vector	delta_p;
+	t_vect		p1;
+	t_vect		p2;
+	t_vect		delta_p;
 	t_color		color;
 }	t_cylinder;
 
 typedef struct s_sphere
 {
-	t_object_id	id;
-	t_vector	coords;
+	t_obj_id	id;
+	t_vect		coords;
 	float		diameter;
 	float		r2;
 	t_color		color;
@@ -146,24 +149,33 @@ typedef union u_object
 	t_sphere	sphere;
 	t_plane		plane;
 	t_cylinder	cylinder;
-}	t_object_union;
+}	t_obj_union;
 
-typedef struct s_object
+typedef struct s_obj
 {
-	t_object_id		id;
-	t_object_union	object;
+	t_obj_id		id;
+	t_obj_union	object;
 	float			speckv;
 	float			specn;
 	float			mirror;
 	float			refract;
-	t_vector		e1;
-	t_vector		e2;
-	t_vector		coords;
+	t_vect			e1;
+	t_vect			e2;
+	t_vect			coords;
 	t_color			color;
 	t_color			second_color;
 	float			pattern_len;
 	int				pattern_num;
-	struct s_object	*next;
-}	t_object;
+	struct s_obj	*next;
+}	t_obj;
+
+typedef struct s_rays
+{
+	t_ray		prime_ray;
+	t_ray		shadowray;
+	t_hit		hit;
+	t_hit		shadow_hit;
+	t_obj		*closest_obj;
+}	t_rays;
 
 #endif

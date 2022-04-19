@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/18 02:33:31 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/19 02:08:05 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,14 @@ void	object_norm(t_rt *rt)
 			cy->p2 = vect_mul(cy->orient, 0.5 * cy->height);
 			cy->p2 = vect_add(cy->p2, cy->coords);
 		}
-		objs->refract = 0;
-		if (objs->mirror < 0)
-			objs->refract = -objs->mirror;
 		set_patternref(rt, objs);
-
-		// to take off later;
-		if (objs->id == id_sphere)
-			objs->color = objs->object.sphere.color;
-		if (objs->id == id_plane)
-			objs->color = objs->object.plane.color;
-		if (objs->id == id_cylinder)
-			objs->color = objs->object.cylinder.color;
-		objs->color = color_obj(objs);
-		// end takeoff
-
 		objs = objs->next;
 	}
 }
 
-void	push_object(t_object *obj, t_object **objs)
+void	push_object(t_obj *obj, t_obj **objs)
 {
-	t_object	*tmp;
+	t_obj	*tmp;
 
 	if (!(*objs))
 		*objs = obj;
@@ -67,11 +53,11 @@ void	push_object(t_object *obj, t_object **objs)
 	}
 }
 
-t_object	*create_object(t_rt *rt, t_object_id id)
+t_obj	*create_object(t_rt *rt, t_obj_id id)
 {
-	t_object	*obj;
+	t_obj	*obj;
 
-	obj = ft_calloc(sizeof(t_object), 1);
+	obj = ft_calloc(sizeof(t_obj), 1);
 	obj->id = id;
 	obj->speckv = SPECULAR_KV;
 	obj->specn = SPECULAR_N;
@@ -84,10 +70,10 @@ t_object	*create_object(t_rt *rt, t_object_id id)
 	return (obj);
 }
 
-void	free_objects(t_object **objs)
+void	free_objects(t_obj **objs)
 {
-	t_object	*tmp;
-	t_object	*obj;
+	t_obj	*tmp;
+	t_obj	*obj;
 
 	obj = *objs;
 	while (obj)

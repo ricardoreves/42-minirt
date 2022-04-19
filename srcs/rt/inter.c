@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 17:31:50 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 02:08:24 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_hit *hit)
 {
-	t_vector	l;
+	t_vect	l;
 	float		tca;
 	float		d2;
 	float		thc;
@@ -111,7 +111,7 @@ t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_hit *hit)
 	return (hit->t < INFINITY && hit->t > EPSILON);
 }
 
-int	intersect(t_ray *ray, t_object *obj, t_hit *hit)
+int	intersect(t_ray *ray, t_obj *obj, t_hit *hit)
 {
 	if (obj->id == id_sphere)
 		return (sphere_inter(ray, &obj->object.sphere, hit));

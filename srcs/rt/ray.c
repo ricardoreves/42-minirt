@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:48:55 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 03:32:26 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 03:23:18 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	lookat(t_rt *rt)
 	rt->cam_matrix[2][2] = forward.z;
 }
 
-t_vector	cam2world(float m[4][4], t_vect *v)
+t_vect	cam2world(float m[4][4], t_vect *v)
 {
 	t_vect	dst;
 

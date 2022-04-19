@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 00:34:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:21:21 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 02:08:05 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	rt_dump(t_rt *rt)
 {
-	t_object	*tmp;
+	t_obj	*tmp;
 	t_light		*tmp2;
 
 	if (rt->ambient.id == id_ambient)

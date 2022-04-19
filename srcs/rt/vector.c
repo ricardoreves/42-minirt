@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 03:43:52 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 02:08:24 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vect	vector(float x, float y, float z)
 {
-	t_vector	v;
+	t_vect	v;
 
 	v.x = x;
 	v.y = y;
@@ -22,12 +22,12 @@ t_vect	vector(float x, float y, float z)
 	return (v);
 }
 
-float	vectlen(t_vector v)
+float	vectlen(t_vect v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
-t_vect	vect_sub(t_vector a, t_vector b)
+t_vect	vect_sub(t_vect a, t_vect b)
 {
 	t_vect	dst;
 	
@@ -37,7 +37,7 @@ t_vect	vect_sub(t_vector a, t_vector b)
 	return (dst);
 }
 
-t_vect	vect_add(t_vector a, t_vector b)
+t_vect	vect_add(t_vect a, t_vect b)
 {
 	t_vect	dst;
 	

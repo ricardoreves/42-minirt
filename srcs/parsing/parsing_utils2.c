@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:37:46 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/18 02:28:54 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/19 02:08:24 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	parse_extra_params(t_object *obj, char *str)
+int	parse_extra_params(t_obj *obj, char *str)
 {
 	char	**tmp;
 	int		ret;
@@ -39,7 +39,7 @@ int	parse_extra_params(t_object *obj, char *str)
 	return (ret);
 }
 
-int	parse_vector(char *str, t_vector *vect)
+int	parse_vector(char *str, t_vect *vect)
 {
 	char	**tmp;
 	int		ret;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/18 02:40:56 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/19 03:23:28 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define BG_COLOR 0xCFCFFF
 # define MAX_KEY 65535
 # define MAX_REFLECT 5
-# define ANTIALIASING_ON TRUE
+# define ANTIALIASING_ON FALSE
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
 #  define A_KEY 0
@@ -74,8 +74,6 @@
 # include "parsing.h"
 
 typedef enum e_bool {FALSE, TRUE}	t_bool;
-typedef t_vector					t_vect;
-typedef t_object					t_obj;
 
 enum {
 	ON_KEYDOWN = 2,
@@ -122,7 +120,7 @@ typedef struct s_rt
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		*light;
-	t_object	*objs;
+	t_obj	*objs;
 	size_t		num_objs;
 	t_event		event;
 	int			display_info;
@@ -168,39 +166,50 @@ void	render(t_rt *rt);
 void	build_camray(t_rt *rt, t_ray *ray, float x, float y);
 void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
 void	lookat(t_rt *rt);
+t_color	light2rgb(t_colors *l);
+
+/* lightray.c */
+t_color	lightrays(t_rt *rt, t_rays *r, t_light *light);
+t_bool	shadow_ray(t_rt *rt, t_rays *r, t_light *light);
+t_color	diffuse_light(t_rays *r, t_light *light);
+t_color	specular_light(t_rays *r, t_light *light);
+t_color	refraction_ray(t_rt *rt, t_rays *r, int max_reflect);
+t_color	reflection_ray(t_rt *rt, t_rays *r, int max_reflect);
+
 
 /* raytrace.c */
 t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect);
-t_obj	*get_closest_obj(t_ray *ray, t_object *obj, t_hit *hit);
+t_obj	*get_closest_obj(t_ray *ray, t_obj *obj, t_hit *hit);
 
 /* inter.c */
-int		intersect(t_ray *ray, t_object *obj, t_hit *hit);
+int		intersect(t_ray *ray, t_obj *obj, t_hit *hit);
 
 /* pattern.c */
 void	set_patternref(t_rt *rt, t_obj *obj);
-t_color	checkboard_color(t_obj *obj, t_vector pHit);
+t_color	checkboard_color(t_obj *obj, t_vect pHit);
 
 /* vector.c */
 t_vect	vector(float x, float y, float z);
-float	vectlen(t_vector v);
-t_vect	vect_sub(t_vector a, t_vector b);
-t_vect	vect_add(t_vector a, t_vector b);
+float	vectlen(t_vect v);
+t_vect	vect_sub(t_vect a, t_vect b);
+t_vect	vect_add(t_vect a, t_vect b);
 t_vect	vect_mul(t_vect v, float f);
-t_vect	*normalize(t_vector *v);
+t_vect	*normalize(t_vect *v);
 float	distance(t_vect a, t_vect b);
-float	dot_prod(t_vector v1, t_vector v2);
+float	dot_prod(t_vect v1, t_vect v2);
 t_vect	cross_prod(t_vect u, t_vect v);
 t_vect	vect_inv(t_vect v);
 t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
-t_vect	reflect_vect(t_vector v, t_vector n);
-t_vect	refract_vect(t_vector v, t_vector n, float eta);
+t_vect	reflect_vect(t_vect v, t_vect n);
+t_vect	refract_vect(t_vect v, t_vect n, float eta);
 
 /* color.c */
 t_color newcolor(float r, float g, float b);
 int		color2rgb(t_color c);
 t_color	color_obj(t_obj *obj);
 t_color	*color_part(t_color *c, float p);
-void	add_light(t_color *color, t_color light, float p2);
+t_color	color_mul(t_color c, float p);
+t_color	add_light(t_color color, t_color light, float p2);
 t_color	mix_color(t_color c1, float p1, t_color c2, float p2);
 t_color	rgb2color(int rgb);
 
@@ -208,9 +217,9 @@ t_color	rgb2color(int rgb);
 t_bool	solve_quadratic(t_quadratic *q);
 
 /* object_utils.c */
-void	push_object(t_object *obj, t_object **objs);
-t_obj	*create_object(t_rt *rt, t_object_id id);
-void	free_objects(t_object **objs);
+void	push_object(t_obj *obj, t_obj **objs);
+t_obj	*create_object(t_rt *rt, t_obj_id id);
+void	free_objects(t_obj **objs);
 void	object_norm(t_rt *rt);
 
 /* file.c */
@@ -226,8 +235,8 @@ int		is_ulong(char *str);
 /* parsing.c */
 char	*sanitize_line(char *line);
 int		parse_line(t_rt *rt, char *line, int num);
-int		parse_vector(char *str, t_vector *vect);
-int		parse_extra_params(t_object *obj, char *str);
+int		parse_vector(char *str, t_vect *vect);
+int		parse_extra_params(t_obj *obj, char *str);
 // int		parse_color(char *str, int *color);
 int		parse_color(char *str, t_color *color);
 int		parse_colors(char *str, t_color *color, t_color *color2);

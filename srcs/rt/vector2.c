@@ -6,13 +6,13 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 21:54:52 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 03:49:30 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/19 02:08:24 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	dot_prod(t_vector v1, t_vector v2)
+float	dot_prod(t_vect v1, t_vect v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
@@ -42,7 +42,7 @@ float	distance(t_vect a, t_vect b)
 	return (sqrt(x + y + z));
 }
 
-t_vector	vect_inv(t_vect v)
+t_vect	vect_inv(t_vect v)
 {
 	v.x = -v.x;
 	v.y = -v.y;
@@ -50,7 +50,7 @@ t_vector	vect_inv(t_vect v)
 	return (v);
 }
 
-t_vector	*normalize(t_vector *v)
+t_vect	*normalize(t_vect *v)
 {
 	float	norm;
 
