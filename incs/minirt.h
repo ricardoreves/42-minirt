@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/19 23:23:33 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 00:26:30 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,10 @@ t_obj	*get_closest_obj(t_ray *ray, t_obj *obj, t_hit *hit);
 
 /* inter.c */
 int		intersect(t_ray *ray, t_obj *obj, t_hit *hit);
+t_bool	cone_inter(t_ray *r, t_cone *co, t_hit *hit);
+t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_hit *hit);
+t_bool	plane_inter(t_ray *r, t_plane *pl, t_hit *hit);
+t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_hit *hit);
 
 /* pattern.c */
 void	set_patternref(t_rt *rt, t_obj *obj);

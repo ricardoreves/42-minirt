@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:31:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 00:17:22 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 00:55:24 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	add_cone(t_rt *rt)
 
 	obj = create_object(rt, id_cone);
 	c = &obj->object.cone;
-	c->angle = 0.4;
-	c->h = 15;
-	c->coords = vector(-10, 15, 50);
+	c->angle = 0.3;
+	c->h = 30;
+	c->coords = vector(50, 40, 95);
 	c->orient = vector(0.5, -1, 0);
 	obj->color = rgb2color(0x17f456);
 	obj->second_color = rgb2color(0x17f456);
-	c->color = rgb2color(0x17f456);
-	obj->mirror = 0;
+	c->color = rgb2color(0x78f456);
+	obj->mirror = 0.8;
 	obj->refract = 0;
 	obj->pattern_num = 0;
 }

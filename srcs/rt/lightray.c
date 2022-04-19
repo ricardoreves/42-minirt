@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 01:27:28 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/19 03:25:24 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 00:53:32 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_color	diffuse_light(t_rays *r, t_light *light)
 t_bool	shadow_ray(t_rt *rt, t_rays *r, t_light *light)
 {
 	r->shadowray.or = r->hit.pHit;
-	r->shadowray.dir = vect_sub(r->hit.pHit, rt->light->coords);
+	r->shadowray.dir = vect_sub(r->hit.pHit, light->coords);
 	normalize(&r->shadowray.dir);
 	ray_mul(&r->shadowray.or, &r->shadowray, 0.01);
 	return (get_closest_obj(&r->shadowray, rt->objs, &r->shadow_hit)
