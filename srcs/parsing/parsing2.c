@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 16:31:46 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:17:41 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	parse_cone(t_rt *rt, char *line, int num)
 	if (parse_vector(params[2], &cone.orient))
 		return (show_parsing_error(params, ERR_INVALID_NB_ORIENT, num));
 	normalize(&cone.orient);
-	if (parse_float(params[3], &cone.h) || parse_float(params[4], &cone.h)
+	if (parse_float(params[3], &cone.h) || parse_float(params[4], &cone.h2)
 		|| parse_float(params[5], &cone.angle))
 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
 	obj = create_object(rt, id_cone);
