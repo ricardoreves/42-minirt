@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 03:41:32 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/20 15:17:19 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,27 @@ int	parse_light(t_rt *rt, char *line, int num)
 	return (0);
 }
 
+int	parse_resolution(t_rt *rt, char *line, int num)
+{
+	char	**params;
+
+	params = ft_split(line, ' ');
+	if (array_length(params) != 3)
+		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
+	if (parse_float(params[1], &rt->width))
+		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
+	if (parse_float(params[2], &rt->height))
+		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
+	free_array(params);
+	return (0);
+}
+
 int	parse_line(t_rt *rt, char *line, int num)
 {
 	if (has_line_valid_charset(line))
 	{
+		if (ft_strncmp(line, "R", 1) == 0)
+			return (parse_resolution(rt, line, num));
 		if (ft_strncmp(line, "A", 1) == 0)
 			return (parse_ambient(rt, line, num));
 		if (ft_strncmp(line, "C", 1) == 0)

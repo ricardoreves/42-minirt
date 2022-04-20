@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 03:37:06 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/20 15:35:45 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define PATTERN_LEN 0.0
 # define PATTERN_NUM 0
 # define FOCAL_DIST 0.5
-# define WIN_WIDTH 1200
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
 # define DECO_WIDTH 60
 # define COLORDEF 0x81A1C1
 # define BG_COLOR 0xCFCFFF
@@ -53,7 +53,7 @@
 #  define RIGHT_CLICK 2
 # endif
 # define USAGE_MESSAGE "Usage: ./minirt scenes/mandatory.c"
-# define SCENE_CHARSET "ACLsplcyo0123456789-;,. \n"
+# define SCENE_CHARSET "RACLsplcyo0123456789-;,. \n"
 # define ERR_FILE_NOT_FOUND "file not found"
 # define ERR_IS_NOT_RT_FILE "isn't a rt file"
 # define ERR_FORBIDDEN_CHAR "contain forbidden character"
@@ -253,6 +253,7 @@ int		parse_plane(t_rt *rt, char *line, int num);
 int		parse_sphere(t_rt *rt, char *line, int num);
 int		parse_cylinder(t_rt *rt, char *line, int num);
 int		parse_cone(t_rt *rt, char *line, int num);
+int		parse_resolution(t_rt *rt, char *line, int num);
 
 /* array_utils.c */
 void	free_array(char *arr[]);
