@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 17:00:08 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:55:20 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ typedef struct s_cone
 	float		h2;
 	float		angle;
 	float		cos2;
+	t_vect		c1;
 	t_vect		c2;
 	t_color		color;
 }	t_cone;

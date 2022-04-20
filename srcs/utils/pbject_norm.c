@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:36:43 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 17:29:44 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:57:20 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	cone_norm(t_cone *c)
 {
 	normalize(&c->orient);
 	c->cos2 = pow(cos(c->angle), 2);
-	c->c2 = vect_mul(c->orient, c->h);
-	c->c2 = vect_add(c->c2, c->coords);
+	c->c1 = vect_mul(c->orient, c->h);
+	c->c1 = vect_add(c->c1, c->coords);
 }
 
 void	cylinder_norm(t_cylinder *cy)
