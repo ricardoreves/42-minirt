@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:31:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 04:57:07 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:21:53 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	add_cone(t_rt *rt)
 
 int	main(int argc, char **argv)
 {
-	t_rt *rt;
+	t_rt	*rt;
 
 	rt = ft_calloc(sizeof(t_rt), 1);
 	if (argc != 2)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 01:56:16 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 15:22:52 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 void	rt_init(t_rt *rt, char *path)
 {
 	rt->mlx = mlx_init();
-	rt->width = (float) WIN_WIDTH;
-	rt->height = (float) WIN_HEIGHT;
-	if (WIN_HEIGHT < WIN_WIDTH)
-		rt->aspectRatio = WIN_WIDTH / WIN_HEIGHT;
+	if (!rt->width)
+		rt->width = (float) WIN_WIDTH;
+	if (!rt->height)
+		rt->height = (float) WIN_HEIGHT;
+	if (rt->height < rt->width)
+		rt->aspectRatio = rt->width / rt->height;
 	else
-		rt->aspectRatio = WIN_HEIGHT / WIN_WIDTH;
-	rt->mlx_win = mlx_new_window(rt->mlx, WIN_WIDTH, WIN_HEIGHT, "minirt");
+		rt->aspectRatio = rt->height / rt->width;
+	rt->mlx_win = mlx_new_window(rt->mlx, rt->width, rt->height, "minirt");
 	rt->path = path;
-	rt->img.img = mlx_new_image(rt->mlx, WIN_WIDTH, WIN_HEIGHT);
+	rt->img.img = mlx_new_image(rt->mlx, rt->width, rt->height);
 	rt->img.addr = mlx_get_data_addr(rt->img.img, &rt->img.bits_per_pixel,
 			&rt->img.line_length, &rt->img.endian);
 	rt->img.antialiasing_on = ANTIALIASING_ON;
