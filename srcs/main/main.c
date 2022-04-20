@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:31:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 01:06:23 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 04:57:07 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 	else if (open_file(rt, argv[1]))
 	{
 		rt_init(rt, argv[1]);
-		add_cone(rt);
+		// add_cone(rt);
 		render(rt);
 		mlx_loop(rt->mlx);
 	}

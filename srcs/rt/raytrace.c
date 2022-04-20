@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 00:51:02 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 05:01:01 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
 	ft_memset(&colors, 0, sizeof(colors));
 	r->closest_obj = get_closest_obj(&r->prime_ray, rt->objs, &r->hit);
 	if (!r->closest_obj)
-		return (rt->bg_color);
+		return (newcolor(0,0,0));
+		// return (rt->bg_color);
 	handle_lights(rt, r, &colors);
 	color = light2rgb(&colors);
 	--max_reflect;
