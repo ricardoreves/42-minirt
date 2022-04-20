@@ -1,133 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/19 21:41:24 by bgoncalv         ###   ########.fr       */
+/*   Created: 2022/04/20 02:53:40 by rpinto-r          #+#    #+#             */
+/*   Updated: 2022/04/20 02:57:40 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	parse_ambient(t_rt *rt, char *line, int num)
+int	parse_extra_params(t_obj *obj, char *str)
 {
-	char		**params;
-	t_ambient	ambient;
+	char	**tmp;
+	int		ret;
+	int		i;
 
-	params = ft_split(line, ' ');
-	if (rt->ambient.id)
-		return (show_parsing_error(params, ERR_TOO_MANY_AMBIENTS, num));
-	if (array_length(params) != 3)
-		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
-	ft_bzero(&ambient, sizeof(t_ambient));
-	ambient.id = id_ambient;
-	if (parse_float(params[1], &ambient.lighting))
-		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
-	if (parse_color(params[2], &ambient.color))
-		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
-	rt->ambient = ambient;
-	free_array(params);
-	return (0);
+	i = -1;
+	ret = 0;
+	tmp = ft_split(str, ',');
+	while (tmp && tmp[++i])
+		if (!is_float(tmp[i]))
+			ret = 1;
+	if (array_length(tmp) != 6)
+		ret = 1;
+	else
+	{
+		obj->speckv = str_to_float(tmp[0]);
+		obj->specn = str_to_float(tmp[1]);
+		obj->mirror = str_to_float(tmp[2]);
+		obj->refract = str_to_float(tmp[3]);
+		obj->pattern_len = str_to_float(tmp[4]);
+		obj->pattern_num = ft_atoi(tmp[5]);
+	}
+	free_array(tmp);
+	return (ret);
 }
 
-int	parse_light(t_rt *rt, char *line, int num)
+int	has_line_valid_charset(char *line)
 {
-	char	**params;
-	t_light	*light;
+	int	i;
 
-	params = ft_split(line, ' ');
-	if (array_length(params) != 4)
-		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
-	light = create_light(rt);
-	light->id = id_light;
-	if (parse_vector(params[1], &light->coords))
-		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
-	if (parse_float(params[2], &light->brightness))
-		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
-	if (parse_color(params[3], &light->color))
-		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
-	free_array(params);
-	return (0);
+	i = -1;
+	while (line && line[++i])
+		if (ft_strchr(SCENE_CHARSET, line[i]) == 0)
+			return (0);
+	return (1);
 }
 
-int	parse_plane(t_rt *rt, char *line, int num)
+char	*sanitize_line(char *line)
 {
-	char		**params;
-	t_obj		*obj;
-	t_plane		plane;
+	int		i;
+	char	*tmp;
 
-	params = ft_split(line, ' ');
-	if (array_length(params) < 4)
-		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
-	ft_bzero(&plane, sizeof(t_plane));
-	if (parse_vector(params[2], &plane.orient))
-		return (show_parsing_error(params, ERR_INVALID_NB_ORIENT, num));
-	normalize(&plane.orient);
-	obj = create_object(rt, id_plane);
-	if (parse_vector(params[1], &obj->coords))
-		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
-	if (parse_colors(params[3], &obj->color, &obj->second_color))
-		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
-	plane.coords = obj->coords;
-	obj->object.plane = plane;
-	if (array_length(params) == 5 && parse_extra_params(obj, params[4]))
-		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
-	free_array(params);
-	return (0);
-}
-
-int	parse_sphere(t_rt *rt, char *line, int num)
-{
-	char		**params;
-	t_obj		*obj;
-	t_sphere	sphere;
-
-	params = ft_split(line, ' ');
-	if (array_length(params) < 4)
-		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
-	ft_bzero(&sphere, sizeof(t_sphere));
-	if (parse_float(params[2], &sphere.diameter))
-		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
-	obj = create_object(rt, id_sphere);
-	if (parse_vector(params[1], &obj->coords))
-		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
-	if (parse_colors(params[3], &obj->color, &obj->second_color))
-		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
-	sphere.coords = obj->coords;
-	obj->object.sphere = sphere;
-	if (array_length(params) == 5 && parse_extra_params(obj, params[4]))
-		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
-	free_array(params);
-	return (0);
-}
-
-int	parse_cylinder(t_rt *rt, char *line, int num)
-{
-	char		**params;
-	t_obj		*obj;
-	t_cylinder	cylinder;
-
-	params = ft_split(line, ' ');
-	if (array_length(params) < 6)
-		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
-	ft_bzero(&cylinder, sizeof(t_cylinder));
-	if (parse_vector(params[2], &cylinder.orient))
-		return (show_parsing_error(params, ERR_INVALID_NB_ORIENT, num));
-	normalize(&cylinder.orient);
-	if (parse_float(params[3], &cylinder.diameter) || parse_float(params[4], &cylinder.height))
-		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
-	obj = create_object(rt, id_cylinder);
-	if (parse_vector(params[1], &obj->coords))
-		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
-	if (parse_colors(params[5], &obj->color, &obj->second_color))
-		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
-	cylinder.coords = obj->coords;
-	obj->object.cylinder = cylinder;
-	if (array_length(params) == 7 && parse_extra_params(obj, params[6]))
-		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
-	free_array(params);
-	return (0);
+	i = -1;
+	tmp = line;
+	while (tmp && tmp[++i])
+		if (tmp[i] == '\t' || tmp[i] == '\n')
+			tmp[i] = ' ';
+	line = ft_strtrim(tmp, " ");
+	free(tmp);
+	return (line);
 }
