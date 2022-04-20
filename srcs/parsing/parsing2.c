@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 03:42:13 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:31:46 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,22 +99,23 @@ int	parse_cone(t_rt *rt, char *line, int num)
 	t_cone	cone;
 
 	params = ft_split(line, ' ');
-	if (array_length(params) < 6)
+	if (array_length(params) < 7)
 		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
 	ft_bzero(&cone, sizeof(t_cone));
 	if (parse_vector(params[2], &cone.orient))
 		return (show_parsing_error(params, ERR_INVALID_NB_ORIENT, num));
 	normalize(&cone.orient);
-	if (parse_float(params[3], &cone.h) || parse_float(params[4], &cone.angle))
+	if (parse_float(params[3], &cone.h) || parse_float(params[4], &cone.h)
+		|| parse_float(params[5], &cone.angle))
 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
 	obj = create_object(rt, id_cone);
 	if (parse_vector(params[1], &obj->coords))
 		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
-	if (parse_colors(params[5], &obj->color, &obj->second_color))
+	if (parse_colors(params[6], &obj->color, &obj->second_color))
 		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
 	cone.coords = obj->coords;
 	obj->object.cone = cone;
-	if (array_length(params) == 7 && parse_extra_params(obj, params[6]))
+	if (array_length(params) == 8 && parse_extra_params(obj, params[7]))
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
 	free_array(params);
 	return (0);
