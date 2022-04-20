@@ -35,7 +35,7 @@ t_color	checkboard_color(t_obj *obj, t_vect pHit)
 	pi = vect_sub(pHit, obj->coords);
 	mu[0] = dot_prod(pi, obj->e1);
 	mu[1] = dot_prod(pi, obj->e2);
-	if (((int) (2 * mu[0]) + (int) mu[1]) & 1)
+	if (((int) (mu[0] / obj->pattern_len) + (int) (mu[1] / obj->pattern_len)) & 1)
 		return (obj->color);
 	return (obj->second_color);
 }

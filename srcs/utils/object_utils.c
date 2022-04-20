@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/19 21:24:50 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 04:09:43 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ void	object_norm(t_rt *rt)
 			objs->object.cone.cos2 = pow(cos(objs->object.cone.angle), 2);
 			objs->object.cone.c2 = vect_mul(objs->object.cone.orient, objs->object.cone.h);
 			objs->object.cone.c2 = vect_add(objs->object.cone.c2, objs->object.cone.coords);
+		}
+		if (objs->id == id_triangle)
+		{
+			objs->object.triangle.edge[0] = vect_sub(objs->object.triangle.c[0], objs->object.triangle.c[1]);
+			objs->object.triangle.edge[1] = vect_sub(objs->object.triangle.c[1], objs->object.triangle.c[2]);
+			objs->object.triangle.edge[2] = vect_sub(objs->object.triangle.c[2], objs->object.triangle.c[0]);
+			objs->object.triangle.n = cross_prod(objs->object.triangle.edge[0], objs->object.triangle.edge[1]);
+			objs->object.triangle.area2 = vectlen(objs->object.triangle.n);
+			normalize(&objs->object.triangle.n);
+			
 		}
 		if (objs->id == id_cylinder)
 		{

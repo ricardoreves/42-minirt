@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/19 23:23:31 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 04:05:31 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef enum e_object_id
 	id_plane,
 	id_cylinder,
 	id_cone,
-	id_sphere
+	id_sphere,
+	id_triangle
 }	t_obj_id;
 
 typedef struct s_vect
@@ -145,6 +146,16 @@ typedef struct s_sphere
 	t_color		color;
 }	t_sphere;
 
+typedef struct s_triangle
+{
+	t_obj_id	id;
+	t_vect		c[3];
+	t_vect		edge[3];
+	t_vect		n;
+	t_color		color;
+	float		area2;
+}	t_triangle;
+
 typedef struct s_cone
 {
 	t_obj_id	id;
@@ -163,6 +174,7 @@ typedef union u_object
 	t_plane		plane;
 	t_cylinder	cylinder;
 	t_cone		cone;
+	t_triangle	triangle;
 }	t_obj_union;
 
 typedef struct s_obj
