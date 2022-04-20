@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 03:31:22 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/20 03:35:53 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,7 @@ int		parse_light(t_rt *rt, char *line, int num);
 int		parse_plane(t_rt *rt, char *line, int num);
 int		parse_sphere(t_rt *rt, char *line, int num);
 int		parse_cylinder(t_rt *rt, char *line, int num);
+int		parse_cone(t_rt *rt, char *line, int num);
 
 /* array_utils.c */
 void	free_array(char *arr[]);
