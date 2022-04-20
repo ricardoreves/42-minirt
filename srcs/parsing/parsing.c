@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 15:17:19 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:38:28 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int	parse_line(t_rt *rt, char *line, int num)
 			return (parse_cylinder(rt, line, num));
 		if (ft_strncmp(line, "co", 2) == 0)
 			return (parse_cone(rt, line, num));
+		if (ft_strncmp(line, "tr", 2) == 0)
+			return (parse_triangle(rt, line, num));
 	}
 	else
 		return (show_error(ERR_FORBIDDEN_CHAR));
