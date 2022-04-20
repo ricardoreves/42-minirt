@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 02:57:34 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/20 03:41:32 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	parse_light(t_rt *rt, char *line, int num)
 
 int	parse_line(t_rt *rt, char *line, int num)
 {
-	// printf("[line:%d]%s\n", num, line);
 	if (has_line_valid_charset(line))
 	{
 		if (ft_strncmp(line, "A", 1) == 0)

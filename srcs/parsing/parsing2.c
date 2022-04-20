@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 02:56:21 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/20 03:42:13 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	parse_cylinder(t_rt *rt, char *line, int num)
 	if (parse_vector(params[2], &cylinder.orient))
 		return (show_parsing_error(params, ERR_INVALID_NB_ORIENT, num));
 	normalize(&cylinder.orient);
-	if (parse_float(params[3], &cylinder.diameter) || parse_float(params[4], &cylinder.height))
+	if (parse_float(params[3], &cylinder.diameter)
+		|| parse_float(params[4], &cylinder.height))
 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
 	obj = create_object(rt, id_cylinder);
 	if (parse_vector(params[1], &obj->coords))

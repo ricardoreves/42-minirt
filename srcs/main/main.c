@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:31:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 00:55:24 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 03:43:26 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	add_cone(t_rt *rt)
 
 int	main(int argc, char **argv)
 {
-	t_rt *rt;
+	t_rt	*rt;
 
 	rt = ft_calloc(sizeof(t_rt), 1);
 	if (argc != 2)
