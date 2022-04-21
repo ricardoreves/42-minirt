@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 17:04:25 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:33:49 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define ERR_INVALID_NB_COLORS "Invalid number of color values"
 # define ERR_INVALID_SPECULAR_PARAMS "Invalid specular params"
 # define ERR_INVALID_PATTERN_PARAMS "Invalid pattern params"
-# define ERR_INVALID_IMAGE_PATH "Image load failed"
+# define ERR_INVALID_IMAGE_PATH "Invalid image path"
 # define ERR_NOT_A_ULONG "Value is not a unsigned long"
 # define ERR_NOT_A_FLOAT "Value is not a float"
 
