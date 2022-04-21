@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 22:12:37 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:09:39 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define MAX_REFLECT 5
 # define ANTIALIASING_ON FALSE
 # ifdef __APPLE__
-#  define ESCAPE_KEY 53
+#  define ESC_KEY 53
 #  define A_KEY 0
 #  define S_KEY 1
 #  define D_KEY 2
@@ -41,7 +41,7 @@
 #  define LEFT_CLICK 1
 #  define RIGHT_CLICK 2
 # elif defined __unix__
-#  define ESCAPE_KEY 65307
+#  define ESC_KEY 65307
 #  define A_KEY 97
 #  define S_KEY 115
 #  define P_KEY 112
@@ -52,8 +52,7 @@
 #  define LEFT_CLICK 1
 #  define RIGHT_CLICK 2
 # endif
-# define USAGE_MESSAGE "Usage: ./minirt scenes/mandatory.c"
-# define SCENE_CHARSET "RACLsplcyotr0123456789-;,. \n"
+# define MSG_USAGE "Usage: ./minirt scenes/mandatory.c"
 # define ERR_FILE_NOT_FOUND "file not found"
 # define ERR_IS_NOT_RT_FILE "isn't a rt file"
 # define ERR_FORBIDDEN_CHAR "contain forbidden character"
@@ -89,6 +88,8 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
+    int		width;
+    int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -120,11 +121,13 @@ typedef struct s_rt
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		*light;
-	t_obj	*objs;
+	t_obj		*objs;
 	size_t		num_objs;
 	t_event		event;
 	int			display_info;
 	t_color		bg_color;
+	int			lnum;
+	int			pnum;
 }	t_rt;
 
 /* window.c */
@@ -231,30 +234,33 @@ int		read_file(t_rt *rt, int fd);
 int		open_file(t_rt *rt, char *path);
 int		is_rt_file(char *path);
 int		is_invalid_file(t_rt *rt);
+char	*sanitize_line(char *line);
 
 /* number.c */
 int		is_float(char *str);
 int		is_ulong(char *str);
 
 /* parsing.c */
-int		has_line_valid_charset(char *line);
-char	*sanitize_line(char *line);
-int		parse_line(t_rt *rt, char *line, int num);
+int		parse_params(t_rt *rt, char *line);
 int		parse_vector(char *str, t_vect *vect);
-int		parse_extra_params(t_obj *obj, char *str);
 int		parse_color(char *str, t_color *color);
 int		parse_colors(char *str, t_color *color, t_color *color2);
 int		parse_float(char *str, float *num);
 int		parse_ulong(char *str, size_t *num);
-int		parse_ambient(t_rt *rt, char *line, int num);
-int		parse_camera(t_rt *rt, char *line, int num);
-int		parse_light(t_rt *rt, char *line, int num);
-int		parse_plane(t_rt *rt, char *line, int num);
-int		parse_sphere(t_rt *rt, char *line, int num);
-int		parse_cylinder(t_rt *rt, char *line, int num);
-int		parse_cone(t_rt *rt, char *line, int num);
-int		parse_triangle(t_rt *rt, char *line, int num);
-int		parse_resolution(t_rt *rt, char *line, int num);
+int		parse_resolution(t_rt *rt, char *line);
+int		parse_ambient(t_rt *rt, char *line);
+int		parse_camera(t_rt *rt, char *line);
+int		parse_light(t_rt *rt, char *line);
+int		parse_plane(t_rt *rt, char **params, t_obj *obj);
+int		parse_sphere(t_rt *rt, char **params, t_obj *obj);
+int		parse_cylinder(t_rt *rt, char **params, t_obj *obj);
+int		parse_cone(t_rt *rt, char **params, t_obj *obj);
+int		parse_triangle(t_rt *rt, char **params, t_obj *obj);
+int		parse_shape(t_rt *rt, char *line, t_obj_id id, int nb_params);
+int		parse_extra_params(t_rt *rt, t_obj *obj, char **params, int i);
+int		parse_imgpath(t_rt *rt, char *path, t_img *img);
+int		parse_specular(char *str, t_obj *obj);
+int		parse_pattern(char *str, t_obj *obj);
 
 /* array_utils.c */
 void	free_array(char *arr[]);
@@ -271,7 +277,7 @@ float	str_to_float(char *str);
 int		str_to_int_color(char *str);
 
 /* error.c */
-int		show_parsing_error(char **params, char *msg, int num);
+int		show_parsing_error(t_rt *rt, char **params, char *msg);
 int		show_error(char *msg);
 
 /* debug.c */
