@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 00:24:31 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 22:12:06 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,7 @@ int	intersect(t_ray *ray, t_obj *obj, t_hit *hit)
 		return (cylinder_inter(ray, &obj->object.cylinder, hit));
 	if (obj->id == id_cone)
 		return (cone_inter(ray, &obj->object.cone, hit));
+	if (obj->id == id_triangle)
+		return (triangle_inter(ray, &obj->object.triangle, hit));
 	return (FALSE);
 }

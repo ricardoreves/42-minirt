@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 15:35:45 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/20 22:12:37 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 #  define RIGHT_CLICK 2
 # endif
 # define USAGE_MESSAGE "Usage: ./minirt scenes/mandatory.c"
-# define SCENE_CHARSET "RACLsplcyo0123456789-;,. \n"
+# define SCENE_CHARSET "RACLsplcyotr0123456789-;,. \n"
 # define ERR_FILE_NOT_FOUND "file not found"
 # define ERR_IS_NOT_RT_FILE "isn't a rt file"
 # define ERR_FORBIDDEN_CHAR "contain forbidden character"
@@ -176,7 +176,6 @@ t_color	specular_light(t_rays *r, t_light *light);
 t_color	refraction_ray(t_rt *rt, t_rays *r, int max_reflect);
 t_color	reflection_ray(t_rt *rt, t_rays *r, int max_reflect);
 
-
 /* raytrace.c */
 t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect);
 t_obj	*get_closest_obj(t_ray *ray, t_obj *obj, t_hit *hit);
@@ -187,6 +186,7 @@ t_bool	cone_inter(t_ray *r, t_cone *co, t_hit *hit);
 t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_hit *hit);
 t_bool	plane_inter(t_ray *r, t_plane *pl, t_hit *hit);
 t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_hit *hit);
+t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit);
 
 /* pattern.c */
 void	set_patternref(t_rt *rt, t_obj *obj);
@@ -253,6 +253,7 @@ int		parse_plane(t_rt *rt, char *line, int num);
 int		parse_sphere(t_rt *rt, char *line, int num);
 int		parse_cylinder(t_rt *rt, char *line, int num);
 int		parse_cone(t_rt *rt, char *line, int num);
+int		parse_triangle(t_rt *rt, char *line, int num);
 int		parse_resolution(t_rt *rt, char *line, int num);
 
 /* array_utils.c */

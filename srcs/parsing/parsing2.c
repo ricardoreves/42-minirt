@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 17:34:13 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:53:09 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,33 @@ int	parse_cone(t_rt *rt, char *line, int num)
 	cone.coords = obj->coords;
 	obj->object.cone = cone;
 	if (array_length(params) == 8 && parse_extra_params(obj, params[7]))
+		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
+	free_array(params);
+	return (0);
+}
+
+int	parse_triangle(t_rt *rt, char *line, int num)
+{
+	char		**params;
+	t_obj		*obj;
+	t_triangle	triangle;
+
+	params = ft_split(line, ' ');
+	if (array_length(params) < 5)
+		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
+	ft_bzero(&triangle, sizeof(t_triangle));
+	if (parse_vector(params[1], &triangle.c[0]))
+		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
+	if (parse_vector(params[2], &triangle.c[1]))
+		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
+	if (parse_vector(params[3], &triangle.c[2]))
+		return (show_parsing_error(params, ERR_INVALID_NB_COORDS, num));
+	obj = create_object(rt, id_triangle);
+	if (parse_colors(params[4], &obj->color, &obj->second_color))
+		return (show_parsing_error(params, ERR_INVALID_NB_COLORS, num));
+	triangle.color = obj->color;
+	obj->object.triangle = triangle;
+	if (array_length(params) == 6 && parse_extra_params(obj, params[5]))
 		return (show_parsing_error(params, ERR_INVALID_EXTRA_PARAMS, num));
 	free_array(params);
 	return (0);

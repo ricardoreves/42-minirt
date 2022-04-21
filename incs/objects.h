@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 17:55:20 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/20 23:20:24 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@
 # define ERR_INVALID_NB_COLORS "invalid number of color values"
 # define ERR_NOT_A_ULONG "value is not a unsigned long"
 # define ERR_NOT_A_FLOAT "value is not a float"
+
+typedef enum e_param_id
+{
+	id_type,
+	id_coords,
+	id_float,
+	id_color,
+	id_ulong
+}	t_param_id;
 
 typedef enum e_object_id
 {
@@ -167,6 +176,8 @@ typedef struct s_cone
 	float		cos2;
 	t_vect		c1;
 	t_vect		c2;
+	float		r1;
+	float		r2;
 	t_color		color;
 }	t_cone;
 
