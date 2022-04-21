@@ -6,19 +6,17 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 15:37:29 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 15:37:34 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:48:40 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	parse_camera(t_rt *rt, char *line)
+int	parse_camera(t_rt *rt, char *line, int i)
 {
-	int			i;
 	char		**params;
 	t_camera	camera;
 
-	i = 0;
 	params = ft_split(line, ' ');
 	if (rt->camera.id)
 		return (show_parsing_error(rt, params, ERR_TOO_MANY_CAMERAS));

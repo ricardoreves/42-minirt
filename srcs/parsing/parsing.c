@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 16:16:15 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:49:23 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	parse_params(t_rt *rt, char *line)
 	if (ft_strncmp(line, "A", 1) == 0)
 		return (parse_ambient(rt, line));
 	if (ft_strncmp(line, "C", 1) == 0)
-		return (parse_camera(rt, line));
+		return (parse_camera(rt, line, 0));
 	if (ft_strncmp(line, "L", 1) == 0)
 		return (parse_light(rt, line));
 	if (ft_strncmp(line, "sp", 2) == 0)

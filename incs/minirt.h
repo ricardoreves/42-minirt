@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 18:28:16 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:49:05 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ int		parse_float(char *str, float *num);
 int		parse_ulong(char *str, size_t *num);
 int		parse_resolution(t_rt *rt, char *line);
 int		parse_ambient(t_rt *rt, char *line);
-int		parse_camera(t_rt *rt, char *line);
+int		parse_camera(t_rt *rt, char *line, int i);
 int		parse_light(t_rt *rt, char *line);
 int		parse_plane(t_rt *rt, char **params, t_obj *obj);
 int		parse_sphere(t_rt *rt, char **params, t_obj *obj);
