@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:36:59 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:23:04 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:00:43 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	read_file(t_rt *rt, int fd)
 		if (!line)
 			break ;
 		line = sanitize_line(line);
-		if (parse_line(rt, line, num))
+		rt->lnum = num;
+		if (parse_params(rt, line))
 			ret = 1;
 		free(line);
 	}
@@ -70,4 +71,19 @@ int	open_file(t_rt *rt, char *path)
 	if (read_file(rt, fd))
 		return (0);
 	return (1);
+}
+
+char	*sanitize_line(char *line)
+{
+	int		i;
+	char	*tmp;
+
+	i = -1;
+	tmp = line;
+	while (tmp && tmp[++i])
+		if (tmp[i] == '\t' || tmp[i] == '\n')
+			tmp[i] = ' ';
+	line = ft_strtrim(tmp, " ");
+	free(tmp);
+	return (line);
 }
