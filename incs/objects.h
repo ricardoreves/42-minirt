@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 17:03:47 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:04:25 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,8 @@ typedef struct s_obj
 	t_color			second_color;
 	float			pattern_len;
 	int				pattern_num;
+	struct s_img	*bump;
+	struct s_img	*texture;
 	struct s_obj	*next;
 }	t_obj;
 
