@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 02:53:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 18:40:53 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 21:52:00 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	parse_imgpath(t_rt *rt, char *path, t_img *img)
 	t_img	im;
 	//void	*mlx_ptr;
 	int	len;
+	(void) rt;
 
 	len = ft_strlen(path) - 4;
 	if (len < 5 || ft_strncmp(path + len, ".xpm", 4) != 0)

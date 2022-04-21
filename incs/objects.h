@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 18:59:50 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 23:53:46 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,12 +197,13 @@ typedef struct s_obj
 	float			specn;
 	float			mirror;
 	float			refract;
-	t_vect			e1;
-	t_vect			e2;
-	t_vect			e3;
+	t_vect			ex;
+	t_vect			ey;
+	t_vect			ez;
 	t_vect			coords;
 	t_color			color;
 	t_color			second_color;
+	float			h;
 	float			pattern_len;
 	int				pattern_num;
 	struct s_img	*bump;
