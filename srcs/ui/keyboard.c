@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:18:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/16 18:31:03 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:09:39 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	switch_var(int *var)
 
 int	handle_keydown(int key, t_rt *rt)
 {
-	if (key == ESCAPE_KEY)
+	if (key == ESC_KEY)
 		exit_win(rt);
 	rt->event.key[key] = 1;
 	if (key == I_KEY)
