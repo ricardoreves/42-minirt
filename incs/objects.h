@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 18:52:48 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:59:50 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ typedef struct s_obj
 	float			refract;
 	t_vect			e1;
 	t_vect			e2;
+	t_vect			e3;
 	t_vect			coords;
 	t_color			color;
 	t_color			second_color;
