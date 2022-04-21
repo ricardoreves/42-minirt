@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 16:09:39 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:28:16 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
+	char	*path;
     int		width;
     int		height;
 	int		bits_per_pixel;
