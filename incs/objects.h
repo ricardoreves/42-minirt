@@ -3,38 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 23:20:24 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:03:47 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define ERR_TOO_MANY_LIGTHS "too many light params"
-# define ERR_TOO_MANY_CAMERAS "too many camera params"
-# define ERR_TOO_MANY_AMBIENTS "too many ambient params"
-# define ERR_MISSING_LIGHT_PARAMS "missing light params"
-# define ERR_MISSING_CAMERA_PARAMS "missing camera params"
-# define ERR_MISSING_AMBIENT_PARAMS "missing ambient params"
-# define ERR_INVALID_EXTRA_PARAMS "invalid extra params"
-# define ERR_INVALID_NB_PARAMS "invalid number of params"
-# define ERR_INVALID_NB_COORDS "invalid number of coordinates values"
-# define ERR_INVALID_NB_ORIENT "invalid number of orientation values"
-# define ERR_INVALID_NB_COLORS "invalid number of color values"
-# define ERR_NOT_A_ULONG "value is not a unsigned long"
-# define ERR_NOT_A_FLOAT "value is not a float"
-
-typedef enum e_param_id
-{
-	id_type,
-	id_coords,
-	id_float,
-	id_color,
-	id_ulong
-}	t_param_id;
+# define NB_PARAMS_PLANE 4
+# define NB_PARAMS_SPHERE 4
+# define NB_PARAMS_CYLINDER 6
+# define NB_PARAMS_CONE 7
+# define NB_PARAMS_TRIANGLE 5
+# define ERR_TOO_MANY_LIGTHS "Too many light params"
+# define ERR_TOO_MANY_CAMERAS "Too many camera params"
+# define ERR_TOO_MANY_AMBIENTS "Too many ambient params"
+# define ERR_MISSING_LIGHT_PARAMS "Missing light params"
+# define ERR_MISSING_CAMERA_PARAMS "Missing camera params"
+# define ERR_MISSING_AMBIENT_PARAMS "Missing ambient params"
+# define ERR_INVALID_EXTRA_PARAMS "Invalid extra params"
+# define ERR_INVALID_NB_PARAMS "Invalid number of params"
+# define ERR_INVALID_NB_COORDS "Invalid number of coordinates values"
+# define ERR_INVALID_NB_ORIENT "Invalid number of orientation values"
+# define ERR_INVALID_NB_COLORS "Invalid number of color values"
+# define ERR_INVALID_SPECULAR_PARAMS "Invalid specular params"
+# define ERR_INVALID_PATTERN_PARAMS "Invalid pattern params"
+# define ERR_INVALID_IMAGE_PATH "Image load failed"
+# define ERR_NOT_A_ULONG "Value is not a unsigned long"
+# define ERR_NOT_A_FLOAT "Value is not a float"
 
 typedef enum e_object_id
 {
