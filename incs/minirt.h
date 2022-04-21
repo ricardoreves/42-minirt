@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 22:12:37 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 03:20:53 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit);
 /* pattern.c */
 void	set_patternref(t_rt *rt, t_obj *obj);
 t_color	checkboard_color(t_obj *obj, t_vect pHit);
+t_color	pattern_color(t_obj *obj, t_vect pHit);
 
 /* vector.c */
 t_vect	vector(float x, float y, float z);

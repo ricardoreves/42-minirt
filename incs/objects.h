@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 23:20:24 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 03:15:49 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ typedef struct s_obj
 	float			refract;
 	t_vect			e1;
 	t_vect			e2;
+	t_vect			e3;
 	t_vect			coords;
 	t_color			color;
 	t_color			second_color;

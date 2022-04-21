@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 03:07:22 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 03:12:11 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,39 +91,3 @@ t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit)
 		hit->nHit = vect_inv(hit->nHit);
 	return (TRUE);
 }
-
-// t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit)
-// {
-// 	float	dot_prod_ndir;
-// 	float	d;
-// 	t_vect	m;
-// 	t_vect	cp;
-
-// 	dot_prod_ndir = dot_prod(t->n, r->dir);
-// 	if (fabs(dot_prod_ndir) < EPSILON)
-// 		return (FALSE);
-// 	d = -dot_prod(t->n, t->c[0]);
-// 	hit->t = -(dot_prod(r->or, t->n) + d) / dot_prod_ndir;
-// 	if (hit->t < EPSILON)
-// 		return (FALSE);
-// 	ray_mul(&hit->pHit, r, hit->t);
-
-// 	cp = vect_sub(t->c[0], hit->pHit);
-// 	m = cross_prod(t->edge[0], cp);
-// 	if (dot_prod(t->n, m) < 0)
-// 		return (FALSE);
-
-// 	cp = vect_sub(t->c[1], hit->pHit);
-// 	m = cross_prod(t->edge[1], cp);
-// 	if (dot_prod(t->n, m) < 0)
-// 		return (FALSE);
-
-// 	cp = vect_sub(t->c[2], hit->pHit);
-// 	m = cross_prod(t->edge[2], cp);
-// 	if (dot_prod(t->n, m) < 0)
-// 		return (FALSE);
-// 	hit->nHit = t->n;
-// 	if (dot_prod(hit->nHit, r->dir) > 0)
-// 		hit->nHit = vect_inv(hit->nHit);
-// 	return (TRUE);
-// }

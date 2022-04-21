@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 05:01:01 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 03:21:41 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_obj	*get_closest_obj(t_ray *ray, t_obj *obj, t_hit *hit)
 		obj = obj->next;
 	}
 	if (closest_obj && closest_obj->pattern_num)
-		hit->color = checkboard_color(closest_obj, hit->pHit);
+		hit->color = pattern_color(closest_obj, hit->pHit);
+		// hit->color = checkboard_color(closest_obj, hit->pHit);
 	else if (closest_obj)
 		hit->color = closest_obj->color;
 	return (closest_obj);
