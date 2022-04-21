@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 15:48:11 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 22:50:51 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,13 @@ int	parse_triangle(t_rt *rt, char **params, t_obj *obj)
 	while (params && params[++i])
 	{
 		rt->pnum = i;
-		if (parse_vector(params[1], &triangle.c[0]))
+		if (i == 1 && parse_vector(params[i], &triangle.c[0]))
 			return (show_parsing_error(rt, params, ERR_INVALID_NB_COORDS));
-		if (parse_vector(params[2], &triangle.c[1]))
+		if (i == 2 && parse_vector(params[i], &triangle.c[1]))
 			return (show_parsing_error(rt, params, ERR_INVALID_NB_COORDS));
-		if (parse_vector(params[3], &triangle.c[2]))
+		if (i == 3 && parse_vector(params[i], &triangle.c[2]))
 			return (show_parsing_error(rt, params, ERR_INVALID_NB_COORDS));
-		if (parse_colors(params[4], &obj->color, &obj->second_color))
+		if (i == 4 && parse_colors(params[i], &obj->color, &obj->second_color))
 			return (show_parsing_error(rt, params, ERR_INVALID_NB_COLORS));
 	}	
 	triangle.color = obj->color;

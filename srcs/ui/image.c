@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 22:23:05 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 22:59:33 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	gen_img(t_rt *rt)
 	char		*pix;
 	t_camera	*cam;
 
-	y = -1;
+	y = 0;
 	cam = &rt->camera;
 	pix = rt->img.addr;
 	cam->scale = tan(cam->fov / 2 * M_PI / 180);
@@ -87,7 +87,7 @@ void	gen_img(t_rt *rt)
 	object_norm(rt);
 	rt->bg_color = rgb2color(0x424242);
 	lookat(rt);
-	while (++y < rt->height)
+	while (y < rt->height)
 	{
 		x = -1;
 		while (++x < rt->width)
@@ -95,6 +95,8 @@ void	gen_img(t_rt *rt)
 			*(unsigned int *)pix = smart_rt(rt, x, y);
 			pix += rt->img.addr_incr;
 		}
+		y++;
+		processing_info(y, rt->height);
 	}
 }
 

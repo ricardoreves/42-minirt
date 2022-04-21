@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 00:05:32 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 00:12:55 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ int		handle_mousemove(int x, int y, t_rt *rt);
 /* deco.c */
 void	draw_deco(t_rt *rt, int width, int color);
 void	put_info(t_rt *rt);
+void	processing_info(int n, int max);
 
 /* test.c */
 void	init_test(t_rt *rt);
@@ -195,6 +196,9 @@ t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit);
 /* pattern.c */
 void	set_patternref(t_rt *rt, t_obj *obj);
 t_color	pattern_color(t_obj *obj, t_vect pHit);
+void	uv_cylco_map(t_obj *obj, t_vect p, float *uv);
+void	uv_plane_map(t_obj *obj, t_vect p, float *uv);
+void	uv_sphere_map(t_obj *obj, t_vect p, float *uv);
 
 /* vector.c */
 t_vect	vector(float x, float y, float z);
