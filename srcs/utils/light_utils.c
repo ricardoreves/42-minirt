@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:34:51 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/17 01:20:45 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/21 02:30:38 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_light	*create_light(t_rt *rt)
 	new_light = ft_calloc(sizeof(t_light), 1);
 	if (!new_light)
 		return (0);
+	new_light->id = id_light;
 	push_light(new_light, &rt->light);
 	return (new_light);
 }
