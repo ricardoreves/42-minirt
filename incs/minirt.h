@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 18:58:50 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 22:59:57 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ int		handle_mousemove(int x, int y, t_rt *rt);
 /* deco.c */
 void	draw_deco(t_rt *rt, int width, int color);
 void	put_info(t_rt *rt);
+void	processing_info(int n, int max);
 
 /* test.c */
 void	init_test(t_rt *rt);
