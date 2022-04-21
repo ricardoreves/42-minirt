@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 18:33:49 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:52:48 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define ERR_INVALID_NB_COORDS "Invalid number of coordinates values"
 # define ERR_INVALID_NB_ORIENT "Invalid number of orientation values"
 # define ERR_INVALID_NB_COLORS "Invalid number of color values"
-# define ERR_INVALID_SPECULAR_PARAMS "Invalid specular params"
+# define ERR_INVALID_SPEC_PARAMS "Invalid specular params"
 # define ERR_INVALID_PATTERN_PARAMS "Invalid pattern params"
 # define ERR_INVALID_IMAGE_PATH "Invalid image path"
 # define ERR_NOT_A_ULONG "Value is not a unsigned long"
