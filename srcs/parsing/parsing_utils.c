@@ -1,154 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 02:53:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 20:32:13 by rpinto-r         ###   ########.fr       */
+/*   Created: 2022/03/19 01:37:46 by rpinto-r          #+#    #+#             */
+/*   Updated: 2022/04/20 02:57:58 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// int handle_params(t_param_id id, char *param)
-// {
-	
-// }
-
-// int	parse_extra_params(t_rt *rt, char *line, int num)
-// {
-// 	int 		i;
-// 	char		**params;
-// 	const int	fmt[2] = {id_float, id_float};
-
-// 	i = 0;
-// 	params = ft_split(line, ' ');
-// 	if (array_length(params) != 3)
-// 		return (show_parsing_error(params, ERR_INVALID_NB_PARAMS, num));
-// 	while (params && params[++i])
-// 	{
-// 		handle_params(fmt[i - 1], param[i]);
-// 	}
-// 	if (array_length(params) > 3)
-// 	{
-		
-// 	}
-	
-
-// 	if (parse_float(params[1], &rt->width))
-// 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
-// 	if (parse_float(params[2], &rt->height))
-// 		return (show_parsing_error(params, ERR_NOT_A_FLOAT, num));
-// 	free_array(params);
-// 	return (0);
-// }
-
-// int	parse_extra_params(t_obj *obj, char *str)
-// {
-// 	char	**tmp;
-// 	int		ret;
-// 	int		i;
-
-// 	i = -1;
-// 	params = ft_split(str, ' ');
-// 	while (params && params[++i])
-// 	{
-// 		if (ft_strncmp(params[i], "spc", 3) == 0)
-// 			return (parse_specular(rt, params[i] + 4, num));
-// 		if (ft_strncmp(params[i], "mir", 3) == 0)
-// 			return (parse_mirror(rt, params[i] + 4, num));
-// 		if (ft_strncmp(params[i], "ref", 3) == 0)
-// 			return (parse_refraction(rt, params[i] + 4, num));
-// 		if (ft_strncmp(params[i], "pat", 3) == 0)
-// 			return (parse_pattern(rt, params[i] + 4, num));
-// 		if (ft_strncmp(params[i], "bum", 3) == 0)
-// 			return (parse_bump(rt, params[i] + 4, num));
-// 		if (ft_strncmp(params[i], "txm", 3) == 0)
-// 			return (parse_texture(rt, params[i] + 4, num));
-// 	}
-// 	return (0);
-// }
-
-// int	parse_specular(t_obj *obj, char *str)
-// {
-// 	char	**tmp;
-// 	int		ret;
-// 	int		i;
-
-// 	i = -1;
-// 	ret = 0;
-// 	tmp = ft_split(str, ',');
-// 	while (tmp && tmp[++i])
-// 		if (!is_float(tmp[i]))
-// 			ret = 1;
-// 	if (array_length(tmp) != 2)
-// 		ret = 1;
-// 	else
-// 	{
-// 		obj->speckv = str_to_float(tmp[0]);
-// 		obj->specn = str_to_float(tmp[1]);
-// 	}
-// 	free_array(tmp);
-// 	return (ret);
-// }
-
-// int	parse_specular(t_obj *obj, char *str)
-// {
-// 	char	**tmp;
-// 	int		ret;
-// 	int		i;
-
-// 	i = -1;
-// 	ret = 0;
-// 	tmp = ft_split(str, ',');
-// 	while (tmp && tmp[++i])
-// 		if (!is_float(tmp[i]))
-// 			ret = 1;
-// 	if (array_length(tmp) != 6)
-// 		ret = 1;
-// 	else
-// 	{
-// 		obj->speckv = str_to_float(tmp[0]);
-// 		obj->specn = str_to_float(tmp[1]);
-// 		obj->mirror = str_to_float(tmp[2]);
-// 		obj->refract = str_to_float(tmp[3]);
-// 		obj->pattern_len = str_to_float(tmp[4]);
-// 		obj->pattern_num = ft_atoi(tmp[5]);
-// 	}
-// 	free_array(tmp);
-// 	return (ret);
-// }
-
-// int	parse_specular(t_obj *obj, char *str)
-// {
-// 	char	**tmp;
-// 	int		ret;
-// 	int		i;
-
-// 	i = -1;
-// 	ret = 0;
-// 	tmp = ft_split(str, ',');
-// 	while (tmp && tmp[++i])
-// 		if (!is_float(tmp[i]))
-// 			ret = 1;
-// 	if (array_length(tmp) != 6)
-// 		ret = 1;
-// 	else
-// 	{
-// 		obj->speckv = str_to_float(tmp[0]);
-// 		obj->specn = str_to_float(tmp[1]);
-// 		obj->mirror = str_to_float(tmp[2]);
-// 		obj->refract = str_to_float(tmp[3]);
-// 		obj->pattern_len = str_to_float(tmp[4]);
-// 		obj->pattern_num = ft_atoi(tmp[5]);
-// 	}
-// 	free_array(tmp);
-// 	return (ret);
-// }
-
-int	parse_extra_params(t_obj *obj, char *str)
+int	parse_vector(char *str, t_vect *vect)
 {
 	char	**tmp;
 	int		ret;
@@ -160,43 +24,73 @@ int	parse_extra_params(t_obj *obj, char *str)
 	while (tmp && tmp[++i])
 		if (!is_float(tmp[i]))
 			ret = 1;
-	if (array_length(tmp) != 6)
+	if (array_length(tmp) != 3)
 		ret = 1;
 	else
 	{
-		obj->speckv = str_to_float(tmp[0]);
-		obj->specn = str_to_float(tmp[1]);
-		obj->mirror = str_to_float(tmp[2]);
-		obj->refract = str_to_float(tmp[3]);
-		obj->pattern_len = str_to_float(tmp[4]);
-		obj->pattern_num = ft_atoi(tmp[5]);
+		vect->x = str_to_float(tmp[0]);
+		vect->y = str_to_float(tmp[1]);
+		vect->z = str_to_float(tmp[2]);
 	}
 	free_array(tmp);
 	return (ret);
 }
 
-int	has_line_valid_charset(char *line)
+int	parse_colors(char *str, t_color *color, t_color *color2)
 {
-	int	i;
+	char	**tmp;
+	int		ret;
+	int		i;
 
 	i = -1;
-	while (line && line[++i])
-		if (ft_strchr(SCENE_CHARSET, line[i]) == 0)
-			return (0);
-	return (1);
+	ret = 0;
+	tmp = ft_split(str, ';');
+	if (array_length(tmp) < 1 || array_length(tmp) > 2)
+		ret = 1;
+	if (array_length(tmp) == 1)
+		ret = parse_color(tmp[0], color);
+	if (array_length(tmp) == 2)
+		ret = parse_color(tmp[1], color2);
+	free_array(tmp);
+	return (ret);
 }
 
-char	*sanitize_line(char *line)
+int	parse_color(char *str, t_color *color)
 {
+	char	**tmp;
+	int		ret;
 	int		i;
-	char	*tmp;
 
 	i = -1;
-	tmp = line;
+	ret = 0;
+	tmp = ft_split(str, ',');
 	while (tmp && tmp[++i])
-		if (tmp[i] == '\t' || tmp[i] == '\n')
-			tmp[i] = ' ';
-	line = ft_strtrim(tmp, " ");
-	free(tmp);
-	return (line);
+		if (!is_ulong(tmp[i]))
+			ret = 1;
+	if (array_length(tmp) != 3)
+		ret = 1;
+	else
+	{
+		color->r = (float) str_to_int_color(tmp[0]) / 255;
+		color->g = (float) str_to_int_color(tmp[1]) / 255;
+		color->b = (float) str_to_int_color(tmp[2]) / 255;
+	}
+	free_array(tmp);
+	return (ret);
+}
+
+int	parse_float(char *str, float *num)
+{
+	if (!is_float(str))
+		return (1);
+	*num = str_to_float(str);
+	return (0);
+}
+
+int	parse_ulong(char *str, size_t *num)
+{
+	if (!is_ulong(str))
+		return (1);
+	*num = (size_t)ft_atoi(str);
+	return (0);
 }

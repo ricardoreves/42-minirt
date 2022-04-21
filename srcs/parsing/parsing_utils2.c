@@ -5,92 +5,75 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 01:37:46 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/20 02:57:58 by rpinto-r         ###   ########.fr       */
+/*   Created: 2022/04/20 02:53:40 by rpinto-r          #+#    #+#             */
+/*   Updated: 2022/04/21 16:55:34 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	parse_vector(char *str, t_vect *vect)
+int	parse_imgpath(t_rt *rt, char *path, t_img *img)
 {
-	char	**tmp;
-	int		ret;
-	int		i;
+	int		fd;
+	t_img	im;
+	void	*mlx_ptr;
 
-	i = -1;
-	ret = 0;
-	tmp = ft_split(str, ',');
-	while (tmp && tmp[++i])
-		if (!is_float(tmp[i]))
-			ret = 1;
-	if (array_length(tmp) != 3)
-		ret = 1;
-	else
-	{
-		vect->x = str_to_float(tmp[0]);
-		vect->y = str_to_float(tmp[1]);
-		vect->z = str_to_float(tmp[2]);
-	}
-	free_array(tmp);
-	return (ret);
-}
-
-int	parse_colors(char *str, t_color *color, t_color *color2)
-{
-	char	**tmp;
-	int		ret;
-	int		i;
-
-	i = -1;
-	ret = 0;
-	tmp = ft_split(str, ';');
-	if (array_length(tmp) < 1 || array_length(tmp) > 2)
-		ret = 1;
-	if (array_length(tmp) == 1)
-		ret = parse_color(tmp[0], color);
-	if (array_length(tmp) == 2)
-		ret = parse_color(tmp[1], color2);
-	free_array(tmp);
-	return (ret);
-}
-
-int	parse_color(char *str, t_color *color)
-{
-	char	**tmp;
-	int		ret;
-	int		i;
-
-	i = -1;
-	ret = 0;
-	tmp = ft_split(str, ',');
-	while (tmp && tmp[++i])
-		if (!is_ulong(tmp[i]))
-			ret = 1;
-	if (array_length(tmp) != 3)
-		ret = 1;
-	else
-	{
-		color->r = (float) str_to_int_color(tmp[0]) / 255;
-		color->g = (float) str_to_int_color(tmp[1]) / 255;
-		color->b = (float) str_to_int_color(tmp[2]) / 255;
-	}
-	free_array(tmp);
-	return (ret);
-}
-
-int	parse_float(char *str, float *num)
-{
-	if (!is_float(str))
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
 		return (1);
-	*num = str_to_float(str);
+	close(fd);
+	mlx_ptr = mlx_init();
+	im.img = mlx_xpm_file_to_image(mlx_ptr, path, &im.width, &im.height);
+	if (!im.img)
+		return (1);
+	im.addr = mlx_get_data_addr(im.img, &im.bits_per_pixel, &im.line_length, &im.endian);
+	img = &im;
 	return (0);
 }
 
-int	parse_ulong(char *str, size_t *num)
+int	parse_specular(char *str, t_obj *obj)
 {
-	if (!is_ulong(str))
-		return (1);
-	*num = (size_t)ft_atoi(str);
-	return (0);
+	int		i;
+	int		ret;
+	char	**params;
+
+	i = -1;
+	ret = 0;
+	params = ft_split(str, ',');
+	while (params && params[++i])
+		if (!is_float(params[i]))
+			ret = 1;
+	if (array_length(params) != 2)
+		ret = 1;
+	else
+	{
+		obj->speckv = str_to_float(params[0]);
+		obj->specn = str_to_float(params[1]);
+	}
+	free_array(params);
+	return (ret);
+}
+
+int	parse_pattern(char *str, t_obj *obj)
+{
+	int		i;
+	int		ret;
+	char	**params;
+
+	i = -1;
+	ret = 0;
+	params = ft_split(str, ',');
+	if (array_length(params) != 2)
+		ret = 1;
+	if (!is_float(params[0]))
+		ret = 1;
+	if (!is_ulong(params[1]))
+		ret = 1;
+	if (!ret)
+	{
+		obj->pattern_len = str_to_float(params[0]);
+		obj->pattern_num = ft_atoi(params[1]);
+	}
+	free_array(params);
+	return (ret);
 }
