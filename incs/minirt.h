@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 22:59:57 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 04:47:25 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,16 @@
 # define DECO_WIDTH 60
 # define COLORDEF 0x81A1C1
 # define BG_COLOR 0xCFCFFF
+# define WHITE 0x00FFFFFF
+# define BLACK 0x0000000
+# define DARKGREY 0x333333
 # define MAX_KEY 65535
 # define MAX_REFLECT 5
 # define ANTIALIASING_ON FALSE
+# define PROGBAR_TEXT_W 90
+# define PROGBAR_TEXT_H 12
+# define PROGBAR_W 150
+# define PROGBAR_H 5
 # ifdef __APPLE__
 #  define ESC_KEY 53
 #  define A_KEY 0
@@ -84,6 +91,20 @@ enum {
 	ON_DESTROY = 17
 };
 
+typedef struct s_progbar
+{
+    int		bar_x;
+    int		bar_y;
+	int		text_x;
+	int		text_y;
+	int		prog_x;
+	int		prog_y;	
+	int		perc_x;
+	int		perc_y;
+	int		prog;
+	char	*s_prog;
+}	t_progbar;
+
 typedef struct s_img
 {
 	void	*img;
@@ -129,6 +150,7 @@ typedef struct s_rt
 	t_color		bg_color;
 	int			lnum;
 	int			pnum;
+	int			progress;
 }	t_rt;
 
 /* window.c */
@@ -153,7 +175,9 @@ int		handle_mousemove(int x, int y, t_rt *rt);
 /* deco.c */
 void	draw_deco(t_rt *rt, int width, int color);
 void	put_info(t_rt *rt);
-void	processing_info(int n, int max);
+
+/* progbar.c */
+void	display_progbar(t_rt *rt, int n, int max);
 
 /* test.c */
 void	init_test(t_rt *rt);

@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 22:59:33 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 04:22:21 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	gen_img(t_rt *rt)
 			pix += rt->img.addr_incr;
 		}
 		y++;
-		processing_info(y, rt->height);
+		display_progbar(rt, y, rt->height);
 	}
 }
 
