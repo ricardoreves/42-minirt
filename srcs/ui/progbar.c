@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 04:30:20 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 04:59:32 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:49:49 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	display_progbar(t_rt *rt, int n, int max)
 
 	printf("Processing: %3d%%\r", (n * 100) / max);
 	fflush(stdout);
-	if (rt->height < PROGBAR_W)
+	if (rt->height < PROGBAR_H || rt->width < PROGBAR_W)
 		return ;
 	pb.prog = (n * 100) / max;
 	pb.s_prog = ft_itoa(pb.prog);
