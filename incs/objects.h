@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 16:15:18 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 23:35:03 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ typedef struct s_obj
 	t_vect			ez;
 	t_vect			coords;
 	t_color			color;
-	t_color			second_color;
+	t_color			color2;
 	float			h;
 	float			pattern_len;
 	int				pattern_num;

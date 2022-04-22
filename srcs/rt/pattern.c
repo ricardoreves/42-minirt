@@ -96,10 +96,10 @@ t_color	pattern_color(t_obj *obj, t_vect phit)
 	if (obj->pattern_num == 3 && ((int)(uv[1] * obj->pattern_len)) & 1)
 		return (obj->color);
 	if (obj->pattern_num < 4)
-		return (obj->second_color);
+		return (obj->color2);
 	uv[2] = sin(uv[1] * obj->pattern_len);
 	if (obj->pattern_num == 4)
-		return (mix_color(obj->color, uv[2], obj->second_color, 1 - fabs(uv[2])));
+		return (mix_color(obj->color, uv[2], obj->color2, 1 - fabs(uv[2])));
 	uv[2] = sin(uv[0] * obj->pattern_len) * cos(uv[1] * obj->pattern_len) / 2;
-	return (mix_color(obj->color, uv[2], obj->second_color, 1 - fabs(uv[2])));
+	return (mix_color(obj->color, uv[2], obj->color2, 1 - fabs(uv[2])));
 }
