@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 04:47:25 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 05:02:52 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@
 # include "ui.h"
 # include "parsing.h"
 
-typedef enum e_bool {FALSE, TRUE}	t_bool;
-
 enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -118,6 +116,11 @@ typedef struct s_img
 	int		addr_incr;
 	int		antialiasing_on;
 }	t_img;
+
+enum {
+	BUMP = 0,
+	TEXTURE = 1
+};
 
 typedef struct s_event
 {
@@ -186,7 +189,7 @@ void	init_test(t_rt *rt);
 int		msg_quit(char *s);
 
 /* image.c*/
-void	clear_img(t_img *img);
+t_color	get_pixelcolor(t_img *img, float xf, float yf);
 void	putpixel(t_img *img, int x, int y, int color);
 void	gen_img(t_rt *rt);
 void	render(t_rt *rt);
@@ -219,8 +222,10 @@ t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit);
 
 /* pattern.c */
 void	set_patternref(t_rt *rt, t_obj *obj);
-t_color	checkboard_color(t_obj *obj, t_vect pHit);
 t_color	pattern_color(t_obj *obj, t_vect pHit);
+void	uv_cylco_map(t_obj *obj, t_vect p, float *uv);
+void	uv_plane_map(t_obj *obj, t_vect p, float *uv);
+void	uv_sphere_map(t_obj *obj, t_vect p, float *uv);
 
 /* vector.c */
 t_vect	vector(float x, float y, float z);
@@ -239,13 +244,14 @@ t_vect	refract_vect(t_vect v, t_vect n, float eta);
 
 /* color.c */
 t_color newcolor(float r, float g, float b);
-int		color2rgb(t_color c);
-t_color	color_obj(t_obj *obj);
 t_color	*color_part(t_color *c, float p);
 t_color	color_mul(t_color c, float p);
+t_color	rgb2color(int rgb);
+int		color2rgb(t_color c);
 t_color	add_light(t_color color, t_color light, float p2);
 t_color	mix_color(t_color c1, float p1, t_color c2, float p2);
-t_color	rgb2color(int rgb);
+int		big_mix(t_color	c[9]);
+t_color	color_obj(t_obj *obj, t_hit *hit);
 
 /* quadratic.c */
 t_bool	solve_quadratic(t_quadratic *q);
@@ -253,7 +259,7 @@ t_bool	solve_quadratic(t_quadratic *q);
 /* object_utils.c */
 void	push_object(t_obj *obj, t_obj **objs);
 t_obj	*create_object(t_rt *rt, t_obj_id id);
-void	free_objects(t_obj **objs);
+void	free_objects(t_rt *rt, t_obj **objs);
 void	object_norm(t_rt *rt);
 
 /* file.c */
@@ -285,7 +291,7 @@ int		parse_cone(t_rt *rt, char **params, t_obj *obj);
 int		parse_triangle(t_rt *rt, char **params, t_obj *obj);
 int		parse_shape(t_rt *rt, char *line, t_obj_id id, int nb_params);
 int		parse_extra_params(t_rt *rt, t_obj *obj, char **params, int i);
-int		parse_imgpath(t_rt *rt, char *path, t_img *img);
+int		parse_imgpath(t_rt *rt, char *path, t_obj *obj, int type);
 int		parse_specular(char *str, t_obj *obj);
 int		parse_pattern(char *str, t_obj *obj);
 

@@ -6,11 +6,21 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/19 03:06:27 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 00:56:48 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_color	newcolor(float r, float g, float b)
+{
+	t_color	c;
+
+	c.r = r;
+	c.g = g;
+	c.b = b;
+	return (c);
+}
 
 t_color	*color_part(t_color *c, float p)
 {
@@ -27,17 +37,6 @@ t_color	color_mul(t_color c, float p)
 	c.b *= c.b * p;
 	return (c);
 }
-
-// t_color	color_obj(t_obj *obj)
-// {
-// 	if (obj && obj->id == id_sphere)
-// 		return (obj->object.sphere.color);
-// 	if (obj && obj->id == id_plane)
-// 		return (obj->object.plane.color);
-// 	if (obj && obj->id == id_cylinder)
-// 		return (obj->object.cylinder.color);
-// 	return (newcolor(0, 0, 0));
-// }
 
 t_color	rgb2color(int rgb)
 {
@@ -57,14 +56,4 @@ int	color2rgb(t_color c)
 	color += (int)(c.g * 255) << 8;
 	color += (int)(c.b * 255);
 	return (color);
-}
-
-t_color	newcolor(float r, float g, float b)
-{
-	t_color	c;
-
-	c.r = r;
-	c.g = g;
-	c.b = b;
-	return (c);
 }

@@ -1,0 +1,11 @@
+
+A	0.05				255,255,255
+C	20,15,50			-0.3,-0.3,-1			25
+L	-50,100,20		0.7				255,255,255
+
+
+sp	0,0,0		20			0,0,0	bum:imgs/earthbump1k.xpm txm:imgs/earthmap1k.xpm
+sp	22,0,0		8			0,0,0	txm:imgs/moonmap1k.xpm
+
+pl 0,0,-30		0,0,1		0,0,80	mir:0.6
+

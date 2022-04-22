@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 18:59:50 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 02:13:32 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define ERR_INVALID_IMAGE_PATH "Invalid image path"
 # define ERR_NOT_A_ULONG "Value is not a unsigned long"
 # define ERR_NOT_A_FLOAT "Value is not a float"
+
+typedef enum e_bool {FALSE, TRUE}	t_bool;
 
 typedef enum e_object_id
 {
@@ -189,6 +191,20 @@ typedef union u_object
 	t_triangle	triangle;
 }	t_obj_union;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	char	*path;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		addr_incr;
+	int		antialiasing_on;
+}	t_img;
+
 typedef struct s_obj
 {
 	t_obj_id		id;
@@ -197,16 +213,19 @@ typedef struct s_obj
 	float			specn;
 	float			mirror;
 	float			refract;
-	t_vect			e1;
-	t_vect			e2;
-	t_vect			e3;
+	t_vect			ex;
+	t_vect			ey;
+	t_vect			ez;
 	t_vect			coords;
 	t_color			color;
 	t_color			second_color;
+	float			h;
 	float			pattern_len;
 	int				pattern_num;
-	struct s_img	*bump;
-	struct s_img	*texture;
+	t_bool			has_bump;
+	t_bool			has_texture;
+	t_img			bump;
+	t_img			texture;
 	struct s_obj	*next;
 }	t_obj;
 
