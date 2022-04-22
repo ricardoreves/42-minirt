@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 05:07:31 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:47:53 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,10 @@ t_color	pattern_color(t_obj *obj, t_vect pHit);
 void	uv_cylco_map(t_obj *obj, t_vect p, float *uv);
 void	uv_plane_map(t_obj *obj, t_vect p, float *uv);
 void	uv_sphere_map(t_obj *obj, t_vect p, float *uv);
+
+/* bumpmap.c */
+void	bump_normal(t_obj *obj, t_img *img, t_hit *hit);
+
 
 /* vector.c */
 t_vect	vector(float x, float y, float z);
