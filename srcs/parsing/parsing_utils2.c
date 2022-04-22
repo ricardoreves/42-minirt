@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 02:53:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 16:20:11 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 22:40:34 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,9 @@ int	parse_specular(char *str, t_obj *obj)
 
 int	parse_pattern(char *str, t_obj *obj)
 {
-	int		i;
 	int		ret;
 	char	**params;
 
-	i = -1;
 	ret = 0;
 	params = ft_split(str, ',');
 	if (array_length(params) != 2)
