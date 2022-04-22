@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 02:53:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 18:40:53 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 04:36:31 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 int	parse_imgpath(t_rt *rt, char *path, t_img *img)
 {
 	int		fd;
+	int		len;
 	t_img	im;
-	//void	*mlx_ptr;
-	int	len;
 
 	len = ft_strlen(path) - 4;
 	if (len < 5 || ft_strncmp(path + len, ".xpm", 4) != 0)
@@ -27,14 +26,7 @@ int	parse_imgpath(t_rt *rt, char *path, t_img *img)
 		return (1);
 	close(fd);
 	im.path = path;
-	// mlx_ptr = mlx_init();
-	// im.img = mlx_xpm_file_to_image(mlx_ptr, path, &im.width, &im.height);
-	// if (!im.img)
-	// 	return (1);
-	// im.addr = mlx_get_data_addr(im.img, &im.bits_per_pixel, &im.line_length, &im.endian);
 	img = &im;
-	// mlx_destroy_image(mlx_ptr, im.img);
-	// ft_memdel(mlx_ptr);
 	return (0);
 }
 
