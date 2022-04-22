@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:19:31 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/17 02:17:13 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 23:00:15 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,10 @@ int	handle_mouseup(int button, int x, int y, t_rt *rt)
 
 int	handle_mousemove(int x, int y, t_rt *rt)
 {
-	int	dx;
-	int	dy;
-
 	rt->event.lastx = rt->event.x;
 	rt->event.lasty = rt->event.y;
 	rt->event.x = x;
 	rt->event.y = y;
-	dx = rt->event.x - rt->event.lastx;
-	dy = rt->event.y - rt->event.lasty;
 	if (rt->event.selection && !rt->event.key[S_KEY] && !rt->event.key[P_KEY]
 		&& !rt->event.key[C_KEY])
 		move_obj(rt, x, y);
