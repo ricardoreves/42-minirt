@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 05:02:52 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 05:07:31 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,6 @@ typedef struct s_progbar
 	int		prog;
 	char	*s_prog;
 }	t_progbar;
-
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	char	*path;
-    int		width;
-    int		height;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		addr_incr;
-	int		antialiasing_on;
-}	t_img;
 
 enum {
 	BUMP = 0,
