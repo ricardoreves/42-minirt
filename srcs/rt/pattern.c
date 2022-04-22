@@ -79,7 +79,7 @@ t_color	pattern_color(t_obj *obj, t_vect phit)
 {
 	float	uv[3];
 
-	//ft_bzero(uv, sizeof(float) * 3);
+	ft_bzero(uv, sizeof(float) * 3);
 	if (obj->pattern_num == 0)
 		return (obj->color);
 	if (obj->id == id_plane)
