@@ -6,7 +6,7 @@
 #    By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:19:59 by rpinto-r          #+#    #+#              #
-#    Updated: 2022/04/22 15:13:24 by rpinto-r         ###   ########.fr        #
+#    Updated: 2022/04/22 16:18:08 by rpinto-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CDEBUG           = -g3 -fsanitize=address
 RM               = rm -rf
 NORM             = norminette
 NAME             = minirt
+SRCS_DIR         = ./srcs
 SRCS_INC         = ./incs
 SRCS             = $(wildcard ./srcs/utils/*.c) \
 				   $(wildcard ./srcs/main/*.c) \
