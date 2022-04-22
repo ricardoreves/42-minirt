@@ -77,9 +77,9 @@ void	uv_cylco_map(t_obj *obj, t_vect p, float *uv)
 
 t_color	pattern_color(t_obj *obj, t_vect phit)
 {
-	float	uv[2];
-	float	p;
+	float	uv[3];
 
+	//ft_bzero(uv, sizeof(float) * 3);
 	if (obj->pattern_num == 0)
 		return (obj->color);
 	if (obj->id == id_plane)
@@ -97,9 +97,9 @@ t_color	pattern_color(t_obj *obj, t_vect phit)
 		return (obj->color);
 	if (obj->pattern_num < 4)
 		return (obj->second_color);
-	p = sin(uv[1] * obj->pattern_len);
+	uv[2] = sin(uv[1] * obj->pattern_len);
 	if (obj->pattern_num == 4)
-		return (mix_color(obj->color, p, obj->second_color, 1 - fabs(p)));
-	p = sin(uv[0] * obj->pattern_len) * cos(uv[1] * obj->pattern_len) / 2;
-	return (mix_color(obj->color, p, obj->second_color, 1 - fabs(p)));
+		return (mix_color(obj->color, uv[2], obj->second_color, 1 - fabs(uv[2])));
+	uv[2] = sin(uv[0] * obj->pattern_len) * cos(uv[1] * obj->pattern_len) / 2;
+	return (mix_color(obj->color, uv[2], obj->second_color, 1 - fabs(uv[2])));
 }
