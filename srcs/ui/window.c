@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 16:16:17 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:17:12 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void	rt_init(t_rt *rt, char *path)
 			&rt->img.line_length, &rt->img.endian);
 	rt->img.antialiasing_on = ANTIALIASING_ON;
 	if (!rt->img.img)
-	{
 		rt_clear(rt);
-		return ;
-	}
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	hook_init(rt);
 	rt->display_info = 0;
@@ -48,6 +45,7 @@ void	rt_clear(t_rt *rt)
 	if (rt->mlx)
 		ft_memdel(&rt->mlx);
 	rt_free(rt);
+	exit(0);
 }
 
 void	rt_free(t_rt *rt)
