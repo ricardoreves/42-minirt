@@ -6,7 +6,7 @@
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 01:16:54 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 05:08:32 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,32 @@ void	handle_lights(t_rt *rt, t_rays *r, t_colors *colors)
 	}
 }
 
+void	bump_normal(t_obj *obj, t_img *img, t_hit *hit)
+{
+	// t_vector	v;
+	char		*dst;
+	int			x[2];
+	int			y[2];
+	int			c[2];
+	float		uv[2];
+
+	uv_sphere_map(obj, hit->pHit, uv);
+	x[0] = (((int) ((1 - uv[0]) * img->width)) + img->width / 2) % img->width;
+	y[0] = (int) ((1 - uv[1]) * img->height);
+	x[1] = (x[0] + 1) % img->width;  // maybe -1
+	y[1] = (y[0] + 1) % img->height; // same
+	if (0 < x[0] && x[0] < img->width && 0 < y[0] && y[0] < img->height)
+	{
+		dst = img->addr
+		+ (y[0] * img->line_length + x[0] * (img->bits_per_pixel / 8));
+		c[0] = *((unsigned int *)dst) & 0xff;
+		dst = img->addr
+			+ (y[1] * img->line_length + x[1] * (img->bits_per_pixel / 8));
+		c[1] = *((unsigned int *)dst) & 0xff;
+	printf("%x, %x\n", c[0], c[1]);
+	}
+}
+
 t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
 {
 	t_color		color;
@@ -81,6 +107,8 @@ t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
 	if (!r->closest_obj)
 		return (newcolor(0,0,0));
 		// return (rt->bg_color);
+	if (r->closest_obj->has_bump)
+		bump_normal(r->closest_obj, &r->closest_obj->bump, &r->hit);
 	handle_lights(rt, r, &colors);
 	color = light2rgb(&colors);
 	--max_reflect;
