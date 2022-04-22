@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 00:46:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 22:59:12 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 04:33:03 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,4 @@ void	put_info(t_rt *rt)
 		"I to hide info");
 	mlx_string_put(m, w, rt->width - 200, rt->height - 5, c,
 		"ESC to quit");
-}
-
-void	processing_info(int n, int max)
-{
-	int	i;
-
-	i = (n * 100) / max;
-	printf("Processing: %3d%%\r", i);
-	fflush(stdout);
 }
