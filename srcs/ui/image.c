@@ -3,33 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 22:59:33 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 03:42:31 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	big_mix(t_color	c[9])
+t_color	get_pixelcolor(t_img *img, float xf, float yf)
 {
-	t_color	r;
-	int		i;
+	char	*dst;
+	int		x;
+	int		y;
 
-	i = 0;
-	r = newcolor(0, 0, 0);
-	while (i < 9)
+	x = ((int) ((1 - xf) * img->width) + img->width / 2) % img->width;
+	y = (int) ((1 - yf) * img->height);
+	if (0 <= x && x < img->width && 0 <= y && y < img->height)
 	{
-		r.r += c[i].r;
-		r.g += c[i].g;
-		r.b += c[i].b;
-		i++;
+		dst = img->addr
+			+ (y * img->line_length + x * (img->bits_per_pixel / 8));
+		return (rgb2color(*(unsigned int *)dst));
 	}
-	r.r /= 9;
-	r.g /= 9;
-	r.b /= 9;
-	return (color2rgb(r));
+	return (newcolor(0,0,0));
 }
 
 int	anti_aliasing(t_rt *rt, float x, float y)

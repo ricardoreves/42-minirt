@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/20 15:22:52 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 03:36:29 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ void	rt_clear(t_rt *rt)
 void	rt_free(t_rt *rt)
 {
 	if (rt)
-	{	
+	{
 		if (rt->light)
 			free_lights(&rt->light);
 		if (rt->objs)
-			free_objects(&rt->objs);
+			free_objects(rt, &rt->objs);
 		free(rt);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/21 18:53:30 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 02:04:30 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	parse_extra_params(t_rt *rt, t_obj *obj, char **params, int i)
 			&& parse_pattern(params[i] + 4, obj))
 			return (show_parsing_error(rt, params, ERR_INVALID_PATTERN_PARAMS));
 		if (ft_strncmp(params[i], "bum", 3) == 0
-			&& parse_imgpath(rt, params[i] + 4, obj->bump))
+			&& parse_imgpath(rt, params[i] + 4, obj, BUMP))
 			return (show_parsing_error(rt, params, ERR_INVALID_IMAGE_PATH));
 		if (ft_strncmp(params[i], "txm", 3) == 0
-			&& parse_imgpath(rt, params[i] + 4, obj->texture))
+			&& parse_imgpath(rt, params[i] + 4, obj, TEXTURE))
 			return (show_parsing_error(rt, params, ERR_INVALID_IMAGE_PATH));
 	}
 	return (0);

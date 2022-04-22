@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pbject_norm.c                                      :+:      :+:    :+:   */
+/*   object_norm.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:36:43 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 22:59:46 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 03:40:30 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,35 @@ void	cylinder_norm(t_cylinder *cy)
 	cy->p2 = vect_add(cy->p2, cy->coords);
 }
 
+void	handle_img(t_rt *rt, t_obj *obj)
+{
+	if (obj->has_texture && !obj->texture.img)
+	{
+		obj->texture.img = mlx_xpm_file_to_image(rt->mlx,
+				obj->texture.path , &obj->texture.width,
+				&obj->texture.height);
+		if (!obj->texture.img)
+			obj->has_texture = FALSE;
+		else
+			obj->texture.addr = mlx_get_data_addr(obj->texture.img,
+				&obj->texture.bits_per_pixel,
+				&obj->texture.line_length,
+				&obj->texture.endian);
+	}
+	if (obj->has_bump && !obj->bump.img)
+	{
+		obj->bump.img = mlx_xpm_file_to_image(rt->mlx,
+		obj->bump.path , &obj->bump.width, &obj->bump.height);
+		if (!obj->bump.img)
+			obj->has_bump = FALSE;
+		else
+			obj->bump.addr = mlx_get_data_addr(obj->bump.img,
+				&obj->bump.bits_per_pixel,
+				&obj->bump.line_length,
+				&obj->bump.endian);
+	}
+}
+
 void	object_norm(t_rt *rt)
 {
 	t_obj		*objs;
@@ -63,6 +92,7 @@ void	object_norm(t_rt *rt)
 	objs = rt->objs;
 	while (objs)
 	{
+		handle_img(rt, objs);
 		if (objs->id == id_sphere)
 			objs->object.sphere.r2 = pow(objs->object.sphere.diameter / 2, 2);
 		if (objs->id == id_cone)
@@ -75,37 +105,3 @@ void	object_norm(t_rt *rt)
 		objs = objs->next;
 	}
 }
-
-
-// void	object_norm(t_rt *rt)
-// {
-// 	t_cylinder	*cy;
-// 	t_obj		*objs;
-
-// 	objs = rt->objs;
-// 	while (objs)
-// 	{
-// 		if (objs->id == id_sphere)
-// 			objs->object.sphere.r2 = pow(objs->object.sphere.diameter / 2, 2);
-// 		if (objs->id == id_cone)
-// 		{
-// 			normalize(&objs->object.cone.orient);
-// 			objs->object.cone.cos2 = pow(cos(objs->object.cone.angle), 2);
-// 			objs->object.cone.c2 = vect_mul(objs->object.cone.orient, objs->object.cone.h);
-// 			objs->object.cone.c2 = vect_add(objs->object.cone.c2, objs->object.cone.coords);
-// 		}
-// 		if (objs->id == id_cylinder)
-// 		{
-// 			cy = &objs->object.cylinder;
-// 			normalize(&cy->orient);
-// 			cy->r2 = cy->diameter * cy->diameter * 0.25;
-// 			cy->delta_p = vect_mul(cy->orient, cy->height);
-// 			cy->p1 = vect_mul(cy->orient, -0.5 * cy->height);
-// 			cy->p1 = vect_add(cy->p1, cy->coords);
-// 			cy->p2 = vect_mul(cy->orient, 0.5 * cy->height);
-// 			cy->p2 = vect_add(cy->p2, cy->coords);
-// 		}
-// 		set_patternref(rt, objs);
-// 		objs = objs->next;
-// 	}
-// }

@@ -81,7 +81,6 @@ t_color	pattern_color(t_obj *obj, t_vect pHit)
 	float	uv[2];
 	float	p;
 
-
 	if (obj->pattern_num == 0)
 		return (obj->color);
 	if (obj->id == id_plane)
@@ -96,13 +95,11 @@ t_color	pattern_color(t_obj *obj, t_vect pHit)
 		return (obj->color);
 	if (obj->pattern_num == 3 && ((int)(uv[1] * obj->pattern_len)) & 1)
 		return (obj->color);
-	else if (obj->pattern_num < 4)
+	if (obj->pattern_num < 4)
 		return (obj->second_color);
-	else if (obj->pattern_num == 4)
-	{
-		p = sin(uv[0] * obj->pattern_len) * cos(uv[1] * obj->pattern_len) / 2;
-		return (mix_color(obj->color, p, obj->second_color, 1 - fabs(p)));
-	}
 	p = sin(uv[1] * obj->pattern_len);
+	if (obj->pattern_num == 4)
+		return (mix_color(obj->color, p, obj->second_color, 1 - fabs(p)));
+	p = sin(uv[0] * obj->pattern_len) * cos(uv[1] * obj->pattern_len) / 2;
 	return (mix_color(obj->color, p, obj->second_color, 1 - fabs(p)));
 }
