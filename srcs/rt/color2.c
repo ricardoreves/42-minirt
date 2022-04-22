@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 00:25:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 03:15:20 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:31:12 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_color	add_light(t_color color, t_color light, float p2)
 {
-	t_color c;
+	t_color	c;
 
 	if (p2 > 1)
 		p2 = 1;
@@ -76,10 +76,10 @@ t_color	color_obj(t_obj *obj, t_hit *hit)
 	color = obj->color;
 	if (obj->id == id_sphere && obj->has_texture)
 	{
-		uv_sphere_map(obj, hit->pHit, uv);
+		uv_sphere_map(obj, hit->phit, uv);
 		color = get_pixelcolor(&obj->texture, uv[0], uv[1]);
 	}
 	else if (obj->pattern_num > 0)
-		color = pattern_color(obj, hit->pHit);
+		color = pattern_color(obj, hit->phit);
 	return (color);
 }

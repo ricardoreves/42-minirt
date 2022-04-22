@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 14:07:44 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:42:03 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ t_color	get_pixelcolor(t_img *img, float xf, float yf)
 	int		x;
 	int		y;
 
-	x = ((int) ((1 - xf) * img->width) + img->width / 2) % img->width;
-	y = (int) ((1 - yf) * img->height);
+	x = ((int)((1 - xf) * img->width) + img->width / 2) % img->width;
+	y = (int)((1 - yf) * img->height);
 	if (0 <= x && x < img->width && 0 <= y && y < img->height)
 	{
 		dst = img->addr
 			+ (y * img->line_length + x * (img->bits_per_pixel / 8));
 		return (rgb2color(*(unsigned int *)dst));
 	}
-	return (newcolor(0,0,0));
+	return (newcolor(0, 0, 0));
 }
 
 int	anti_aliasing(t_rt *rt, float x, float y)
@@ -79,7 +79,7 @@ void	gen_img(t_rt *rt)
 	cam = &rt->camera;
 	pix = rt->img.addr;
 	cam->scale = tan(cam->fov / 2 * M_PI / 180);
-	rt->aspectRatio = (float) rt->width / rt->height;
+	rt->aspectratio = (float) rt->width / rt->height;
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	object_norm(rt);
 	rt->bg_color = rgb2color(0x424242);

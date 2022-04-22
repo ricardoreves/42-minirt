@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:22:36 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 14:48:14 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:27:30 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_obj	*get_closest_obj(t_ray *ray, t_obj *obj, t_hit *hit)
 {
-	float		min_dist;
+	float	min_dist;
 	t_obj	*closest_obj;
-	t_hit		tmp_hit;
+	t_hit	tmp_hit;
 
 	closest_obj = NULL;
 	min_dist = INFINITY;
@@ -57,16 +57,20 @@ t_color	light2rgb(t_colors *l)
 void	handle_lights(t_rt *rt, t_rays *r, t_colors *colors)
 {
 	t_light	*l;
+
 	colors->ambient = r->hit.color;
-	colors->ambient = add_light(colors->ambient, rt->ambient.color, rt->ambient.lighting);
+	colors->ambient = add_light(colors->ambient, rt->ambient.color,
+			rt->ambient.lighting);
 	l = rt->light;
 	while (l)
 	{
 		colors->is_shadow = shadow_ray(rt, r, l);
 		if (!colors->is_shadow)
-			colors->diffuse = mix_color(colors->diffuse, 1, diffuse_light(r, l), 1);
+			colors->diffuse = mix_color(colors->diffuse, 1,
+					diffuse_light(r, l), 1);
 		if (!colors->is_shadow)
-			colors->specular = mix_color(colors->specular, 1, specular_light(r, l), 1);
+			colors->specular = mix_color(colors->specular, 1,
+					specular_light(r, l), 1);
 		l = l->next;
 	}
 }
@@ -79,8 +83,7 @@ t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
 	ft_memset(&colors, 0, sizeof(colors));
 	r->closest_obj = get_closest_obj(&r->prime_ray, rt->objs, &r->hit);
 	if (!r->closest_obj)
-		return (newcolor(0,0,0));
-		// return (rt->bg_color);
+		return (newcolor(0, 0, 0));
 	if (r->closest_obj->has_bump)
 		bump_normal(r->closest_obj, &r->closest_obj->bump, &r->hit);
 	handle_lights(rt, r, &colors);
@@ -90,7 +93,7 @@ t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
 	{
 		colors.reflect = reflection_ray(rt, r, max_reflect);
 		color = mix_color(color, 1 - r->closest_obj->mirror,
-			colors.reflect, r->closest_obj->mirror);
+				colors.reflect, r->closest_obj->mirror);
 	}
 	if (r->closest_obj->refract > 0 && max_reflect)
 	{

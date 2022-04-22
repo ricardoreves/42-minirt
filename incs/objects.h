@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 02:13:32 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:15:18 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,19 @@ typedef struct s_color
 	float	b;
 }	t_color;
 
-typedef	struct s_ray
+typedef struct s_ray
 {
 	t_vect	or;
 	t_vect	dir;
 }	t_ray;
 
-typedef	struct s_hit
+typedef struct s_hit
 {
-	t_vect		nHit;
-	t_vect		pHit;
-	float		t;
-	t_color		color;
+	t_vect	nhit;
+	t_vect	phit;
+	float	t;
+	t_color	color;
 }	t_hit;
-
 
 typedef struct s_colors
 {

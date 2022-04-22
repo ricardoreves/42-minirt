@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 02:53:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 05:04:55 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:20:11 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	parse_imgpath(t_rt *rt, char *path, t_obj *obj, int type)
 {
 	int		fd;
 	int		len;
-	(void) rt;
 
+	(void) rt;
 	len = ft_strlen(path) - 4;
 	if (len < 5 || ft_strncmp(path + len, ".xpm", 4) != 0)
 		return (1);

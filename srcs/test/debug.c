@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 00:34:39 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/19 02:08:05 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:41:23 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
+/* 
 void	rt_dump(t_rt *rt)
 {
 	t_obj	*tmp;
@@ -90,3 +90,4 @@ void	rt_dump(t_rt *rt)
 		tmp = tmp->next;
 	}
 }
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/19 02:08:24 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:34:36 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ float	vectlen(t_vect v)
 t_vect	vect_sub(t_vect a, t_vect b)
 {
 	t_vect	dst;
-	
+
 	dst.x = b.x - a.x;
 	dst.y = b.y - a.y;
 	dst.z = b.z - a.z;
@@ -40,7 +40,7 @@ t_vect	vect_sub(t_vect a, t_vect b)
 t_vect	vect_add(t_vect a, t_vect b)
 {
 	t_vect	dst;
-	
+
 	dst.x = b.x + a.x;
 	dst.y = b.y + a.y;
 	dst.z = b.z + a.z;
@@ -50,7 +50,7 @@ t_vect	vect_add(t_vect a, t_vect b)
 t_vect	vect_mul(t_vect v, float f)
 {
 	t_vect	dst;
-	
+
 	dst.x = v.x * f;
 	dst.y = v.y * f;
 	dst.z = v.z * f;

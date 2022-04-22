@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 14:28:39 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:30:52 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_hit *hit)
 {
 	t_vect	l;
-	float		tca;
-	float		d2;
-	float		thc;
-	float		t2;
+	float	tca;
+	float	d2;
+	float	thc;
+	float	t2;
 
 	l = vect_sub(ray->or, sp->coords);
 	tca = dot_prod(l, ray->dir);
@@ -34,9 +34,9 @@ t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_hit *hit)
 		return (FALSE);
 	if (hit->t < EPSILON || t2 < hit->t)
 		hit->t = t2;
-	ray_mul(&hit->pHit, ray, hit->t);
-	hit->nHit = vect_sub(sp->coords, hit->pHit);
-	normalize(&hit->nHit);
+	ray_mul(&hit->phit, ray, hit->t);
+	hit->nhit = vect_sub(sp->coords, hit->phit);
+	normalize(&hit->nhit);
 	return (TRUE);
 }
 
@@ -52,10 +52,10 @@ t_bool	plane_inter(t_ray *r, t_plane *pl, t_hit *hit)
 	hit->t = dot_prod(tmp, pl->orient) / denom;
 	if (hit->t < EPSILON)
 		return (FALSE);
-	ray_mul(&hit->pHit, r, hit->t);
-	hit->nHit = pl->orient;
-	if (dot_prod(hit->nHit, r->dir) > 0)
-		hit->nHit = vect_inv(hit->nHit);
+	ray_mul(&hit->phit, r, hit->t);
+	hit->nhit = pl->orient;
+	if (dot_prod(hit->nhit, r->dir) > 0)
+		hit->nhit = vect_inv(hit->nhit);
 	return (TRUE);
 }
 
@@ -76,13 +76,13 @@ t_bool	infinite_cyl_inter(t_ray *r, t_cylinder *cy, t_hit *hit)
 	if (q.t1 <= EPSILON || (q.t2 > EPSILON && (q.t2 < q.t1)))
 		q.t1 = q.t2;
 	hit->t = q.t1;
-	ray_mul(&hit->pHit, r, q.t1);
-	v = vect_sub(cy->coords, hit->pHit);
-	hit->nHit = cross_prod(v, cy->orient);
-	hit->nHit = cross_prod(hit->nHit, cy->orient);
-	normalize(&hit->nHit);
-	if (dot_prod(hit->nHit, r->dir))
-		hit->nHit = vect_inv(hit->nHit);
+	ray_mul(&hit->phit, r, q.t1);
+	v = vect_sub(cy->coords, hit->phit);
+	hit->nhit = cross_prod(v, cy->orient);
+	hit->nhit = cross_prod(hit->nhit, cy->orient);
+	normalize(&hit->nhit);
+	if (dot_prod(hit->nhit, r->dir))
+		hit->nhit = vect_inv(hit->nhit);
 	return (TRUE);
 }
 
@@ -95,16 +95,16 @@ t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_hit *hit)
 	pl.coords = cy->p1;
 	pl.orient = cy->orient;
 	if (plane_inter(r, &pl, &tmp_hit)
-		&& distance(tmp_hit.pHit, cy->p1)
+		&& distance(tmp_hit.phit, cy->p1)
 		<= cy->diameter * 0.5 && hit->t > tmp_hit.t)
 		*hit = tmp_hit;
 	pl.coords = cy->p2;
 	if (plane_inter(r, &pl, &tmp_hit)
-		&& distance(tmp_hit.pHit, cy->p2) <= cy->diameter * 0.5
+		&& distance(tmp_hit.phit, cy->p2) <= cy->diameter * 0.5
 		&& hit->t > tmp_hit.t)
 		*hit = tmp_hit;
 	if (infinite_cyl_inter(r, cy, &tmp_hit)
-		&& pow(distance(cy->coords, tmp_hit.pHit), 2)
+		&& pow(distance(cy->coords, tmp_hit.phit), 2)
 		<= pow(cy->height * 0.5, 2) + cy->r2
 		&& hit->t > tmp_hit.t)
 		*hit = tmp_hit;

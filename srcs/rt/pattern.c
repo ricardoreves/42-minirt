@@ -75,8 +75,7 @@ void	uv_cylco_map(t_obj *obj, t_vect p, float *uv)
 	uv[1] = y / obj->h + 0.5;
 }
 
-
-t_color	pattern_color(t_obj *obj, t_vect pHit)
+t_color	pattern_color(t_obj *obj, t_vect phit)
 {
 	float	uv[2];
 	float	p;
@@ -84,12 +83,13 @@ t_color	pattern_color(t_obj *obj, t_vect pHit)
 	if (obj->pattern_num == 0)
 		return (obj->color);
 	if (obj->id == id_plane)
-		uv_plane_map(obj, pHit, uv);
+		uv_plane_map(obj, phit, uv);
 	if (obj->id == id_sphere)
-		uv_sphere_map(obj, pHit, uv);
+		uv_sphere_map(obj, phit, uv);
 	if (obj->id == id_cylinder || obj->id == id_cone)
-		uv_cylco_map(obj, pHit, uv);
-	if (obj->pattern_num == 1 && (((int) (uv[0] * obj->pattern_len) + (int)(uv[1] * obj->pattern_len)) & 1))
+		uv_cylco_map(obj, phit, uv);
+	if (obj->pattern_num == 1 && (((int)(uv[0] * obj->pattern_len) + (int)(uv[1]
+			* obj->pattern_len)) & 1))
 		return (obj->color);
 	if (obj->pattern_num == 2 && ((int)(uv[0] * obj->pattern_len)) & 1)
 		return (obj->color);

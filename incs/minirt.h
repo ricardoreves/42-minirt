@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 14:47:53 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:19:26 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@
 # include "mlx.h"
 # include "libft.h"
 # include "objects.h"
-# include "ui.h"
-# include "parsing.h"
 
 enum {
 	ON_KEYDOWN = 2,
@@ -91,8 +89,8 @@ enum {
 
 typedef struct s_progbar
 {
-    int		bar_x;
-    int		bar_y;
+	int		bar_x;
+	int		bar_y;
 	int		text_x;
 	int		text_y;
 	int		prog_x;
@@ -124,7 +122,7 @@ typedef struct s_rt
 	char		*path;
 	float		width;
 	float		height;
-	float		aspectRatio;
+	float		aspectratio;
 	float		cam_matrix[4][4];
 	void		*mlx;
 	void		*mlx_win;
@@ -208,14 +206,13 @@ t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit);
 
 /* pattern.c */
 void	set_patternref(t_rt *rt, t_obj *obj);
-t_color	pattern_color(t_obj *obj, t_vect pHit);
+t_color	pattern_color(t_obj *obj, t_vect phit);
 void	uv_cylco_map(t_obj *obj, t_vect p, float *uv);
 void	uv_plane_map(t_obj *obj, t_vect p, float *uv);
 void	uv_sphere_map(t_obj *obj, t_vect p, float *uv);
 
 /* bumpmap.c */
 void	bump_normal(t_obj *obj, t_img *img, t_hit *hit);
-
 
 /* vector.c */
 t_vect	vector(float x, float y, float z);
@@ -233,7 +230,7 @@ t_vect	reflect_vect(t_vect v, t_vect n);
 t_vect	refract_vect(t_vect v, t_vect n, float eta);
 
 /* color.c */
-t_color newcolor(float r, float g, float b);
+t_color	newcolor(float r, float g, float b);
 t_color	*color_part(t_color *c, float p);
 t_color	color_mul(t_color c, float p);
 t_color	rgb2color(int rgb);

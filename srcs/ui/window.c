@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 03:36:29 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:16:17 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	rt_init(t_rt *rt, char *path)
 	if (!rt->height)
 		rt->height = (float) WIN_HEIGHT;
 	if (rt->height < rt->width)
-		rt->aspectRatio = rt->width / rt->height;
+		rt->aspectratio = rt->width / rt->height;
 	else
-		rt->aspectRatio = rt->height / rt->width;
+		rt->aspectratio = rt->height / rt->width;
 	rt->mlx_win = mlx_new_window(rt->mlx, rt->width, rt->height, "minirt");
 	rt->path = path;
 	rt->img.img = mlx_new_image(rt->mlx, rt->width, rt->height);

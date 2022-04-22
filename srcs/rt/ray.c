@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 18:48:55 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/19 03:23:18 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:16:17 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	build_camray(t_rt *rt, t_ray *ray, float x, float y)
 	cam = &rt->camera;
 	ray->or = vector(cam->coords.x, cam->coords.y, cam->coords.z);
 	ray->dir.x = (2.0 * (x + 0.5) / (float) rt->width - 1.0)
-		* cam->scale * rt->aspectRatio;
+		* cam->scale * rt->aspectratio;
 	ray->dir.y = (1.0 - 2.0 * (y + 0.5) / (float) rt->height) * cam->scale;
 	ray->dir.z = FOCAL_DIST;
 	ray->dir = cam2world(rt->cam_matrix, &ray->dir);

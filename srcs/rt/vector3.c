@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 00:56:26 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/19 02:08:24 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:31:36 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vect	reflect_vect(t_vect v, t_vect n)
 	return (dst);
 }
 
-t_vect	refract_vect(t_vect v, t_vect n, float eta) // eta = n1/n2
+t_vect	refract_vect(t_vect v, t_vect n, float eta)
 {
 	float	c1;
 	float	c2;
@@ -42,4 +42,3 @@ t_vect	refract_vect(t_vect v, t_vect n, float eta) // eta = n1/n2
 	normalize(&dst);
 	return (dst);
 }
-

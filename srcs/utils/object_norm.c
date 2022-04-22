@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_norm.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:36:43 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 15:23:10 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:39:53 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,25 @@ void	handle_img(t_rt *rt, t_obj *obj)
 {
 	if (obj->has_texture && !obj->texture.img)
 	{
-		obj->texture.img = mlx_xpm_file_to_image(rt->mlx,
-				obj->texture.path , &obj->texture.width,
-				&obj->texture.height);
+		obj->texture.img = mlx_xpm_file_to_image(rt->mlx, obj->texture.path,
+				&obj->texture.width, &obj->texture.height);
 		if (!obj->texture.img)
 			obj->has_texture = FALSE;
 		else
 			obj->texture.addr = mlx_get_data_addr(obj->texture.img,
-				&obj->texture.bits_per_pixel,
-				&obj->texture.line_length,
-				&obj->texture.endian);
+					&obj->texture.bits_per_pixel, &obj->texture.line_length,
+					&obj->texture.endian);
 	}
 	if (obj->has_bump && !obj->bump.img)
 	{
 		obj->bump.img = mlx_xpm_file_to_image(rt->mlx,
-		obj->bump.path , &obj->bump.width, &obj->bump.height);
+				obj->bump.path, &obj->bump.width, &obj->bump.height);
 		if (!obj->bump.img)
 			obj->has_bump = FALSE;
 		else
 			obj->bump.addr = mlx_get_data_addr(obj->bump.img,
-				&obj->bump.bits_per_pixel,
-				&obj->bump.line_length,
-				&obj->bump.endian);
+					&obj->bump.bits_per_pixel, &obj->bump.line_length,
+					&obj->bump.endian);
 	}
 }
 

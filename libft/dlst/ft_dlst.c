@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dlst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:54:02 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/30 18:15:17 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:11:05 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_dlist	*ft_dlnew(void)
 	dl->last = NULL;
 	return (dl);
 }
+
 void	ft_dlinit(t_dlist *dl)
 {
 	dl->length = 0;

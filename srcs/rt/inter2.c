@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/21 03:12:11 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:15:18 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ t_bool	conic_inter(t_ray *r, t_cone *co, t_hit *hit)
 	if (q.t1 <= EPSILON || (q.t2 > EPSILON && (q.t2 < q.t1)))
 		q.t1 = q.t2;
 	hit->t = q.t1;
-	ray_mul(&hit->pHit, r, hit->t);
-	cp = vect_sub(co->coords, hit->pHit);
+	ray_mul(&hit->phit, r, hit->t);
+	cp = vect_sub(co->coords, hit->phit);
 	if (dot_prod(co->orient, cp) > co->h || dot_prod(co->orient, cp) < -co->h2)
 		return (FALSE);
-	hit->nHit = cross_prod(cross_prod(cp, co->orient), cp);
-	normalize(&hit->nHit);
+	hit->nhit = cross_prod(cross_prod(cp, co->orient), cp);
+	normalize(&hit->nhit);
 	return (TRUE);
 }
 
@@ -49,18 +49,18 @@ t_bool	cone_inter(t_ray *r, t_cone *co, t_hit *hit)
 	pl.coords = co->c1;
 	pl.orient = co->orient;
 	if (plane_inter(r, &pl, &tmp_hit)
-		&& distance(tmp_hit.pHit, co->c1)
+		&& distance(tmp_hit.phit, co->c1)
 		<= co->r1 && hit->t > tmp_hit.t)
 		*hit = tmp_hit;
 	pl.coords = co->c2;
 	if (plane_inter(r, &pl, &tmp_hit)
-		&& distance(tmp_hit.pHit, co->c2)
+		&& distance(tmp_hit.phit, co->c2)
 		<= co->r2 && hit->t > tmp_hit.t)
 		*hit = tmp_hit;
 	if (conic_inter(r, co, &tmp_hit) && hit->t > tmp_hit.t)
 		*hit = tmp_hit;
-	if (dot_prod(hit->nHit, r->dir) > 0)
-		hit->nHit = vect_inv(hit->nHit);
+	if (dot_prod(hit->nhit, r->dir) > 0)
+		hit->nhit = vect_inv(hit->nhit);
 	return (hit->t < INFINITY && hit->t > EPSILON);
 }
 
@@ -78,16 +78,16 @@ t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit)
 	hit->t = -(dot_prod(r->or, t->n) + d) / dot_prod_ndir;
 	if (hit->t < EPSILON)
 		return (FALSE);
-	ray_mul(&hit->pHit, r, hit->t);
+	ray_mul(&hit->phit, r, hit->t);
 	i = -1;
 	while (++i < 3)
 	{
-		m = cross_prod(t->edge[i], vect_sub(t->c[i], hit->pHit));
+		m = cross_prod(t->edge[i], vect_sub(t->c[i], hit->phit));
 		if (dot_prod(t->n, m) < 0)
 			return (FALSE);
 	}
-	hit->nHit = t->n;
-	if (dot_prod(hit->nHit, r->dir) > 0)
-		hit->nHit = vect_inv(hit->nHit);
+	hit->nhit = t->n;
+	if (dot_prod(hit->nhit, r->dir) > 0)
+		hit->nhit = vect_inv(hit->nhit);
 	return (TRUE);
 }
