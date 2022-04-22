@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+         #
+#    By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:19:59 by rpinto-r          #+#    #+#              #
-#    Updated: 2022/04/17 18:00:55 by bgoncalv         ###   ########.fr        #
+#    Updated: 2022/04/22 15:13:24 by rpinto-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,13 +69,11 @@ run:
 	./$(NAME) $(SCENE)
 
 norm:
-	$(NORM) $(SRCS_INC) $(SRCS_DIR) $(LIBFT_DIR) | grep Error
+	$(NORM) $(SRCS_INC) $(SRCS_DIR) $(LIBFT_DIR)
 
 dev: CFLAGS += $(CDEBUG)
-dev: $(DEV_OBJS)
-	$(MAKE) -C $(LIBFT_DIR)
-	$(MAKE) -C $(LIBMLX_DIR)
-	$(CC) $(DEV_OBJS) $(CFLAGS) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) -L $(LIBFT_DIR) -L $(LIBMLX_DIR) -o $(NAME)
+dev: $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) -L $(LIBFT_DIR) -L $(LIBMLX_DIR) -o $(NAME)
 	$(MAKE) run
 
 valgrind:
