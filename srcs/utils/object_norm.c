@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_norm.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: bgoncalv <bgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:36:43 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 05:00:27 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:23:10 by bgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	handle_img(t_rt *rt, t_obj *obj)
 				&obj->bump.bits_per_pixel,
 				&obj->bump.line_length,
 				&obj->bump.endian);
-		printf("\n\n%i, %i\n", obj->bump.width, obj->bump.height);
 	}
 }
 
