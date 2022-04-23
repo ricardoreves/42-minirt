@@ -1,0 +1,14 @@
+
+A	0.2				255,255,255
+C	20,15,50			0,0,-1			25
+L	-50,-100,-20		0.7				255,230,240
+
+sp	0,0,0		8			0,0,0	txm:imgs/mercurymap.xpm
+sp	10,0,0		8			0,0,0	txm:imgs/venusmap.xpm
+sp	20,0,0		8			0,0,0	txm:imgs/earthmap1k.xpm
+sp	30,0,0		8			0,0,0	txm:imgs/marsmap1k.xpm
+
+sp	40,0,0		8			0,0,0	txm:imgs/jupitermap.xpm
+sp	50,0,0		8			0,0,0	txm:imgs/saturnmap.xpm
+sp	60,0,0		8			0,0,0	txm:imgs/uranusmap.xpm
+sp	70,0,0		8			0,0,0	txm:imgs/neptunemap.xpm
