@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 16:19:26 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/24 07:03:47 by brunodeoliv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define PROGBAR_TEXT_H 12
 # define PROGBAR_W 150
 # define PROGBAR_H 5
+# define MAX_THREADS 10
 # ifdef __APPLE__
 #  define ESC_KEY 53
 #  define A_KEY 0
@@ -72,6 +73,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -178,6 +181,7 @@ t_color	get_pixelcolor(t_img *img, float xf, float yf);
 void	putpixel(t_img *img, int x, int y, int color);
 void	gen_img(t_rt *rt);
 void	render(t_rt *rt);
+int		smart_rt(t_rt *rt, float x, float y);
 
 /* ray.c */
 void	build_camray(t_rt *rt, t_ray *ray, float x, float y);
@@ -302,6 +306,10 @@ int		str_to_int_color(char *str);
 /* error.c */
 int		show_parsing_error(t_rt *rt, char **params, char *msg);
 int		show_error(char *msg);
+
+/* time.c */
+double   get_timediff(void);
+void	multi_gen(t_rt *rt);
 
 /* debug.c */
 void	rt_dump(t_rt *rt);

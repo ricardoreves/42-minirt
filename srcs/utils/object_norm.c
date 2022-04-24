@@ -85,7 +85,14 @@ void	handle_img(t_rt *rt, t_obj *obj)
 void	object_norm(t_rt *rt)
 {
 	t_obj		*objs;
+	t_camera	*cam;
 
+	cam = &rt->camera;
+	cam->scale = tan(cam->fov / 2 * M_PI / 180);
+	rt->aspectratio = (float) rt->width / rt->height;
+	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
+	rt->bg_color = rgb2color(0x424242);
+	lookat(rt);
 	objs = rt->objs;
 	while (objs)
 	{
