@@ -38,13 +38,17 @@ t_obj	*get_closest_obj(t_ray *ray, t_obj *obj, t_hit *hit)
 	return (closest_obj);
 }
 
-t_color	light2rgb(t_colors *l)
+t_color	light2rgb(t_obj *o, t_colors *colors)
 {
 	t_color	c;
 
-	c.r = l->ambient.r + l->diffuse.r + l->specular.r;
-	c.g = l->ambient.g + l->diffuse.g + l->specular.g;
-	c.b = l->ambient.b + l->diffuse.b + l->specular.b;
+	c.r = colors->ambient.r + colors->diffuse.r + colors->specular.r;
+	c.g = colors->ambient.g + colors->diffuse.g + colors->specular.g;
+	c.b = colors->ambient.b + colors->diffuse.b + colors->specular.b;
+	if (o && o->mirror > 0)
+		c = mix_color(c, 1 - o->mirror, colors->reflect, o->mirror);
+	if (o && o->refract > 0)
+		c = mix_color(colors->refract, 0.7, c, 0.3);
 	if (c.r > 1)
 		c.r = 1;
 	if (c.g > 1)
@@ -77,28 +81,23 @@ void	handle_lights(t_rt *rt, t_rays *r, t_colors *colors)
 
 t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect)
 {
-	t_color		color;
 	t_colors	colors;
+	t_obj		*o;
 
 	ft_memset(&colors, 0, sizeof(colors));
 	r->closest_obj = get_closest_obj(&r->prime_ray, rt->objs, &r->hit);
+	o = r->closest_obj;
 	if (!r->closest_obj)
 		return (newcolor(0, 0, 0));
 	if (r->closest_obj->has_bump)
 		bump_normal(r->closest_obj, &r->closest_obj->bump, &r->hit);
 	handle_lights(rt, r, &colors);
-	color = light2rgb(&colors);
 	--max_reflect;
 	if (r->closest_obj->mirror > 0 && max_reflect)
-	{
 		colors.reflect = reflection_ray(rt, r, max_reflect);
-		color = mix_color(color, 1 - r->closest_obj->mirror,
-				colors.reflect, r->closest_obj->mirror);
-	}
 	if (r->closest_obj->refract > 0 && max_reflect)
-	{
 		colors.refract = refraction_ray(rt, r, max_reflect);
-		color = mix_color(colors.refract, 0.7, color, 0.3);
-	}
-	return (color);
+	if (max_reflect < 0)
+		o = NULL;
+	return (light2rgb(o, &colors));
 }

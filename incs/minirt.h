@@ -115,6 +115,7 @@ typedef struct s_event
 	int		key[MAX_KEY];
 	int		mouse;
 	t_obj	*selection;
+	t_bool	torender;
 }	t_event;
 
 typedef struct s_rt
@@ -182,7 +183,8 @@ void	render(t_rt *rt);
 void	build_camray(t_rt *rt, t_ray *ray, float x, float y);
 void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
 void	lookat(t_rt *rt);
-t_color	light2rgb(t_colors *l);
+// t_color	light2rgb(t_colors *l);
+// t_color	light2rgb(t_obj *o, t_colors *l);
 
 /* lightray.c */
 t_color	lightrays(t_rt *rt, t_rays *r, t_light *light);
@@ -248,6 +250,7 @@ void	push_object(t_obj *obj, t_obj **objs);
 t_obj	*create_object(t_rt *rt, t_obj_id id);
 void	free_objects(t_rt *rt, t_obj **objs);
 void	object_norm(t_rt *rt);
+t_vect	*get_coords(t_obj *o);
 
 /* file.c */
 int		read_file(t_rt *rt, int fd);

@@ -12,6 +12,21 @@
 
 #include "minirt.h"
 
+t_vect	*get_coords(t_obj *o)
+{
+	if (!o)
+		return (NULL);
+	if (o->id == id_plane)
+		return (&o->object.plane.coords);
+	if (o->id == id_sphere)
+		return (&o->object.sphere.coords);
+	if (o->id == id_cone)
+		return (&o->object.cone.coords);
+	if (o->id == id_cylinder)
+		return (&o->object.cylinder.coords);
+	return (NULL);	
+}
+
 void	push_object(t_obj *obj, t_obj **objs)
 {
 	t_obj	*tmp;

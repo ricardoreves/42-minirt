@@ -69,3 +69,11 @@ void	build_camray(t_rt *rt, t_ray *ray, float x, float y)
 	ray->dir = cam2world(rt->cam_matrix, &ray->dir);
 	normalize(&ray->dir);
 }
+
+t_vect	*ray_mul(t_vect *dst, t_ray *r, float t)
+{
+	dst->x = r->or.x + t * r->dir.x;
+	dst->y = r->or.y + t * r->dir.y;
+	dst->z = r->or.z + t * r->dir.z;
+	return (dst);
+}
