@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:13 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 17:17:12 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/24 07:48:21 by brunodeoliv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	rt_init(t_rt *rt, char *path)
 	rt->img.addr_incr = rt->img.bits_per_pixel / 8;
 	hook_init(rt);
 	rt->display_info = 0;
+	rt->is_processing = FALSE;
 }
 
 void	rt_clear(t_rt *rt)

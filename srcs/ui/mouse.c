@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 02:19:31 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 23:00:15 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/24 07:52:17 by brunodeoliv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	move_obj(t_rt *rt, int x, int y)
 	t_ray	select_ray;
 	float	t;
 
-	if (!rt->event.selection)
+	if (!rt->event.selection || rt->event.selection->id == id_triangle)
 		return ;
 	obj_pos = NULL;
 	build_camray(rt, &select_ray, x, y);

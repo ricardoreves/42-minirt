@@ -6,7 +6,7 @@
 /*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/24 07:03:47 by brunodeoliv      ###   ########.fr       */
+/*   Updated: 2022/04/24 07:46:18 by brunodeoliv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct s_rt
 	int			lnum;
 	int			pnum;
 	int			progress;
+	t_bool		is_processing;
 }	t_rt;
 
 /* window.c */

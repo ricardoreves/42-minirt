@@ -6,7 +6,7 @@
 /*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/24 07:24:40 by brunodeoliv      ###   ########.fr       */
+/*   Updated: 2022/04/24 07:47:33 by brunodeoliv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,14 @@ int	smart_rt(t_rt *rt, float x, float y)
 
 void	render(t_rt *rt)
 {
+	if (rt->is_processing)
+		return ;
+	rt->is_processing = TRUE;
 	get_timediff();
 	multi_gen(rt);
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->img.img, 0, 0);
 	if (rt->display_info)
 		put_info(rt);
 	printf("\ngen time : %f\n", get_timediff());
+	rt->is_processing = FALSE;
 }
