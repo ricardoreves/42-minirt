@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/25 21:09:42 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:22:56 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,6 @@ enum {
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
 };
-
-typedef struct s_progbar
-{
-	int		bar_x;
-	int		bar_y;
-	int		text_x;
-	int		text_y;
-	int		prog;
-	char	*s_prog;
-}	t_progbar;
 
 enum {
 	BUMP = 0,
