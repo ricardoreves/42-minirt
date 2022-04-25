@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:13:17 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/24 07:47:33 by brunodeoliv      ###   ########.fr       */
+/*   Updated: 2022/04/25 17:42:51 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,40 +29,6 @@ t_color	get_pixelcolor(t_img *img, float xf, float yf)
 	return (newcolor(0, 0, 0));
 }
 
-int	anti_aliasing(t_rt *rt, float x, float y)
-{
-	t_color	c[9];
-	int		i;
-	int		j;
-	t_rays	r;
-
-	y -= 0.33;
-	i = 0;
-	j = 0;
-	while (i < 3)
-	{
-		j = 0;
-		x -= 0.99;
-		while (j < 3)
-		{
-			build_camray(rt, &r.prime_ray, x, y);
-			c[i * 3 + j] = raytrace(rt, &r, MAX_REFLECT);
-			x += 0.33;
-			j++;
-		}
-		y += 0.33;
-		i++;
-	}
-	return (big_mix(c));
-}
-
-typedef struct s_line_trd
-{
-	int			i;
-	t_rt		*rt;
-	pthread_t	trd;
-}	t_line_trd;
-
 void	*trd_gen(void *line_trd)
 {
 	float		x;
@@ -84,8 +50,7 @@ void	*trd_gen(void *line_trd)
 		}
 		y += MAX_THREADS;
 		pix += ltrd->rt->img.line_length * (MAX_THREADS - 1);
-		if (ltrd->i == 0)
-			display_progbar(ltrd->rt, y, ltrd->rt->height);
+		put_screen_processing(ltrd->rt);
 	}
 	return (NULL);
 }
@@ -131,6 +96,7 @@ void	render(t_rt *rt)
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->img.img, 0, 0);
 	if (rt->display_info)
 		put_info(rt);
-	printf("\ngen time : %f\n", get_timediff());
+	printf("\nDuration   :   %.2fs\n", get_timediff());
+	fflush(stdout);
 	rt->is_processing = FALSE;
 }
