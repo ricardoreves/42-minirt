@@ -70,17 +70,13 @@ make
 
 
 ## 📚 References
-The famous and inevitable scratch pixel website - https://www.scratchapixel.com/
-
-The book Fundamentals of Ray Tracing - http://cosinekitty.com/raytrace/raytrace_us.pdf
-
-A few post on slackoverflows, wikipedia pages and other websites such as:
-
-http://graphics.cs.cmu.edu/nsp/course/15-462/Spring04/slides/09-texture.pdf
-
-https://www.ics.uci.edu/~majumder/VC/classes/BEmap.pdf
-
-And what remains of my old studies on vector-based geometry and physics
+- [scratchapixel.com](https://www.scratchapixel.com/) The famous and inevitable scratch pixel website
+- [cosinekitty.com](http://cosinekitty.com/raytrace/raytrace_us.pdf) - The book Fundamentals of Ray Tracing
+- [gabrielgambetta.com](https://www.gabrielgambetta.com/computer-graphics-from-scratch/02-basic-raytracing.html) - Basic Raytracing
+- [graphics.cs.cmu.edu](http://graphics.cs.cmu.edu/nsp/course/15-462/Spring04/slides/09-texture.pdf) - Texture and other Mappings
+- [ics.uci.edu](https://www.ics.uci.edu/~majumder/VC/classes/BEmap.pdf) - Bump and Environmen Mapping
+- A few post on slackoverflows, wikipedia pages and other websites
+- And what remains of my old studies on vector-based geometry and physics
 
 
 ## 🧰 Tools
