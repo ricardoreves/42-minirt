@@ -6,11 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/25 17:51:49 by rpinto-r         ###   ########.fr       */
-=======
-/*   Updated: 2022/04/25 03:38:06 by brunodeoliv      ###   ########.fr       */
->>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492
+/*   Updated: 2022/04/25 23:45:16 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +138,6 @@ t_bool	conic_inter(t_ray *r, t_cone *co, t_hit *hit)
 	normalize(&hit->nhit);
 	return (TRUE);
 }
-<<<<<<< HEAD
-=======
 
 t_bool	cone_inter(t_ray *r, t_cone *co, t_hit *hit)
 {
@@ -219,7 +213,9 @@ t_bool	torus_inter(t_ray *r, t_torus *t, t_hit *hit)
 	t_vect		dir2;
 	t_vect		dir;
 
-	(void) hit;
+	(void)hit;
+	(void)solve;
+	(void)dir;
 	return (FALSE);
 	dir = r->dir;
 	dir2 = vector(r->dir.x * r->dir.x, r->dir.y * r->dir.y, r->dir.z * r->dir.z);
@@ -248,4 +244,3 @@ int	intersect(t_ray *ray, t_obj *obj, t_hit *hit)
 		return (torus_inter(ray, &obj->object.torus, hit));
 	return (FALSE);
 }
->>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/25 22:47:53 by rpinto-r         ###   ########.fr       */
-=======
-/*   Updated: 2022/04/25 03:02:19 by brunodeoliv      ###   ########.fr       */
->>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492
+/*   Updated: 2022/04/25 23:50:47 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +18,7 @@
 # define NB_PARAMS_CYLINDER 6
 # define NB_PARAMS_CONE 7
 # define NB_PARAMS_TRIANGLE 5
-# define NB_PARAMS_TORUS 6
+# define NB_PARAMS_TORUS 8
 # define ERR_TOO_MANY_LIGTHS "Too many light params"
 # define ERR_TOO_MANY_CAMERAS "Too many camera params"
 # define ERR_TOO_MANY_AMBIENTS "Too many ambient params"
@@ -188,22 +184,14 @@ typedef struct s_cone
 	t_color		color;
 }	t_cone;
 
-<<<<<<< HEAD
-typedef struct s_torus
-=======
 typedef	struct s_torus
->>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492
 {
 	t_obj_id	id;
 	t_vect		coords;
 	t_vect		orient;
-<<<<<<< HEAD
-	float		small_r;
-=======
 	float		sml_r;
 	float		sml_r2;
 	float		big_r;
->>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492
 	float		big_r2;
 	t_color		color;
 }	t_torus;
