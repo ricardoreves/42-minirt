@@ -21,7 +21,7 @@ Possible upgrades coming in a near futur:
 * Limit angle on refraction
 * Handling of objects inside transparent(refraction) ones
 * More primitive objects such as Torus, squares, cubes, pyramides, maybe?
-* Better lighs blending
+* Better light blending
 * Soft shadows
 
 ### Goal
