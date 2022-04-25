@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 23:35:03 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 03:02:19 by brunodeoliv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ typedef enum e_object_id
 	id_cylinder,
 	id_cone,
 	id_sphere,
-	id_triangle
+	id_triangle,
+	id_torus
 }	t_obj_id;
 
 typedef struct s_vect
@@ -181,6 +182,18 @@ typedef struct s_cone
 	t_color		color;
 }	t_cone;
 
+typedef	struct s_torus
+{
+	t_obj_id	id;
+	t_vect		coords;
+	t_vect		orient;
+	float		sml_r;
+	float		sml_r2;
+	float		big_r;
+	float		big_r2;
+	t_color		color;
+}	t_torus;
+
 typedef union u_object
 {
 	t_sphere	sphere;
@@ -188,6 +201,7 @@ typedef union u_object
 	t_cylinder	cylinder;
 	t_cone		cone;
 	t_triangle	triangle;
+	t_torus		torus;
 }	t_obj_union;
 
 typedef struct s_img

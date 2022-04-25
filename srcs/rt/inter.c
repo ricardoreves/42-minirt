@@ -6,7 +6,7 @@
 /*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/24 07:17:14 by brunodeoliv      ###   ########.fr       */
+/*   Updated: 2022/04/25 03:38:06 by brunodeoliv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,41 @@ t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit)
 	return (TRUE);
 }
 
+typedef	struct s_tor_solve
+{
+	float	a;
+	float	b;
+	float	c;
+	float	d;
+	float	e;
+	float	g;
+	float	h;
+	float	i;
+	float	j;
+	float	k;
+	float	l;
+}	t_tor_solve;
+
+
+t_bool	torus_inter(t_ray *r, t_torus *t, t_hit *hit)
+{
+	t_tor_solve	solve;
+	t_vect		dir2;
+	t_vect		dir;
+
+	(void) hit;
+	return (FALSE);
+	dir = r->dir;
+	dir2 = vector(r->dir.x * r->dir.x, r->dir.y * r->dir.y, r->dir.z * r->dir.z);
+	solve.g = 4 * t->big_r2 * (dir2.x + dir2.y);
+	solve.h = 8 * t->big_r2 * (dir2.x + dir2.y);
+	solve.i= 4 * t->big_r2 * (dir2.x + dir2.y);
+	solve.j = 4 * t->big_r2 * (dir2.x + dir2.y);
+	solve.k = 4 * t->big_r2 * (dir2.x + dir2.y);
+	solve.l = 4 * t->big_r2 * (dir2.x + dir2.y);
+	return (TRUE);
+}
+
 int	intersect(t_ray *ray, t_obj *obj, t_hit *hit)
 {
 	if (obj->id == id_sphere)
@@ -203,5 +238,7 @@ int	intersect(t_ray *ray, t_obj *obj, t_hit *hit)
 		return (cone_inter(ray, &obj->object.cone, hit));
 	if (obj->id == id_triangle)
 		return (triangle_inter(ray, &obj->object.triangle, hit));
+	if (obj->id == id_torus)
+		return (torus_inter(ray, &obj->object.torus, hit));
 	return (FALSE);
 }
