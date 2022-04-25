@@ -1,19 +1,24 @@
-# .github/workflows/norminette.yml
 name: norminette
-on: [push, pull_request]
+
+on: [push]
 
 jobs:
-
-  norminette_v2_job:
+  build:
     runs-on: ubuntu-latest
-    name: norminette v2
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9"]
     steps:
-    - uses: actions/checkout@v2
-    - uses: alexandregv/norminette-action@v2
-
-  norminette_v3_job:
-    runs-on: ubuntu-latest
-    name: norminette v3
-    steps:
-    - uses: actions/checkout@v2
-    - uses: alexandregv/norminette-action@v3
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools
+        pip install norminette
+    - name: Analysing the code with norminette
+      run: |
+        norminette --version
+        norminette libft/ srcs/ incs/
