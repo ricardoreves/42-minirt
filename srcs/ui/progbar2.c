@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 04:30:20 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/25 17:34:00 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:12:48 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	put_screen_processing(t_rt *rt)
 	rt->process += 1;
 	perc = (rt->process / rt->height);
 	put_console_processing(perc);
-	if (rt->height > PROGBAR_H || rt->width > PROGBAR_W)
+	if (IS_LINUX && rt->height > 100 && rt->width > PROGBAR_W)
 	{
 		if (rt->process == 1)
 			put_progbar_background(rt, bar_x, bar_y);

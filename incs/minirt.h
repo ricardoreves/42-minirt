@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/25 18:09:05 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:09:42 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define PROGBAR_H 12
 # define MAX_THREADS 10
 # ifdef __APPLE__
+#  define IS_LINUX 0
 #  define ESC_KEY 53
 #  define A_KEY 0
 #  define S_KEY 1
@@ -49,6 +50,7 @@
 #  define LEFT_CLICK 1
 #  define RIGHT_CLICK 2
 # elif defined __unix__
+#  define IS_LINUX 1
 #  define ESC_KEY 65307
 #  define A_KEY 97
 #  define S_KEY 115
