@@ -6,18 +6,17 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 02:53:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 22:40:34 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:32:20 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	parse_imgpath(t_rt *rt, char *path, t_obj *obj, int type)
+int	is_invalid_xpmfile(char *path)
 {
-	int		fd;
-	int		len;
+	int	fd;
+	int	len;
 
-	(void) rt;
 	len = ft_strlen(path) - 4;
 	if (len < 5 || ft_strncmp(path + len, ".xpm", 4) != 0)
 		return (1);
@@ -25,16 +24,34 @@ int	parse_imgpath(t_rt *rt, char *path, t_obj *obj, int type)
 	if (fd == -1)
 		return (1);
 	close(fd);
-	if (type == BUMP)
-	{
-		obj->bump.path = ft_strdup(path);
-		obj->has_bump = TRUE;
-	}
-	if (type == TEXTURE)
-	{
-		obj->texture.path = ft_strdup(path);
-		obj->has_texture = TRUE;
-	}
+	return (0);
+}
+
+int	parse_bump(char *param, t_obj *obj)
+{
+	char	**params;
+
+	params = ft_split(param, ',');
+	if (array_length(params) == 2 && parse_float(params[1], &obj->bump_f))
+		return (1);
+	if (is_invalid_xpmfile(params[0]))
+		return (1);
+	obj->bump.path = params[0];
+	obj->has_bump = TRUE;
+	return (0);
+}
+
+int	parse_texture(char *param, t_obj *obj)
+{
+	char	**params;
+
+	params = ft_split(param, ',');
+	if (array_length(params) == 2 && parse_float(params[1], &obj->texture_f))
+		return (1);
+	if (is_invalid_xpmfile(params[0]))
+		return (1);
+	obj->texture.path = params[0];
+	obj->has_texture = TRUE;
 	return (0);
 }
 

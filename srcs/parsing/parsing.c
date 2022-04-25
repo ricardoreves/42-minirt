@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgoncalv <bgoncalv@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:31:28 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 02:04:30 by bgoncalv         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:35:39 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	parse_params(t_rt *rt, char *line)
 		return (parse_shape(rt, line, id_cone, NB_PARAMS_CONE));
 	if (ft_strncmp(line, "tr", 2) == 0)
 		return (parse_shape(rt, line, id_triangle, NB_PARAMS_TRIANGLE));
+	if (ft_strncmp(line, "to", 2) == 0)
+		return (parse_shape(rt, line, id_torus, NB_PARAMS_TORUS));
 	return (0);
 }
 
@@ -53,11 +55,13 @@ int	parse_extra_params(t_rt *rt, t_obj *obj, char **params, int i)
 			&& parse_pattern(params[i] + 4, obj))
 			return (show_parsing_error(rt, params, ERR_INVALID_PATTERN_PARAMS));
 		if (ft_strncmp(params[i], "bum", 3) == 0
-			&& parse_imgpath(rt, params[i] + 4, obj, BUMP))
-			return (show_parsing_error(rt, params, ERR_INVALID_IMAGE_PATH));
+			&& parse_bump(params[i] + 4, obj))
+			return (show_parsing_error(rt, params, ERR_INVALID_BUMP_PARAMS));
 		if (ft_strncmp(params[i], "txm", 3) == 0
-			&& parse_imgpath(rt, params[i] + 4, obj, TEXTURE))
-			return (show_parsing_error(rt, params, ERR_INVALID_IMAGE_PATH));
+			&& parse_texture(params[i] + 4, obj))
+			return (show_parsing_error(rt, params, ERR_INVALID_TEXTURE_PARAMS));
+		if (ft_strncmp(params[i], "alp", 3) == 0 && parse_float(params[i] + 4, &obj->alpha))
+			return (show_parsing_error(rt, params, ERR_NOT_A_FLOAT));
 	}
 	return (0);
 }

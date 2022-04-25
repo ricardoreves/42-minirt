@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/22 23:35:03 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 22:47:53 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define NB_PARAMS_CYLINDER 6
 # define NB_PARAMS_CONE 7
 # define NB_PARAMS_TRIANGLE 5
+# define NB_PARAMS_TORUS 6
 # define ERR_TOO_MANY_LIGTHS "Too many light params"
 # define ERR_TOO_MANY_CAMERAS "Too many camera params"
 # define ERR_TOO_MANY_AMBIENTS "Too many ambient params"
@@ -31,7 +32,8 @@
 # define ERR_INVALID_NB_COLORS "Invalid number of color values"
 # define ERR_INVALID_SPEC_PARAMS "Invalid specular params"
 # define ERR_INVALID_PATTERN_PARAMS "Invalid pattern params"
-# define ERR_INVALID_IMAGE_PATH "Invalid image path"
+# define ERR_INVALID_BUMP_PARAMS "Invalid bump params"
+# define ERR_INVALID_TEXTURE_PARAMS "Invalid texture params"
 # define ERR_NOT_A_ULONG "Value is not a unsigned long"
 # define ERR_NOT_A_FLOAT "Value is not a float"
 
@@ -47,7 +49,8 @@ typedef enum e_object_id
 	id_cylinder,
 	id_cone,
 	id_sphere,
-	id_triangle
+	id_triangle,
+	id_torus
 }	t_obj_id;
 
 typedef struct s_vect
@@ -181,6 +184,16 @@ typedef struct s_cone
 	t_color		color;
 }	t_cone;
 
+typedef struct s_torus
+{
+	t_obj_id	id;
+	t_vect		coords;
+	t_vect		orient;
+	float		small_r;
+	float		big_r2;
+	t_color		color;
+}	t_torus;
+
 typedef union u_object
 {
 	t_sphere	sphere;
@@ -188,6 +201,7 @@ typedef union u_object
 	t_cylinder	cylinder;
 	t_cone		cone;
 	t_triangle	triangle;
+	t_torus		torus;
 }	t_obj_union;
 
 typedef struct s_img
@@ -221,6 +235,9 @@ typedef struct s_obj
 	float			h;
 	float			pattern_len;
 	int				pattern_num;
+	float			alpha;
+	float			bump_f;
+	float			texture_f;
 	t_bool			has_bump;
 	t_bool			has_texture;
 	t_img			bump;

@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/25 21:22:56 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 22:37:18 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,9 +290,11 @@ int		parse_cone(t_rt *rt, char **params, t_obj *obj);
 int		parse_triangle(t_rt *rt, char **params, t_obj *obj);
 int		parse_shape(t_rt *rt, char *line, t_obj_id id, int nb_params);
 int		parse_extra_params(t_rt *rt, t_obj *obj, char **params, int i);
-int		parse_imgpath(t_rt *rt, char *path, t_obj *obj, int type);
 int		parse_specular(char *str, t_obj *obj);
 int		parse_pattern(char *str, t_obj *obj);
+int		parse_bump(char *param, t_obj *obj);
+int		parse_texture(char *param, t_obj *obj);
+int		is_xpm_file(char *path);
 
 /* array_utils.c */
 void	free_array(char *arr[]);

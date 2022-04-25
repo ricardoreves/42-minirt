@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 23:35:03 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:50:09 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,33 @@ int	parse_triangle(t_rt *rt, char **params, t_obj *obj)
 	}	
 	triangle.color = obj->color;
 	obj->object.triangle = triangle;
+	return (0);
+}
+
+int	parse_torus(t_rt *rt, char **params, t_obj *obj)
+{
+	int		i;
+	t_torus	torus;
+
+	i = 0;
+	ft_bzero(&torus, sizeof(t_torus));
+	while (params && params[++i])
+	{
+		rt->pnum = i;
+		rt->pnum = i;
+		if (i == 1 && parse_vector(params[i], &obj->coords))
+			return (show_parsing_error(rt, params, ERR_INVALID_NB_COORDS));
+		if (i == 2 && parse_vector(params[i], &torus.orient))
+			return (show_parsing_error(rt, params, ERR_INVALID_NB_ORIENT));
+		if (i == 3 && parse_float(params[i], &torus.small_r))
+			return (show_parsing_error(rt, params, ERR_NOT_A_FLOAT));
+		if (i == 4 && parse_float(params[i], &torus.big_r2))
+			return (show_parsing_error(rt, params, ERR_NOT_A_FLOAT));
+		if (i == 5 && parse_colors(params[i], &obj->color, &obj->color2))
+			return (show_parsing_error(rt, params, ERR_INVALID_NB_COLORS));
+	}	
+	normalize(&torus.orient);
+	torus.coords = obj->coords;
+	obj->object.torus = torus;
 	return (0);
 }
