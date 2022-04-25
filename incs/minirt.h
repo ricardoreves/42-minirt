@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
+/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:42:00 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/24 07:46:18 by brunodeoliv      ###   ########.fr       */
+/*   Updated: 2022/04/25 18:09:05 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define ANTIALIASING_ON FALSE
 # define PROGBAR_TEXT_W 90
 # define PROGBAR_TEXT_H 12
-# define PROGBAR_W 150
-# define PROGBAR_H 5
+# define PROGBAR_W 180
+# define PROGBAR_H 12
 # define MAX_THREADS 10
 # ifdef __APPLE__
 #  define ESC_KEY 53
@@ -96,10 +96,6 @@ typedef struct s_progbar
 	int		bar_y;
 	int		text_x;
 	int		text_y;
-	int		prog_x;
-	int		prog_y;	
-	int		perc_x;
-	int		perc_y;
 	int		prog;
 	char	*s_prog;
 }	t_progbar;
@@ -123,27 +119,36 @@ typedef struct s_event
 
 typedef struct s_rt
 {
-	char		*path;
-	float		width;
-	float		height;
-	float		aspectratio;
-	float		cam_matrix[4][4];
-	void		*mlx;
-	void		*mlx_win;
-	t_img		img;
-	t_camera	camera;
-	t_ambient	ambient;
-	t_light		*light;
-	t_obj		*objs;
-	size_t		num_objs;
-	t_event		event;
-	int			display_info;
-	t_color		bg_color;
-	int			lnum;
-	int			pnum;
-	int			progress;
-	t_bool		is_processing;
+	char			*path;
+	float			width;
+	float			height;
+	float			aspectratio;
+	float			cam_matrix[4][4];
+	void			*mlx;
+	void			*mlx_win;
+	t_img			img;
+	t_camera		camera;
+	t_ambient		ambient;
+	t_light			*light;
+	t_obj			*objs;
+	size_t			num_objs;
+	t_event			event;
+	int				display_info;
+	t_color			bg_color;
+	int				lnum;
+	int				pnum;
+	int				process;
+	pthread_mutex_t	process_lock;
+	char			*process_text;
+	t_bool			is_processing;
 }	t_rt;
+
+typedef struct s_line_trd
+{
+	int			i;
+	t_rt		*rt;
+	pthread_t	trd;
+}	t_line_trd;
 
 /* window.c */
 void	rt_init(t_rt *rt, char *path);
@@ -169,7 +174,13 @@ void	draw_deco(t_rt *rt, int width, int color);
 void	put_info(t_rt *rt);
 
 /* progbar.c */
-void	display_progbar(t_rt *rt, int n, int max);
+void	put_console_processing(float perc);
+void	put_screen_processing(t_rt *rt);
+void	put_progbar_box(t_rt *rt, int x, int y);
+void	put_progbar_background(t_rt *rt, int x, int y);
+void	put_progbar_process(t_rt *rt, int x, int y);
+void	put_progbar_text(t_rt *rt, float perc);
+char	*get_progbar_text(float percent);
 
 /* test.c */
 void	init_test(t_rt *rt);
@@ -183,19 +194,19 @@ void	putpixel(t_img *img, int x, int y, int color);
 void	gen_img(t_rt *rt);
 void	render(t_rt *rt);
 int		smart_rt(t_rt *rt, float x, float y);
+int		anti_aliasing(t_rt *rt, float x, float y);
 
 /* ray.c */
-void	build_camray(t_rt *rt, t_ray *ray, float x, float y);
 void	build_ray(t_ray *ray, t_vect *or, t_vect *dir);
 void	lookat(t_rt *rt);
-// t_color	light2rgb(t_colors *l);
-// t_color	light2rgb(t_obj *o, t_colors *l);
+t_vect	cam2world(float m[4][4], t_vect *v);
+void	build_camray(t_rt *rt, t_ray *ray, float x, float y);
+t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
 
 /* lightray.c */
-t_color	lightrays(t_rt *rt, t_rays *r, t_light *light);
-t_bool	shadow_ray(t_rt *rt, t_rays *r, t_light *light);
-t_color	diffuse_light(t_rays *r, t_light *light);
 t_color	specular_light(t_rays *r, t_light *light);
+t_color	diffuse_light(t_rays *r, t_light *light);
+t_bool	shadow_ray(t_rt *rt, t_rays *r, t_light *light);
 t_color	refraction_ray(t_rt *rt, t_rays *r, int max_reflect);
 t_color	reflection_ray(t_rt *rt, t_rays *r, int max_reflect);
 
@@ -204,12 +215,14 @@ t_color	raytrace(t_rt *rt, t_rays *r, int max_reflect);
 t_obj	*get_closest_obj(t_ray *ray, t_obj *obj, t_hit *hit);
 
 /* inter.c */
-int		intersect(t_ray *ray, t_obj *obj, t_hit *hit);
-t_bool	cone_inter(t_ray *r, t_cone *co, t_hit *hit);
 t_bool	sphere_inter(t_ray *ray, t_sphere *sp, t_hit *hit);
 t_bool	plane_inter(t_ray *r, t_plane *pl, t_hit *hit);
+t_bool	infinite_cyl_inter(t_ray *r, t_cylinder *cy, t_hit *hit);
 t_bool	cylinder_inter(t_ray *r, t_cylinder *cy, t_hit *hit);
+t_bool	conic_inter(t_ray *r, t_cone *co, t_hit *hit);
+t_bool	cone_inter(t_ray *r, t_cone *co, t_hit *hit);
 t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit);
+int		intersect(t_ray *ray, t_obj *obj, t_hit *hit);
 
 /* pattern.c */
 void	set_patternref(t_rt *rt, t_obj *obj);
@@ -227,12 +240,11 @@ float	vectlen(t_vect v);
 t_vect	vect_sub(t_vect a, t_vect b);
 t_vect	vect_add(t_vect a, t_vect b);
 t_vect	vect_mul(t_vect v, float f);
-t_vect	*normalize(t_vect *v);
-float	distance(t_vect a, t_vect b);
 float	dot_prod(t_vect v1, t_vect v2);
 t_vect	cross_prod(t_vect u, t_vect v);
+float	distance(t_vect a, t_vect b);
 t_vect	vect_inv(t_vect v);
-t_vect	*ray_mul(t_vect *dst, t_ray *r, float t);
+t_vect	*normalize(t_vect *v);
 t_vect	reflect_vect(t_vect v, t_vect n);
 t_vect	refract_vect(t_vect v, t_vect n, float eta);
 
@@ -309,7 +321,7 @@ int		show_parsing_error(t_rt *rt, char **params, char *msg);
 int		show_error(char *msg);
 
 /* time.c */
-double   get_timediff(void);
+double	get_timediff(void);
 void	multi_gen(t_rt *rt);
 
 /* debug.c */
