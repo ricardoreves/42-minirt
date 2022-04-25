@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 00:38:40 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/22 17:18:37 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:32:18 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vect	*get_coords(t_obj *o)
 		return (&o->object.cone.coords);
 	if (o->id == id_cylinder)
 		return (&o->object.cylinder.coords);
-	return (NULL);	
+	return (NULL);
 }
 
 void	push_object(t_obj *obj, t_obj **objs)
