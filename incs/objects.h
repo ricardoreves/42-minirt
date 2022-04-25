@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/04/25 23:50:47 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/26 00:30:08 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define NB_PARAMS_CYLINDER 6
 # define NB_PARAMS_CONE 7
 # define NB_PARAMS_TRIANGLE 5
-# define NB_PARAMS_TORUS 8
+# define NB_PARAMS_TORUS 6
 # define ERR_TOO_MANY_LIGTHS "Too many light params"
 # define ERR_TOO_MANY_CAMERAS "Too many camera params"
 # define ERR_TOO_MANY_AMBIENTS "Too many ambient params"

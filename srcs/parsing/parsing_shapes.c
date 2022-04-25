@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:39:44 by rpinto-r          #+#    #+#             */
-/*   Updated: 2022/04/25 23:49:39 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/26 00:29:53 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,13 +154,9 @@ int	parse_torus(t_rt *rt, char **params, t_obj *obj)
 			return (show_parsing_error(rt, params, ERR_INVALID_NB_ORIENT));
 		if (i == 3 && parse_float(params[i], &torus.sml_r))
 			return (show_parsing_error(rt, params, ERR_NOT_A_FLOAT));
-		if (i == 4 && parse_float(params[i], &torus.sml_r2))
+		if (i == 4 && parse_float(params[i], &torus.big_r2))
 			return (show_parsing_error(rt, params, ERR_NOT_A_FLOAT));
-		if (i == 5 && parse_float(params[i], &torus.big_r))
-			return (show_parsing_error(rt, params, ERR_NOT_A_FLOAT));
-		if (i == 6 && parse_float(params[i], &torus.big_r2))
-			return (show_parsing_error(rt, params, ERR_NOT_A_FLOAT));
-		if (i == 7 && parse_colors(params[i], &obj->color, &obj->color2))
+		if (i == 5 && parse_colors(params[i], &obj->color, &obj->color2))
 			return (show_parsing_error(rt, params, ERR_INVALID_NB_COLORS));
 	}	
 	normalize(&torus.orient);
