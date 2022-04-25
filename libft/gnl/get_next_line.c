@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 21:19:40 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 14:54:31 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 02:16:14 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char	*get_next_line(int fd)
 	buffer[n] = 0;
 	while (0 < n && n <= BUFFER_SIZE)
 	{
-		lfd->s_left = ft_strjoin(lfd->s_left, buffer);
+		lfd->s_left = ft_strjoin2(lfd->s_left, buffer);
 		if (!lfd->s_left || ft_hasline(lfd->s_left))
 			break ;
 		n = read(fd, buffer, BUFFER_SIZE);

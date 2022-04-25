@@ -6,7 +6,7 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 21:19:42 by bgoncalv          #+#    #+#             */
-/*   Updated: 2022/03/18 14:54:08 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/04/25 02:15:51 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_strndup(char *s, size_t n)
 	return (dst);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin2(char *s1, char *s2)
 {
 	char	*dst;
 	char	*s;
