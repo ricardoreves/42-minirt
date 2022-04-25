@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: brunodeoliveira <brunodeoliveira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 23:08:15 by bgoncalv          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/25 22:47:53 by rpinto-r         ###   ########.fr       */
+=======
+/*   Updated: 2022/04/25 03:02:19 by brunodeoliv      ###   ########.fr       */
+>>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,12 +188,22 @@ typedef struct s_cone
 	t_color		color;
 }	t_cone;
 
+<<<<<<< HEAD
 typedef struct s_torus
+=======
+typedef	struct s_torus
+>>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492
 {
 	t_obj_id	id;
 	t_vect		coords;
 	t_vect		orient;
+<<<<<<< HEAD
 	float		small_r;
+=======
+	float		sml_r;
+	float		sml_r2;
+	float		big_r;
+>>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492
 	float		big_r2;
 	t_color		color;
 }	t_torus;

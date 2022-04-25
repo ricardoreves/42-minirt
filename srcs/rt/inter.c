@@ -6,7 +6,11 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:10:41 by bgoncalv          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/25 17:51:49 by rpinto-r         ###   ########.fr       */
+=======
+/*   Updated: 2022/04/25 03:38:06 by brunodeoliv      ###   ########.fr       */
+>>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,3 +142,110 @@ t_bool	conic_inter(t_ray *r, t_cone *co, t_hit *hit)
 	normalize(&hit->nhit);
 	return (TRUE);
 }
+<<<<<<< HEAD
+=======
+
+t_bool	cone_inter(t_ray *r, t_cone *co, t_hit *hit)
+{
+	t_plane	pl;
+	t_hit	tmp_hit;
+
+	hit->t = INFINITY;
+	pl.coords = co->c1;
+	pl.orient = co->orient;
+	if (plane_inter(r, &pl, &tmp_hit)
+		&& distance(tmp_hit.phit, co->c1)
+		<= co->r1 && hit->t > tmp_hit.t)
+		*hit = tmp_hit;
+	pl.coords = co->c2;
+	if (plane_inter(r, &pl, &tmp_hit)
+		&& distance(tmp_hit.phit, co->c2)
+		<= co->r2 && hit->t > tmp_hit.t)
+		*hit = tmp_hit;
+	if (conic_inter(r, co, &tmp_hit) && hit->t > tmp_hit.t)
+		*hit = tmp_hit;
+	if (dot_prod(hit->nhit, r->dir) > 0)
+		hit->nhit = vect_inv(hit->nhit);
+	return (hit->t < INFINITY && hit->t > EPSILON);
+}
+
+t_bool	triangle_inter(t_ray *r, t_triangle *t, t_hit *hit)
+{
+	float	dot_prod_ndir;
+	float	d;
+	t_vect	m;
+	int		i;
+
+	dot_prod_ndir = dot_prod(t->n, r->dir);
+	if (fabs(dot_prod_ndir) < EPSILON)
+		return (FALSE);
+	d = -dot_prod(t->n, t->c[0]);
+	hit->t = -(dot_prod(r->or, t->n) + d) / dot_prod_ndir;
+	if (hit->t < EPSILON)
+		return (FALSE);
+	ray_mul(&hit->phit, r, hit->t);
+	i = -1;
+	while (++i < 3)
+	{
+		m = cross_prod(t->edge[i], vect_sub(t->c[i], hit->phit));
+		if (dot_prod(t->n, m) < 0)
+			return (FALSE);
+	}
+	hit->nhit = t->n;
+	if (dot_prod(hit->nhit, r->dir) > 0)
+		hit->nhit = vect_inv(hit->nhit);
+	return (TRUE);
+}
+
+typedef	struct s_tor_solve
+{
+	float	a;
+	float	b;
+	float	c;
+	float	d;
+	float	e;
+	float	g;
+	float	h;
+	float	i;
+	float	j;
+	float	k;
+	float	l;
+}	t_tor_solve;
+
+
+t_bool	torus_inter(t_ray *r, t_torus *t, t_hit *hit)
+{
+	t_tor_solve	solve;
+	t_vect		dir2;
+	t_vect		dir;
+
+	(void) hit;
+	return (FALSE);
+	dir = r->dir;
+	dir2 = vector(r->dir.x * r->dir.x, r->dir.y * r->dir.y, r->dir.z * r->dir.z);
+	solve.g = 4 * t->big_r2 * (dir2.x + dir2.y);
+	solve.h = 8 * t->big_r2 * (dir2.x + dir2.y);
+	solve.i= 4 * t->big_r2 * (dir2.x + dir2.y);
+	solve.j = 4 * t->big_r2 * (dir2.x + dir2.y);
+	solve.k = 4 * t->big_r2 * (dir2.x + dir2.y);
+	solve.l = 4 * t->big_r2 * (dir2.x + dir2.y);
+	return (TRUE);
+}
+
+int	intersect(t_ray *ray, t_obj *obj, t_hit *hit)
+{
+	if (obj->id == id_sphere)
+		return (sphere_inter(ray, &obj->object.sphere, hit));
+	if (obj->id == id_plane)
+		return (plane_inter(ray, &obj->object.plane, hit));
+	if (obj->id == id_cylinder)
+		return (cylinder_inter(ray, &obj->object.cylinder, hit));
+	if (obj->id == id_cone)
+		return (cone_inter(ray, &obj->object.cone, hit));
+	if (obj->id == id_triangle)
+		return (triangle_inter(ray, &obj->object.triangle, hit));
+	if (obj->id == id_torus)
+		return (torus_inter(ray, &obj->object.torus, hit));
+	return (FALSE);
+}
+>>>>>>> 9cd36a2eef411de8038f09a1bce3cb7da8ac6492

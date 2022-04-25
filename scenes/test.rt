@@ -8,9 +8,9 @@ L	50,100,0		0.7				0,0,255
 pl	0,0,100			0,0,1			120,20,60	spc:0.1,10 	
 pl	0,-10,0			0,1,0			89,15,255;250,0,1	pat:0.1,1	spc:0.1,10 mir:0.5
 
-cy	-30,0,50		0,1,0		7	12.42	0,55,255;250,0,1 pat:20,3 spc:0.4,10 
-sp	-10,0,50		20			0,255,22;250,0,1	pat:20,3 bum:imgs/earthbump1k.xpm txm:imgs/earthmap1k.xpm
+cy	-30,0,50		0,1,0		7	12.42	0,55,255;250,0,1 pat:20,3 spc:0.4,10 alp:0.6
+sp	-10,0,50		20			0,255,22;250,0,1	pat:20,3 bum:imgs/earthbump1k.xpm,0.3 txm:imgs/earthmap1k.xpm,1.5
 
 co	10,10,50		0,-1,0			10	5	0.3		0,128,255;250,0,1	pat:20,3
-co	20,10,50		0,1,0			0	15	0.3		128,255,55 bum:imgs/earthbump1k.xpm txm:imgs/earthmap1k.xpm
+co	20,10,50		0,1,0			0	15	0.3		128,255,55 bum:imgs/earthbump1k.xpm,0.8 txm:imgs/earthmap1k.xpm,2.0
 
