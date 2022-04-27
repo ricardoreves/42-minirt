@@ -1,6 +1,6 @@
 
 # 42 MiniRT
-![Language](https://img.shields.io/static/v1?label=language&message=c&color=blue) ![Licence](https://img.shields.io/badge/license-MIT-green) ![Score](https://42-project-badge.glitch.me/users/rpinto-r/project/minirt) [![norminette](https://github.com/ricardoreves/42-minirt/actions/workflows/norminette.yml/badge.svg)](https://github.com/ricardoreves/42-minirt/actions/workflows/norminette.yml) 
+![Language](https://img.shields.io/static/v1?label=language&message=c&color=blue) ![Licence](https://img.shields.io/badge/license-MIT-green) ![Score](https://42-project-badge.glitch.me/users/rpinto-r/project/minirt) 
 
 ## 🪧 Overview
 ### Description
@@ -75,6 +75,7 @@ make
 - [gabrielgambetta.com](https://www.gabrielgambetta.com/computer-graphics-from-scratch/02-basic-raytracing.html) - Basic Raytracing
 - [graphics.cs.cmu.edu](http://graphics.cs.cmu.edu/nsp/course/15-462/Spring04/slides/09-texture.pdf) - Texture and other Mappings
 - [ics.uci.edu](https://www.ics.uci.edu/~majumder/VC/classes/BEmap.pdf) - Bump and Environmen Mapping
+- [aurelienbrabant.fr](https://aurelienbrabant.fr/blog/pixel-drawing-with-the-minilibx#finding-the-pixels-first-bytes-address) - Pixel drawing with the minilibx
 - A few post on slackoverflows, wikipedia pages and other websites
 - And what remains of my old studies on vector-based geometry and physics
 
